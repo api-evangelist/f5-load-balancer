@@ -1,0 +1,123 @@
+name: F5 Load Balancer API
+description: APIs for managing F5 BIG-IP Load Balancer configuration, monitoring, and operations
+image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+url: https://www.f5.com
+created: '2024'
+modified: '2024'
+specificationVersion: '0.18'
+tags:
+- load balancer
+- application delivery
+- traffic management
+- ADC
+- BIG-IP
+- networking
+- infrastructure
+apis:
+- name: F5 BIG-IP iControl REST API
+  description: Primary REST API for managing F5 BIG-IP systems including virtual servers, pools, nodes, and policies
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://{big-ip-host}/mgmt/tm
+  version: v13.0+
+  tags:
+  - REST API
+  - configuration
+  - management
+  - iControl
+  properties:
+  - type: X-documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: X-openapi
+    url: https://cdn.f5.com/product/cloudsolutions/icontrol-rest-api-reference/latest/
+  - type: X-authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  contact:
+  - FN: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+- name: F5 BIG-IP AS3 API
+  description: Application Services 3 Extension (AS3) for declarative API-based application deployment
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  baseURL: https://{big-ip-host}/mgmt/shared/appsvcs
+  version: v3.x
+  tags:
+  - declarative
+  - application services
+  - automation
+  - AS3
+  properties:
+  - type: X-documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: X-schema
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/refguide/schema-reference.html
+  - type: X-github
+    url: https://github.com/F5Networks/f5-appsvcs-extension
+- name: F5 BIG-IP Telemetry Streaming API
+  description: Telemetry Streaming (TS) for forwarding statistics and events to analytics consumers
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/products/extensions/f5-telemetry-streaming/latest/
+  baseURL: https://{big-ip-host}/mgmt/shared/telemetry
+  version: v1.x
+  tags:
+  - telemetry
+  - monitoring
+  - metrics
+  - logging
+  properties:
+  - type: X-documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-telemetry-streaming/latest/
+  - type: X-github
+    url: https://github.com/F5Networks/f5-telemetry-streaming
+- name: F5 BIG-IP Declarative Onboarding API
+  description: Declarative Onboarding (DO) for initial system configuration and provisioning
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+  baseURL: https://{big-ip-host}/mgmt/shared/declarative-onboarding
+  version: v1.x
+  tags:
+  - onboarding
+  - provisioning
+  - configuration
+  - declarative
+  properties:
+  - type: X-documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+  - type: X-github
+    url: https://github.com/F5Networks/f5-declarative-onboarding
+- name: F5 BIG-IQ Central Management API
+  description: Centralized management API for multiple BIG-IP devices
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/
+  baseURL: https://{big-iq-host}/mgmt/cm
+  version: v7.x+
+  tags:
+  - centralized management
+  - BIG-IQ
+  - multi-device
+  - orchestration
+  properties:
+  - type: X-documentation
+    url: https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/
+  - type: X-api-reference
+    url: https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/
+common:
+- type: X-portal
+  url: https://clouddocs.f5.com/
+- type: X-support
+  url: https://www.f5.com/services/support
+- type: X-pricing
+  url: https://www.f5.com/trials
+- type: X-terms-of-service
+  url: https://www.f5.com/company/policies/terms-of-use
+- type: X-privacy-policy
+  url: https://www.f5.com/company/policies/privacy-notice
+- type: X-blog
+  url: https://www.f5.com/company/blog
+- type: X-github
+  url: https://github.com/F5Networks
+maintainers:
+- FN: F5 Networks, Inc.
+  email: support@f5.com
+  url: https://www.f5.com
