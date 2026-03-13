@@ -3,7 +3,7 @@ description: APIs for managing F5 BIG-IP Load Balancer configuration, monitoring
 image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
 url: https://www.f5.com
 created: '2024'
-modified: '2024'
+modified: '2026-03-04'
 specificationVersion: '0.18'
 tags:
 - load balancer
@@ -15,109 +15,284 @@ tags:
 - infrastructure
 apis:
 - name: F5 BIG-IP iControl REST API
-  description: Primary REST API for managing F5 BIG-IP systems including virtual servers, pools, nodes, and policies
+  description: >-
+    Primary REST API for managing F5 BIG-IP systems including virtual servers,
+    pools, nodes, and policies. iControl REST provides an imperative,
+    RESTful interface for configuration and service control of BIG-IP devices
+    from remote applications.
   image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
   humanURL: https://clouddocs.f5.com/api/icontrol-rest/
   baseURL: https://{big-ip-host}/mgmt/tm
   version: v13.0+
   tags:
   - REST API
-  - configuration
-  - management
+  - Configuration
+  - Management
   - iControl
   properties:
-  - type: X-documentation
+  - type: Documentation
     url: https://clouddocs.f5.com/api/icontrol-rest/
-  - type: X-openapi
-    url: https://cdn.f5.com/product/cloudsolutions/icontrol-rest-api-reference/latest/
-  - type: X-authentication
+  - type: Reference
+    url: https://clouddocs.f5.com/api/icontrol-rest/APIRef.html
+  - type: Authentication
     url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Getting Started
+    url: https://clouddocs.f5.com/api/
   contact:
   - FN: F5 Networks Support
     email: support@f5.com
     url: https://www.f5.com/services/support
 - name: F5 BIG-IP AS3 API
-  description: Application Services 3 Extension (AS3) for declarative API-based application deployment
+  description: >-
+    Application Services 3 Extension (AS3) for declarative API-based
+    application deployment. AS3 is a flexible, low-overhead mechanism for
+    managing application-specific configurations on a BIG-IP system using
+    JSON declarations rather than imperative commands.
   image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
   humanURL: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
   baseURL: https://{big-ip-host}/mgmt/shared/appsvcs
   version: v3.x
   tags:
-  - declarative
-  - application services
-  - automation
+  - Declarative
+  - Application Services
+  - Automation
   - AS3
   properties:
-  - type: X-documentation
+  - type: Documentation
     url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
-  - type: X-schema
+  - type: Reference
     url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/refguide/schema-reference.html
-  - type: X-github
+  - type: GitHubRepository
     url: https://github.com/F5Networks/f5-appsvcs-extension
+  - type: Change Log
+    url: https://github.com/f5networks/f5-appsvcs-extension/releases
 - name: F5 BIG-IP Telemetry Streaming API
-  description: Telemetry Streaming (TS) for forwarding statistics and events to analytics consumers
+  description: >-
+    Telemetry Streaming (TS) extension for forwarding BIG-IP statistics and
+    events to third-party analytics consumers. TS uses a declarative model
+    to configure the collection and forwarding of metrics, logs, and events
+    from BIG-IP devices to external monitoring systems.
   image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
   humanURL: https://clouddocs.f5.com/products/extensions/f5-telemetry-streaming/latest/
   baseURL: https://{big-ip-host}/mgmt/shared/telemetry
   version: v1.x
   tags:
-  - telemetry
-  - monitoring
-  - metrics
-  - logging
+  - Telemetry
+  - Monitoring
+  - Metrics
+  - Logging
   properties:
-  - type: X-documentation
+  - type: Documentation
     url: https://clouddocs.f5.com/products/extensions/f5-telemetry-streaming/latest/
-  - type: X-github
+  - type: GitHubRepository
     url: https://github.com/F5Networks/f5-telemetry-streaming
 - name: F5 BIG-IP Declarative Onboarding API
-  description: Declarative Onboarding (DO) for initial system configuration and provisioning
+  description: >-
+    Declarative Onboarding (DO) extension for initial BIG-IP system
+    configuration and provisioning. DO uses a declarative model to automate
+    the initial setup of BIG-IP devices including licensing, DNS, NTP,
+    VLANs, self IPs, and provisioning modules.
   image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
   humanURL: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
   baseURL: https://{big-ip-host}/mgmt/shared/declarative-onboarding
   version: v1.x
   tags:
-  - onboarding
-  - provisioning
-  - configuration
-  - declarative
+  - Onboarding
+  - Provisioning
+  - Configuration
+  - Declarative
   properties:
-  - type: X-documentation
+  - type: Documentation
     url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
-  - type: X-github
+  - type: Authentication
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/authentication.html
+  - type: GitHubRepository
     url: https://github.com/F5Networks/f5-declarative-onboarding
 - name: F5 BIG-IQ Central Management API
-  description: Centralized management API for multiple BIG-IP devices
+  description: >-
+    Centralized management API for administering multiple BIG-IP devices from
+    a single BIG-IQ instance. Provides REST endpoints for device discovery,
+    configuration management, analytics, and orchestrated deployments across
+    a fleet of BIG-IP systems.
   image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
   humanURL: https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/
   baseURL: https://{big-iq-host}/mgmt/cm
   version: v7.x+
   tags:
-  - centralized management
+  - Centralized Management
   - BIG-IQ
-  - multi-device
-  - orchestration
+  - Multi-Device
+  - Orchestration
   properties:
-  - type: X-documentation
+  - type: Documentation
     url: https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/
-  - type: X-api-reference
+  - type: Reference
     url: https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/
+- name: F5 BIG-IP FAST API
+  description: >-
+    F5 BIG-IP Application Services Templates (FAST) provides a simplified
+    way to deploy applications on the BIG-IP system using AS3. FAST offers
+    a templating engine and REST API for creating, managing, and deploying
+    application configurations through customizable or pre-built templates.
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/products/extensions/f5-appsvcs-templates/latest/
+  baseURL: https://{big-ip-host}/mgmt/shared/fast
+  tags:
+  - Templates
+  - Automation
+  - Deployment
+  - FAST
+  properties:
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-templates/latest/
+  - type: Getting Started
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-templates/latest/userguide/
+  - type: GitHubRepository
+    url: https://github.com/F5Networks/f5-appsvcs-templates
+- name: F5 BIG-IP Cloud Failover Extension API
+  description: >-
+    The Cloud Failover Extension (CFE) provides L3 failover functionality
+    for BIG-IP systems deployed in cloud environments. CFE uses a declarative
+    model to configure automatic failover across cloud providers including
+    AWS, Azure, and Google Cloud Platform.
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/products/extensions/f5-cloud-failover/latest/
+  baseURL: https://{big-ip-host}/mgmt/shared/cloud-failover
+  tags:
+  - Cloud
+  - Failover
+  - High Availability
+  - Declarative
+  properties:
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-cloud-failover/latest/
+  - type: Getting Started
+    url: https://clouddocs.f5.com/products/extensions/f5-cloud-failover/latest/userguide/quickstart.html
+  - type: GitHubRepository
+    url: https://github.com/F5Networks/f5-cloud-failover-extension
+- name: F5 iHealth API
+  description: >-
+    REST-based API for working programmatically with the F5 iHealth
+    diagnostics site. Enables management of QKView collections, access to
+    diagnostic data, troubleshooting assistance, and retrieval of upgrade
+    recommendations and known issue information.
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/api/ihealth/
+  baseURL: https://ihealth2-api.f5.com/qkview-analyzer/api
+  tags:
+  - Diagnostics
+  - Health
+  - Monitoring
+  - QKView
+  properties:
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/ihealth/
+  - type: Reference
+    url: https://ihealth2-api.f5.com/qkview-analyzer/api/docs/index.html
+  - type: GitHubRepository
+    url: https://github.com/f5devcentral/f5-ihealth-api-examples
+- name: F5 BIG-IP NEXT Central Manager API
+  description: >-
+    The next-generation management API for F5 BIG-IP NEXT infrastructure.
+    Provides a unified OpenAPI 3.0 REST interface for managing BIG-IP NEXT
+    instances, including application deployment, WAF policies, analytics,
+    notifications, and system administration through a central management
+    console.
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/bigip-next/latest/api_docs.html
+  baseURL: https://{big-ip-next-cm-host}/api
+  tags:
+  - BIG-IP NEXT
+  - Central Manager
+  - Management
+  - Next Generation
+  properties:
+  - type: Documentation
+    url: https://clouddocs.f5.com/bigip-next/latest/api_docs.html
+  - type: Reference
+    url: https://clouddocs.f5.com/products/bigip-next/mgmt-api/latest/ApiReferences/bigip_public_api_ref/r_openapi-next.html
+- name: F5 Distributed Cloud Services API
+  description: >-
+    REST API for managing F5 Distributed Cloud Services, including application
+    delivery, security, and networking capabilities. Provides programmatic
+    access to load balancing, WAF, DDoS protection, API security, DNS, and
+    multi-cloud networking services through a declarative object model.
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://docs.cloud.f5.com/docs-v2/api
+  baseURL: https://{tenant}.console.ves.volterra.io/api
+  tags:
+  - Distributed Cloud
+  - SaaS
+  - Multi-Cloud
+  - Security
+  properties:
+  - type: Documentation
+    url: https://docs.cloud.f5.com/docs-v2/api
+  - type: Reference
+    url: https://docs.cloud.f5.com/docs-v2/reference/api-ref
+  - type: Authentication
+    url: https://docs.cloud.f5.com/docs-v2/platform/how-to/volt-automation/apis
+  - type: Getting Started
+    url: https://docs.cloud.f5.com/docs-v2/platform/quickstart/get-started-on-console
+- name: F5 BIG-IP Container Ingress Services API
+  description: >-
+    F5 Container Ingress Services (CIS) integrates BIG-IP with Kubernetes
+    and OpenShift container orchestration environments. CIS monitors the
+    Kubernetes API to dynamically create, manage, and update L4/L7 services
+    on BIG-IP systems based on changes to containerized application
+    configurations.
+  image: https://www.f5.com/content/dam/f5-com/global-assets/images/f5-logo.svg
+  humanURL: https://clouddocs.f5.com/containers/latest/
+  baseURL: https://{big-ip-host}/mgmt/tm
+  tags:
+  - Kubernetes
+  - Containers
+  - Ingress
+  - Orchestration
+  properties:
+  - type: Documentation
+    url: https://clouddocs.f5.com/containers/latest/
+  - type: GitHubRepository
+    url: https://github.com/F5Networks/k8s-bigip-ctlr
 common:
-- type: X-portal
+- type: Portal
   url: https://clouddocs.f5.com/
-- type: X-support
+- type: Documentation
+  url: https://clouddocs.f5.com/api/
+- type: Getting Started
+  url: https://clouddocs.f5.com/api/
+- type: Support
   url: https://www.f5.com/services/support
-- type: X-pricing
+- type: Pricing
   url: https://www.f5.com/trials
-- type: X-terms-of-service
+- type: Terms of Service
   url: https://www.f5.com/company/policies/terms-of-use
-- type: X-privacy-policy
+- type: Privacy Policy
   url: https://www.f5.com/company/policies/privacy-notice
-- type: X-blog
+- type: Blog
   url: https://www.f5.com/company/blog
-- type: X-github
+- type: GitHub Organization
   url: https://github.com/F5Networks
-maintainers:
-- FN: F5 Networks, Inc.
-  email: support@f5.com
+- type: GitHubRepository
+  url: https://github.com/f5devcentral
+- type: Status
+  url: https://www.f5cloudstatus.com/
+- type: Community
+  url: https://community.f5.com/
+- type: Website
   url: https://www.f5.com
+- type: Login
+  url: https://account.f5.com/myf5
+- type: Sign Up
+  url: https://login.f5.com/resource/registerEmail.jsp
+- type: SDKs
+  url: https://github.com/f5devcentral/f5-sdk-python
+- type: SDKs
+  url: https://f5-sdk.readthedocs.io/
+- type: Terraform
+  url: https://github.com/F5Networks/terraform-provider-bigip
+- type: Ansible
+  url: https://github.com/F5Networks/f5-ansible
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

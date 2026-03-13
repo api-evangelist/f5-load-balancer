@@ -1,0 +1,566 @@
+openapi: 3.1.0
+info:
+  title: F5 BIG-IP Application Services 3 Extension (AS3) API
+  description: >-
+    The Application Services 3 Extension (AS3) provides a declarative API for
+    managing application-specific configurations on BIG-IP systems. AS3 uses
+    JSON declarations to describe the desired state of Layer 4-7 application
+    services, enabling infrastructure-as-code workflows for load balancing,
+    SSL offloading, and traffic management. Rather than issuing imperative
+    commands, users submit a complete declaration and AS3 configures the
+    BIG-IP to match the declared state.
+  version: '3.50.0'
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+
+externalDocs:
+  description: F5 BIG-IP AS3 Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+
+servers:
+  - url: https://{bigip_host}/mgmt/shared/appsvcs
+    description: BIG-IP AS3 Extension Endpoint
+    variables:
+      bigip_host:
+        default: 192.168.1.245
+        description: Hostname or IP address of the BIG-IP device
+
+security:
+  - basicAuth: []
+  - tokenAuth: []
+
+tags:
+  - name: Declarations
+    description: >-
+      Submit, retrieve, and manage AS3 declarations that describe the desired
+      application services configuration state on the BIG-IP system.
+  - name: Tasks
+    description: >-
+      Monitor the status of asynchronous declaration processing tasks.
+  - name: Info
+    description: >-
+      Retrieve version and capability information about the installed AS3
+      extension.
+
+paths:
+  /declare:
+    post:
+      operationId: submitDeclaration
+      summary: Submit an AS3 declaration
+      description: >-
+        Submits an AS3 declaration to deploy or update application services
+        configuration on the BIG-IP system. The declaration describes the
+        desired configuration state using a JSON document. AS3 processes
+        the declaration and configures the BIG-IP to match. Use the
+        async=true query parameter for large declarations to receive a
+        task ID for status polling.
+      tags:
+        - Declarations
+      parameters:
+        - name: async
+          in: query
+          required: false
+          description: >-
+            When true, returns immediately with a task ID for asynchronous
+            processing. Recommended for large declarations.
+          schema:
+            type: boolean
+            default: false
+        - name: show
+          in: query
+          required: false
+          description: >-
+            Controls the level of detail in the response. Use full to include
+            all configuration details, or base for a summary.
+          schema:
+            type: string
+            enum:
+              - base
+              - full
+              - expanded
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AS3Declaration'
+      responses:
+        '200':
+          description: Declaration processed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3Response'
+        '202':
+          description: Declaration accepted for asynchronous processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3TaskResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          description: Declaration validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3Response'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    get:
+      operationId: getDeclaration
+      summary: Retrieve the current AS3 declaration
+      description: >-
+        Retrieves the current AS3 declaration from the BIG-IP system.
+        Returns the full declaration for all tenants or a specific tenant
+        when the tenant path is appended to the URL.
+      tags:
+        - Declarations
+      parameters:
+        - name: show
+          in: query
+          required: false
+          description: >-
+            Controls the level of detail in the response.
+          schema:
+            type: string
+            enum:
+              - base
+              - full
+              - expanded
+        - name: age
+          in: query
+          required: false
+          description: >-
+            Retrieve a previous declaration by age. Use 0 for the most
+            recent, 1 for the previous, and so on.
+          schema:
+            type: integer
+            minimum: 0
+      responses:
+        '200':
+          description: Current declaration retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3Declaration'
+        '204':
+          description: No declaration has been submitted
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    delete:
+      operationId: deleteDeclaration
+      summary: Remove the AS3 declaration
+      description: >-
+        Removes the AS3 declaration and all associated configuration from the
+        BIG-IP system. This deletes all tenants and their application services.
+      tags:
+        - Declarations
+      responses:
+        '200':
+          description: Declaration removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3Response'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+    patch:
+      operationId: patchDeclaration
+      summary: Partially update the AS3 declaration
+      description: >-
+        Modifies the existing AS3 declaration using a JSON Patch or JSON
+        Merge Patch document. This allows incremental changes without
+        resubmitting the entire declaration.
+      tags:
+        - Declarations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+      responses:
+        '200':
+          description: Declaration patched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3Response'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /declare/{tenantName}:
+    parameters:
+      - $ref: '#/components/parameters/TenantNameParam'
+    get:
+      operationId: getTenantDeclaration
+      summary: Retrieve declaration for a specific tenant
+      description: >-
+        Retrieves the AS3 declaration scoped to a specific tenant. Only
+        the configuration for the named tenant is returned.
+      tags:
+        - Declarations
+      parameters:
+        - name: show
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - base
+              - full
+              - expanded
+      responses:
+        '200':
+          description: Tenant declaration retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteTenantDeclaration
+      summary: Remove a specific tenant declaration
+      description: >-
+        Removes the declaration and all associated configuration for a
+        specific tenant from the BIG-IP system.
+      tags:
+        - Declarations
+      responses:
+        '200':
+          description: Tenant declaration removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3Response'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /task:
+    get:
+      operationId: listTasks
+      summary: List all AS3 tasks
+      description: >-
+        Retrieves a list of all asynchronous AS3 declaration processing
+        tasks and their statuses.
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Task list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3TaskList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /task/{taskId}:
+    parameters:
+      - $ref: '#/components/parameters/TaskIdParam'
+    get:
+      operationId: getTask
+      summary: Get status of a specific task
+      description: >-
+        Retrieves the status and result of a specific asynchronous AS3
+        declaration processing task identified by its task ID.
+      tags:
+        - Tasks
+      responses:
+        '200':
+          description: Task status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3TaskResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /info:
+    get:
+      operationId: getInfo
+      summary: Get AS3 extension information
+      description: >-
+        Retrieves version, release, and schema version information for the
+        installed AS3 extension on the BIG-IP system.
+      tags:
+        - Info
+      responses:
+        '200':
+          description: AS3 information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3Info'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: >-
+        Token-based authentication obtained from the /mgmt/shared/authn/login
+        endpoint.
+
+  parameters:
+    TenantNameParam:
+      name: tenantName
+      in: path
+      required: true
+      description: >-
+        Name of the AS3 tenant whose declaration to retrieve or manage.
+      schema:
+        type: string
+    TaskIdParam:
+      name: taskId
+      in: path
+      required: true
+      description: >-
+        Unique identifier of the asynchronous task.
+      schema:
+        type: string
+        format: uuid
+
+  responses:
+    BadRequest:
+      description: >-
+        The request was malformed or the declaration failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: >-
+        Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: >-
+        The requested tenant or task was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: >-
+        An internal error occurred processing the declaration.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+
+    AS3Declaration:
+      type: object
+      description: >-
+        An AS3 declaration describing the desired application services
+        configuration state on the BIG-IP system.
+      required:
+        - class
+      properties:
+        class:
+          type: string
+          const: AS3
+          description: >-
+            Must be AS3 for the top-level declaration class.
+        action:
+          type: string
+          description: >-
+            The action to perform with this declaration.
+          enum:
+            - deploy
+            - dry-run
+            - redeploy
+            - retrieve
+            - remove
+            - patch
+          default: deploy
+        persist:
+          type: boolean
+          description: >-
+            Whether AS3 should save the declaration for retrieval.
+          default: true
+        declaration:
+          type: object
+          description: >-
+            The ADC class declaration containing tenant and application
+            definitions.
+          properties:
+            class:
+              type: string
+              const: ADC
+            schemaVersion:
+              type: string
+              description: >-
+                Version of the AS3 schema this declaration conforms to.
+            id:
+              type: string
+              description: >-
+                Unique identifier for this declaration.
+            label:
+              type: string
+              description: >-
+                Human-readable label for this declaration.
+            remark:
+              type: string
+              description: >-
+                Arbitrary remark or note about this declaration.
+            updateMode:
+              type: string
+              description: >-
+                How AS3 processes the declaration relative to existing config.
+              enum:
+                - selective
+                - complete
+          additionalProperties:
+            type: object
+            description: >-
+              Tenant objects containing application service definitions.
+
+    AS3Response:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+                description: >-
+                  HTTP status code for this tenant result.
+              message:
+                type: string
+                description: >-
+                  Status message for this tenant result.
+              lineCount:
+                type: integer
+              host:
+                type: string
+              tenant:
+                type: string
+              runTime:
+                type: integer
+        declaration:
+          type: object
+          description: >-
+            The processed declaration.
+
+    AS3TaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: >-
+            Unique task identifier.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              tenant:
+                type: string
+
+    AS3TaskList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AS3TaskResponse'
+
+    AS3Info:
+      type: object
+      properties:
+        version:
+          type: string
+          description: >-
+            AS3 extension version.
+        release:
+          type: string
+          description: >-
+            AS3 release identifier.
+        schemaCurrent:
+          type: string
+          description: >-
+            Current AS3 schema version.
+        schemaMinimum:
+          type: string
+          description: >-
+            Minimum supported AS3 schema version.
+
+    JsonPatchOperation:
+      type: object
+      required:
+        - op
+        - path
+      properties:
+        op:
+          type: string
+          description: >-
+            The JSON Patch operation to perform.
+          enum:
+            - add
+            - remove
+            - replace
+            - move
+            - copy
+            - test
+        path:
+          type: string
+          description: >-
+            JSON Pointer to the target location.
+        value:
+          description: >-
+            Value for add, replace, or test operations.
+        from:
+          type: string
+          description: >-
+            Source JSON Pointer for move or copy operations.

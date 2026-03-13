@@ -1,0 +1,1677 @@
+openapi: 3.1.0
+info:
+  title: F5 BIG-IP iControl REST API
+  description: >-
+    The iControl REST API provides programmatic access to manage and configure
+    F5 BIG-IP devices. It enables automation of Local Traffic Manager (LTM)
+    resources including virtual servers, pools, nodes, pool members, monitors,
+    profiles, and policies for application delivery, load balancing, and
+    network management. iControl REST is a RESTful interface that allows
+    any configuration or management task achievable through the BIG-IP
+    command line to be performed programmatically.
+  version: '15.1.0'
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Proprietary
+    url: https://www.f5.com/company/policies/terms-of-use
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+
+externalDocs:
+  description: F5 iControl REST API Documentation
+  url: https://clouddocs.f5.com/api/icontrol-rest/
+
+servers:
+  - url: https://{bigip_host}/mgmt/tm
+    description: BIG-IP Management Interface
+    variables:
+      bigip_host:
+        default: 192.168.1.245
+        description: Hostname or IP address of the BIG-IP device
+
+security:
+  - basicAuth: []
+  - tokenAuth: []
+
+tags:
+  - name: Virtual Servers
+    description: >-
+      Manage virtual servers that direct client traffic to appropriate
+      server pools based on configured rules and profiles.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_virtual.html
+  - name: Pools
+    description: >-
+      Manage pools of backend servers for load distribution and health
+      monitoring.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_pool.html
+  - name: Pool Members
+    description: >-
+      Manage individual server members within load balancing pools including
+      their state, ratio, priority group, and connection limits.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_pool_members.html
+  - name: Nodes
+    description: >-
+      Manage backend server nodes identified by IP address or FQDN that
+      serve as the foundation for pool member definitions.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_node.html
+  - name: Monitors
+    description: >-
+      Configure health monitors that verify the availability and performance
+      of nodes, pool members, and services.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_monitor.html
+  - name: Profiles
+    description: >-
+      Manage traffic profiles that define how the BIG-IP processes different
+      types of network traffic including HTTP, TCP, SSL, and persistence.
+  - name: Policies
+    description: >-
+      Manage local traffic policies that provide rule-based traffic steering
+      and content manipulation capabilities.
+  - name: iRules
+    description: >-
+      Manage iRules for custom traffic management logic using the F5
+      Tcl-based scripting language.
+  - name: SSL Certificates
+    description: >-
+      Manage SSL certificates and keys used for TLS/SSL termination and
+      re-encryption on virtual servers.
+  - name: Data Groups
+    description: >-
+      Manage internal and external data groups used for address, string,
+      and integer lookups in traffic processing decisions.
+  - name: SNAT Pools
+    description: >-
+      Manage SNAT (Secure Network Address Translation) pools that define
+      translation addresses for outbound connections.
+  - name: System
+    description: >-
+      Access system-level information and configuration including device
+      status, software versions, and global settings.
+
+paths:
+  /ltm/virtual:
+    get:
+      operationId: listVirtualServers
+      summary: List all virtual servers
+      description: >-
+        Retrieves a collection of all virtual server resources configured
+        on the BIG-IP system. Returns virtual server properties including
+        destination address, pool assignment, profiles, and operational state.
+      tags:
+        - Virtual Servers
+      parameters:
+        - $ref: '#/components/parameters/SelectParam'
+        - $ref: '#/components/parameters/FilterParam'
+        - $ref: '#/components/parameters/TopParam'
+        - $ref: '#/components/parameters/SkipParam'
+        - $ref: '#/components/parameters/ExpandSubcollectionsParam'
+      responses:
+        '200':
+          description: Successfully retrieved virtual server collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServerCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      operationId: createVirtualServer
+      summary: Create a virtual server
+      description: >-
+        Creates a new virtual server resource on the BIG-IP system. The
+        virtual server defines a traffic destination address and port to
+        which the BIG-IP listens for client connections.
+      tags:
+        - Virtual Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualServer'
+      responses:
+        '200':
+          description: Virtual server created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Virtual server with the specified name already exists
+        '500':
+          $ref: '#/components/responses/InternalError'
+
+  /ltm/virtual/{virtualName}:
+    parameters:
+      - $ref: '#/components/parameters/VirtualNameParam'
+    get:
+      operationId: getVirtualServer
+      summary: Get a specific virtual server
+      description: >-
+        Retrieves a single virtual server resource identified by name,
+        including all of its configuration properties and operational state.
+      tags:
+        - Virtual Servers
+      responses:
+        '200':
+          description: Successfully retrieved virtual server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateVirtualServer
+      summary: Update a virtual server
+      description: >-
+        Replaces the configuration of an existing virtual server resource.
+        All writable properties should be included in the request body.
+      tags:
+        - Virtual Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualServer'
+      responses:
+        '200':
+          description: Virtual server updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: patchVirtualServer
+      summary: Partially update a virtual server
+      description: >-
+        Modifies specific properties of an existing virtual server without
+        requiring the full resource representation.
+      tags:
+        - Virtual Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualServer'
+      responses:
+        '200':
+          description: Virtual server patched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteVirtualServer
+      summary: Delete a virtual server
+      description: >-
+        Removes a virtual server resource from the BIG-IP system. Existing
+        connections may be disrupted depending on the virtual server state.
+      tags:
+        - Virtual Servers
+      responses:
+        '200':
+          description: Virtual server deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /ltm/pool:
+    get:
+      operationId: listPools
+      summary: List all pools
+      description: >-
+        Retrieves a collection of all load balancing pool resources configured
+        on the BIG-IP system. Pools contain members that receive traffic
+        distributed by virtual servers.
+      tags:
+        - Pools
+      parameters:
+        - $ref: '#/components/parameters/SelectParam'
+        - $ref: '#/components/parameters/FilterParam'
+        - $ref: '#/components/parameters/TopParam'
+        - $ref: '#/components/parameters/SkipParam'
+        - $ref: '#/components/parameters/ExpandSubcollectionsParam'
+      responses:
+        '200':
+          description: Successfully retrieved pool collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createPool
+      summary: Create a pool
+      description: >-
+        Creates a new load balancing pool on the BIG-IP system. A pool
+        is a collection of backend server members to which the BIG-IP
+        distributes client traffic.
+      tags:
+        - Pools
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pool'
+      responses:
+        '200':
+          description: Pool created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Pool with the specified name already exists
+
+  /ltm/pool/{poolName}:
+    parameters:
+      - $ref: '#/components/parameters/PoolNameParam'
+    get:
+      operationId: getPool
+      summary: Get a specific pool
+      description: >-
+        Retrieves a single pool resource identified by name including its
+        configuration and load balancing settings.
+      tags:
+        - Pools
+      responses:
+        '200':
+          description: Successfully retrieved pool
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pool'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updatePool
+      summary: Update a pool
+      description: >-
+        Replaces the configuration of an existing pool resource.
+      tags:
+        - Pools
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pool'
+      responses:
+        '200':
+          description: Pool updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePool
+      summary: Delete a pool
+      description: >-
+        Removes a pool resource from the BIG-IP system. Any virtual servers
+        referencing this pool should be updated before deletion.
+      tags:
+        - Pools
+      responses:
+        '200':
+          description: Pool deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /ltm/pool/{poolName}/members:
+    parameters:
+      - $ref: '#/components/parameters/PoolNameParam'
+    get:
+      operationId: listPoolMembers
+      summary: List pool members
+      description: >-
+        Retrieves a collection of all members within a specific pool
+        including their addresses, ports, and operational states.
+      tags:
+        - Pool Members
+      parameters:
+        - $ref: '#/components/parameters/SelectParam'
+        - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Successfully retrieved pool member collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolMemberCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: addPoolMember
+      summary: Add a member to a pool
+      description: >-
+        Adds a new server member to the specified pool. The member is
+        identified by its node address and service port.
+      tags:
+        - Pool Members
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PoolMember'
+      responses:
+        '200':
+          description: Pool member added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolMember'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /ltm/pool/{poolName}/members/{memberName}:
+    parameters:
+      - $ref: '#/components/parameters/PoolNameParam'
+      - $ref: '#/components/parameters/MemberNameParam'
+    get:
+      operationId: getPoolMember
+      summary: Get a specific pool member
+      description: >-
+        Retrieves a single pool member resource including its configuration,
+        health status, and statistics.
+      tags:
+        - Pool Members
+      responses:
+        '200':
+          description: Successfully retrieved pool member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolMember'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updatePoolMember
+      summary: Update a pool member
+      description: >-
+        Replaces the configuration of a specific pool member.
+      tags:
+        - Pool Members
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PoolMember'
+      responses:
+        '200':
+          description: Pool member updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolMember'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePoolMember
+      summary: Remove a pool member
+      description: >-
+        Removes a server member from the specified pool.
+      tags:
+        - Pool Members
+      responses:
+        '200':
+          description: Pool member removed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /ltm/node:
+    get:
+      operationId: listNodes
+      summary: List all nodes
+      description: >-
+        Retrieves a collection of all node resources on the BIG-IP system.
+        Nodes represent backend servers identified by their IP addresses
+        or FQDNs.
+      tags:
+        - Nodes
+      parameters:
+        - $ref: '#/components/parameters/SelectParam'
+        - $ref: '#/components/parameters/FilterParam'
+        - $ref: '#/components/parameters/TopParam'
+        - $ref: '#/components/parameters/SkipParam'
+      responses:
+        '200':
+          description: Successfully retrieved node collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNode
+      summary: Create a node
+      description: >-
+        Creates a new node resource representing a backend server on
+        the network. Nodes are the foundation for pool members.
+      tags:
+        - Nodes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Node'
+      responses:
+        '200':
+          description: Node created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Node with the specified name already exists
+
+  /ltm/node/{nodeName}:
+    parameters:
+      - $ref: '#/components/parameters/NodeNameParam'
+    get:
+      operationId: getNode
+      summary: Get a specific node
+      description: >-
+        Retrieves a single node resource including its address, monitoring
+        status, and configuration.
+      tags:
+        - Nodes
+      responses:
+        '200':
+          description: Successfully retrieved node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateNode
+      summary: Update a node
+      description: >-
+        Replaces the configuration of an existing node resource.
+      tags:
+        - Nodes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Node'
+      responses:
+        '200':
+          description: Node updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNode
+      summary: Delete a node
+      description: >-
+        Removes a node resource from the BIG-IP system. The node must not
+        be referenced by any pool members.
+      tags:
+        - Nodes
+      responses:
+        '200':
+          description: Node deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /ltm/monitor/http:
+    get:
+      operationId: listHttpMonitors
+      summary: List HTTP health monitors
+      description: >-
+        Retrieves all HTTP health monitors configured on the BIG-IP system.
+        HTTP monitors verify availability by sending HTTP requests to pool
+        members and evaluating the responses.
+      tags:
+        - Monitors
+      responses:
+        '200':
+          description: Successfully retrieved HTTP monitor collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createHttpMonitor
+      summary: Create an HTTP health monitor
+      description: >-
+        Creates a new HTTP health monitor that sends HTTP requests to pool
+        members to verify their availability and responsiveness.
+      tags:
+        - Monitors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HttpMonitor'
+      responses:
+        '200':
+          description: HTTP monitor created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpMonitor'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/monitor/https:
+    get:
+      operationId: listHttpsMonitors
+      summary: List HTTPS health monitors
+      description: >-
+        Retrieves all HTTPS health monitors configured on the BIG-IP system.
+        HTTPS monitors verify availability over TLS-encrypted connections.
+      tags:
+        - Monitors
+      responses:
+        '200':
+          description: Successfully retrieved HTTPS monitor collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/monitor/tcp:
+    get:
+      operationId: listTcpMonitors
+      summary: List TCP health monitors
+      description: >-
+        Retrieves all TCP health monitors configured on the BIG-IP system.
+        TCP monitors verify that pool members are accepting connections
+        on the specified port.
+      tags:
+        - Monitors
+      responses:
+        '200':
+          description: Successfully retrieved TCP monitor collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/profile/http:
+    get:
+      operationId: listHttpProfiles
+      summary: List HTTP profiles
+      description: >-
+        Retrieves all HTTP traffic profiles on the BIG-IP system. HTTP
+        profiles configure how the BIG-IP processes HTTP traffic including
+        compression, caching, and header manipulation.
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: Successfully retrieved HTTP profile collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/profile/tcp:
+    get:
+      operationId: listTcpProfiles
+      summary: List TCP profiles
+      description: >-
+        Retrieves all TCP traffic profiles on the BIG-IP system. TCP
+        profiles optimize TCP connection behavior for different
+        application and network scenarios.
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: Successfully retrieved TCP profile collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/profile/client-ssl:
+    get:
+      operationId: listClientSslProfiles
+      summary: List client SSL profiles
+      description: >-
+        Retrieves all client-side SSL profiles on the BIG-IP system.
+        Client SSL profiles manage TLS/SSL termination for connections
+        between clients and the BIG-IP.
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: Successfully retrieved client SSL profile collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/policy:
+    get:
+      operationId: listPolicies
+      summary: List local traffic policies
+      description: >-
+        Retrieves all local traffic policies on the BIG-IP system. Policies
+        provide rule-based traffic steering, content manipulation, and
+        request/response modification.
+      tags:
+        - Policies
+      responses:
+        '200':
+          description: Successfully retrieved policy collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PolicyCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/rule:
+    get:
+      operationId: listIRules
+      summary: List iRules
+      description: >-
+        Retrieves all iRule resources on the BIG-IP system. iRules are
+        Tcl-based scripts that provide custom traffic management logic
+        for virtual servers.
+      tags:
+        - iRules
+      responses:
+        '200':
+          description: Successfully retrieved iRule collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IRuleCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /sys/file/ssl-cert:
+    get:
+      operationId: listSslCertificates
+      summary: List SSL certificates
+      description: >-
+        Retrieves all SSL certificate files installed on the BIG-IP system
+        that are available for use in SSL profiles.
+      tags:
+        - SSL Certificates
+      responses:
+        '200':
+          description: Successfully retrieved SSL certificate collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SslCertCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/data-group/internal:
+    get:
+      operationId: listInternalDataGroups
+      summary: List internal data groups
+      description: >-
+        Retrieves all internal data groups on the BIG-IP system. Data groups
+        provide address, string, and integer lookups used in iRules and
+        traffic policies for decision-making.
+      tags:
+        - Data Groups
+      responses:
+        '200':
+          description: Successfully retrieved internal data group collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataGroupCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /ltm/snatpool:
+    get:
+      operationId: listSnatPools
+      summary: List SNAT pools
+      description: >-
+        Retrieves all SNAT pool resources on the BIG-IP system. SNAT pools
+        define collections of translation addresses used for outbound
+        connection source address translation.
+      tags:
+        - SNAT Pools
+      responses:
+        '200':
+          description: Successfully retrieved SNAT pool collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SnatPoolCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /sys:
+    get:
+      operationId: getSystemInfo
+      summary: Get system information
+      description: >-
+        Retrieves top-level system information and available sub-collections
+        for the BIG-IP system.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Successfully retrieved system information
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /sys/version:
+    get:
+      operationId: getSystemVersion
+      summary: Get system software version
+      description: >-
+        Retrieves the software version information for the BIG-IP system
+        including product name, version, build number, and edition.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Successfully retrieved system version
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  selfLink:
+                    type: string
+                    format: uri
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /sys/device:
+    get:
+      operationId: listDevices
+      summary: List BIG-IP devices
+      description: >-
+        Retrieves information about all BIG-IP devices in the device trust
+        group, including hostname, management address, failover state,
+        and device group membership.
+      tags:
+        - System
+      responses:
+        '200':
+          description: Successfully retrieved device collection
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: >-
+        Token-based authentication obtained from the /mgmt/shared/authn/login
+        endpoint. Tokens expire after a configurable timeout period.
+
+  parameters:
+    VirtualNameParam:
+      name: virtualName
+      in: path
+      required: true
+      description: >-
+        Name of the virtual server resource, optionally prefixed with
+        the partition path (e.g., ~Common~my_virtual).
+      schema:
+        type: string
+    PoolNameParam:
+      name: poolName
+      in: path
+      required: true
+      description: >-
+        Name of the pool resource, optionally prefixed with the partition
+        path (e.g., ~Common~my_pool).
+      schema:
+        type: string
+    MemberNameParam:
+      name: memberName
+      in: path
+      required: true
+      description: >-
+        Name of the pool member in address:port format
+        (e.g., ~Common~10.0.0.1:80).
+      schema:
+        type: string
+    NodeNameParam:
+      name: nodeName
+      in: path
+      required: true
+      description: >-
+        Name of the node resource, optionally prefixed with the partition
+        path.
+      schema:
+        type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: >-
+        Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: >-
+        OData filter expression to restrict returned resources.
+      schema:
+        type: string
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: >-
+        Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: >-
+        Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+    ExpandSubcollectionsParam:
+      name: expandSubcollections
+      in: query
+      required: false
+      description: >-
+        When set to true, inline sub-collections in the response.
+      schema:
+        type: string
+        enum:
+          - 'true'
+          - 'false'
+
+  responses:
+    BadRequest:
+      description: >-
+        The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: >-
+        Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: >-
+        The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: >-
+        An internal server error occurred on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
+
+    VirtualServerCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:virtual:virtualcollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/VirtualServer'
+
+    VirtualServer:
+      type: object
+      required:
+        - name
+        - destination
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:virtual:virtualstate
+          readOnly: true
+        name:
+          type: string
+          description: >-
+            Unique name of the virtual server within its partition.
+          minLength: 1
+          maxLength: 255
+        fullPath:
+          type: string
+          description: >-
+            Full administrative path including partition.
+          readOnly: true
+        generation:
+          type: integer
+          description: >-
+            Configuration generation counter.
+          readOnly: true
+        selfLink:
+          type: string
+          format: uri
+          readOnly: true
+        destination:
+          type: string
+          description: >-
+            Destination IP address and port the virtual server listens on
+            in /partition/address:port format.
+        description:
+          type: string
+          description: >-
+            User-defined description of the virtual server.
+        enabled:
+          type: boolean
+          description: >-
+            Whether the virtual server accepts and processes client traffic.
+        disabled:
+          type: boolean
+          description: >-
+            Whether the virtual server is administratively disabled.
+        ipProtocol:
+          type: string
+          description: >-
+            Network protocol the virtual server handles.
+          enum:
+            - tcp
+            - udp
+            - sctp
+            - any
+        mask:
+          type: string
+          description: >-
+            Network mask for the destination address.
+        pool:
+          type: string
+          description: >-
+            Default pool that receives traffic from this virtual server.
+        source:
+          type: string
+          description: >-
+            Source address filter for accepted connections.
+        sourcePort:
+          type: string
+          description: >-
+            Source port translation behavior.
+          enum:
+            - preserve
+            - preserve-strict
+            - change
+        connectionLimit:
+          type: integer
+          description: >-
+            Maximum concurrent connections. Zero means unlimited.
+          minimum: 0
+        translateAddress:
+          type: string
+          description: >-
+            Whether destination address translation is enabled.
+          enum:
+            - enabled
+            - disabled
+        translatePort:
+          type: string
+          description: >-
+            Whether destination port translation is enabled.
+          enum:
+            - enabled
+            - disabled
+        mirror:
+          type: string
+          description: >-
+            Whether connection and persistence mirroring is enabled.
+          enum:
+            - enabled
+            - disabled
+        partition:
+          type: string
+          description: >-
+            Administrative partition containing this resource.
+        persist:
+          type: array
+          description: >-
+            Persistence profiles applied to the virtual server.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              tmDefault:
+                type: string
+        profiles:
+          type: array
+          description: >-
+            Traffic processing profiles applied to this virtual server.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              context:
+                type: string
+                enum:
+                  - all
+                  - clientside
+                  - serverside
+              fullPath:
+                type: string
+        rules:
+          type: array
+          description: >-
+            iRules applied to this virtual server.
+          items:
+            type: string
+        vlansEnabled:
+          type: boolean
+          description: >-
+            Whether the virtual server is enabled on specific VLANs.
+        vlans:
+          type: array
+          description: >-
+            VLANs on which the virtual server is enabled or disabled.
+          items:
+            type: string
+        rateLimit:
+          type: string
+          description: >-
+            Maximum new connections per second.
+
+    PoolCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:poolcollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+
+    Pool:
+      type: object
+      required:
+        - name
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:poolstate
+          readOnly: true
+        name:
+          type: string
+          description: >-
+            Name of the pool resource.
+          minLength: 1
+          maxLength: 255
+        fullPath:
+          type: string
+          readOnly: true
+        generation:
+          type: integer
+          readOnly: true
+        selfLink:
+          type: string
+          format: uri
+          readOnly: true
+        description:
+          type: string
+          description: >-
+            User-defined description of the pool.
+        loadBalancingMode:
+          type: string
+          description: >-
+            Algorithm used to distribute traffic across pool members.
+          enum:
+            - round-robin
+            - ratio-member
+            - least-connections-member
+            - observed-member
+            - predictive-member
+            - ratio-node
+            - least-connections-node
+            - fastest-node
+            - observed-node
+            - predictive-node
+            - dynamic-ratio-node
+            - fastest-app-response
+            - least-sessions
+            - dynamic-ratio-member
+            - weighted-least-connections-member
+            - weighted-least-connections-node
+        monitor:
+          type: string
+          description: >-
+            Health monitor(s) applied to pool members.
+        partition:
+          type: string
+          description: >-
+            Administrative partition containing this pool.
+        allowNat:
+          type: string
+          description: >-
+            Whether the pool can load balance NAT connections.
+          enum:
+            - 'yes'
+            - 'no'
+        allowSnat:
+          type: string
+          description: >-
+            Whether the pool can load balance SNAT connections.
+          enum:
+            - 'yes'
+            - 'no'
+        minActiveMembers:
+          type: integer
+          description: >-
+            Minimum active members before priority-group activation.
+          minimum: 0
+        slowRampTime:
+          type: integer
+          description: >-
+            Seconds to ramp up traffic to newly enabled members.
+          minimum: 0
+        reselectTries:
+          type: integer
+          description: >-
+            Reselection attempts after a passive failure detection.
+          minimum: 0
+        serviceDownAction:
+          type: string
+          description: >-
+            Action when all pool members are unavailable.
+          enum:
+            - none
+            - reset
+            - reselect
+            - drop
+
+    PoolMemberCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:members:memberscollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoolMember'
+
+    PoolMember:
+      type: object
+      required:
+        - name
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:members:membersstate
+          readOnly: true
+        name:
+          type: string
+          description: >-
+            Member name in address:port format.
+        fullPath:
+          type: string
+          readOnly: true
+        address:
+          type: string
+          description: >-
+            IP address of the pool member.
+          format: ipv4
+        connectionLimit:
+          type: integer
+          description: >-
+            Maximum concurrent connections for this member.
+          minimum: 0
+        description:
+          type: string
+          description: >-
+            User-defined description.
+        dynamicRatio:
+          type: integer
+          description: >-
+            Dynamic ratio weight for load balancing.
+        monitor:
+          type: string
+          description: >-
+            Health monitor override for this member.
+        partition:
+          type: string
+        priorityGroup:
+          type: integer
+          description: >-
+            Priority group number. Higher values receive traffic first.
+          minimum: 0
+        ratio:
+          type: integer
+          description: >-
+            Ratio weight for proportional load balancing.
+          minimum: 1
+        session:
+          type: string
+          description: >-
+            Session availability state.
+          enum:
+            - user-enabled
+            - user-disabled
+            - monitor-enabled
+        state:
+          type: string
+          description: >-
+            Operational state of the member.
+          enum:
+            - user-up
+            - user-down
+            - up
+            - down
+            - unchecked
+
+    NodeCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:node:nodecollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Node'
+
+    Node:
+      type: object
+      required:
+        - name
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:node:nodestate
+          readOnly: true
+        name:
+          type: string
+          description: >-
+            Name of the node, typically its IP address.
+        fullPath:
+          type: string
+          readOnly: true
+        address:
+          type: string
+          description: >-
+            IP address of the node.
+          format: ipv4
+        connectionLimit:
+          type: integer
+          minimum: 0
+        description:
+          type: string
+        dynamicRatio:
+          type: integer
+        fqdn:
+          type: object
+          description: >-
+            FQDN configuration for DNS-based address resolution.
+          properties:
+            addressFamily:
+              type: string
+              enum:
+                - ipv4
+                - ipv6
+            autopopulate:
+              type: string
+              enum:
+                - enabled
+                - disabled
+            downInterval:
+              type: integer
+            interval:
+              type: string
+            tmName:
+              type: string
+              format: hostname
+        monitor:
+          type: string
+          description: >-
+            Health monitor applied to the node.
+        partition:
+          type: string
+        rateLimit:
+          type: string
+        ratio:
+          type: integer
+          minimum: 1
+        session:
+          type: string
+          enum:
+            - user-enabled
+            - user-disabled
+            - monitor-enabled
+        state:
+          type: string
+          enum:
+            - user-up
+            - user-down
+            - up
+            - down
+            - unchecked
+
+    MonitorCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HttpMonitor'
+
+    HttpMonitor:
+      type: object
+      required:
+        - name
+      properties:
+        kind:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: >-
+            Name of the health monitor.
+        fullPath:
+          type: string
+          readOnly: true
+        generation:
+          type: integer
+          readOnly: true
+        selfLink:
+          type: string
+          format: uri
+          readOnly: true
+        description:
+          type: string
+          description: >-
+            User-defined description of the monitor.
+        destination:
+          type: string
+          description: >-
+            Destination IP and port to monitor. Use * for wildcard.
+        interval:
+          type: integer
+          description: >-
+            Seconds between health check probes.
+          minimum: 1
+        timeout:
+          type: integer
+          description: >-
+            Seconds before declaring a member down after failed checks.
+          minimum: 1
+        send:
+          type: string
+          description: >-
+            HTTP request string to send to the monitored node.
+        recv:
+          type: string
+          description: >-
+            Expected response content string that indicates a healthy member.
+        recvDisable:
+          type: string
+          description: >-
+            Response content string that marks a member as disabled.
+        reverse:
+          type: string
+          description: >-
+            Whether the monitor marks a node down when the recv string is found.
+          enum:
+            - enabled
+            - disabled
+        transparent:
+          type: string
+          description: >-
+            Whether the monitor pings through the pool member to the specified destination.
+          enum:
+            - enabled
+            - disabled
+        upInterval:
+          type: integer
+          description: >-
+            Seconds between health checks when a node is up.
+        manualResume:
+          type: string
+          description: >-
+            Whether manual intervention is required to re-enable a node.
+          enum:
+            - enabled
+            - disabled
+        partition:
+          type: string
+        defaultsFrom:
+          type: string
+          description: >-
+            Parent monitor from which this monitor inherits settings.
+
+    ProfileCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            type: object
+
+    PolicyCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            type: object
+
+    IRuleCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            type: object
+
+    SslCertCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            type: object
+
+    DataGroupCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            type: object
+
+    SnatPoolCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            type: object
