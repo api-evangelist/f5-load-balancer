@@ -1,5 +1,5 @@
 aid: f5-load-balancer
-name: F5 Load Balancer API
+name: F5 Load Balancer
 description: >-
   APIs for managing F5 BIG-IP Load Balancer configuration, monitoring, and
   operations. F5 BIG-IP is an application delivery controller that provides
