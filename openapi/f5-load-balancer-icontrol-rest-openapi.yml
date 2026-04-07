@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: F5 BIG-IP iControl REST API
+  title: F5 Load Balancer F5 BIG-IP iControl REST API
   description: >-
     The iControl REST API provides programmatic access to manage and configure
     F5 BIG-IP devices. It enables automation of Local Traffic Manager (LTM)
@@ -99,7 +99,7 @@ paths:
   /ltm/virtual:
     get:
       operationId: listVirtualServers
-      summary: List all virtual servers
+      summary: F5 Load Balancer List all virtual servers
       description: >-
         Retrieves a collection of all virtual server resources configured
         on the BIG-IP system. Returns virtual server properties including
@@ -125,7 +125,7 @@ paths:
           $ref: '#/components/responses/InternalError'
     post:
       operationId: createVirtualServer
-      summary: Create a virtual server
+      summary: F5 Load Balancer Create a virtual server
       description: >-
         Creates a new virtual server resource on the BIG-IP system. The
         virtual server defines a traffic destination address and port to
@@ -159,7 +159,7 @@ paths:
       - $ref: '#/components/parameters/VirtualNameParam'
     get:
       operationId: getVirtualServer
-      summary: Get a specific virtual server
+      summary: F5 Load Balancer Get a specific virtual server
       description: >-
         Retrieves a single virtual server resource identified by name,
         including all of its configuration properties and operational state.
@@ -178,7 +178,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateVirtualServer
-      summary: Update a virtual server
+      summary: F5 Load Balancer Update a virtual server
       description: >-
         Replaces the configuration of an existing virtual server resource.
         All writable properties should be included in the request body.
@@ -205,7 +205,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     patch:
       operationId: patchVirtualServer
-      summary: Partially update a virtual server
+      summary: F5 Load Balancer Partially update a virtual server
       description: >-
         Modifies specific properties of an existing virtual server without
         requiring the full resource representation.
@@ -232,7 +232,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteVirtualServer
-      summary: Delete a virtual server
+      summary: F5 Load Balancer Delete a virtual server
       description: >-
         Removes a virtual server resource from the BIG-IP system. Existing
         connections may be disrupted depending on the virtual server state.
@@ -249,7 +249,7 @@ paths:
   /ltm/pool:
     get:
       operationId: listPools
-      summary: List all pools
+      summary: F5 Load Balancer List all pools
       description: >-
         Retrieves a collection of all load balancing pool resources configured
         on the BIG-IP system. Pools contain members that receive traffic
@@ -273,7 +273,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createPool
-      summary: Create a pool
+      summary: F5 Load Balancer Create a pool
       description: >-
         Creates a new load balancing pool on the BIG-IP system. A pool
         is a collection of backend server members to which the BIG-IP
@@ -305,7 +305,7 @@ paths:
       - $ref: '#/components/parameters/PoolNameParam'
     get:
       operationId: getPool
-      summary: Get a specific pool
+      summary: F5 Load Balancer Get a specific pool
       description: >-
         Retrieves a single pool resource identified by name including its
         configuration and load balancing settings.
@@ -324,7 +324,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updatePool
-      summary: Update a pool
+      summary: F5 Load Balancer Update a pool
       description: >-
         Replaces the configuration of an existing pool resource.
       tags:
@@ -350,7 +350,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deletePool
-      summary: Delete a pool
+      summary: F5 Load Balancer Delete a pool
       description: >-
         Removes a pool resource from the BIG-IP system. Any virtual servers
         referencing this pool should be updated before deletion.
@@ -369,7 +369,7 @@ paths:
       - $ref: '#/components/parameters/PoolNameParam'
     get:
       operationId: listPoolMembers
-      summary: List pool members
+      summary: F5 Load Balancer List pool members
       description: >-
         Retrieves a collection of all members within a specific pool
         including their addresses, ports, and operational states.
@@ -391,7 +391,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     post:
       operationId: addPoolMember
-      summary: Add a member to a pool
+      summary: F5 Load Balancer Add a member to a pool
       description: >-
         Adds a new server member to the specified pool. The member is
         identified by its node address and service port.
@@ -423,7 +423,7 @@ paths:
       - $ref: '#/components/parameters/MemberNameParam'
     get:
       operationId: getPoolMember
-      summary: Get a specific pool member
+      summary: F5 Load Balancer Get a specific pool member
       description: >-
         Retrieves a single pool member resource including its configuration,
         health status, and statistics.
@@ -442,7 +442,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updatePoolMember
-      summary: Update a pool member
+      summary: F5 Load Balancer Update a pool member
       description: >-
         Replaces the configuration of a specific pool member.
       tags:
@@ -468,7 +468,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deletePoolMember
-      summary: Remove a pool member
+      summary: F5 Load Balancer Remove a pool member
       description: >-
         Removes a server member from the specified pool.
       tags:
@@ -484,7 +484,7 @@ paths:
   /ltm/node:
     get:
       operationId: listNodes
-      summary: List all nodes
+      summary: F5 Load Balancer List all nodes
       description: >-
         Retrieves a collection of all node resources on the BIG-IP system.
         Nodes represent backend servers identified by their IP addresses
@@ -507,7 +507,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createNode
-      summary: Create a node
+      summary: F5 Load Balancer Create a node
       description: >-
         Creates a new node resource representing a backend server on
         the network. Nodes are the foundation for pool members.
@@ -538,7 +538,7 @@ paths:
       - $ref: '#/components/parameters/NodeNameParam'
     get:
       operationId: getNode
-      summary: Get a specific node
+      summary: F5 Load Balancer Get a specific node
       description: >-
         Retrieves a single node resource including its address, monitoring
         status, and configuration.
@@ -557,7 +557,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     put:
       operationId: updateNode
-      summary: Update a node
+      summary: F5 Load Balancer Update a node
       description: >-
         Replaces the configuration of an existing node resource.
       tags:
@@ -583,7 +583,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteNode
-      summary: Delete a node
+      summary: F5 Load Balancer Delete a node
       description: >-
         Removes a node resource from the BIG-IP system. The node must not
         be referenced by any pool members.
@@ -600,7 +600,7 @@ paths:
   /ltm/monitor/http:
     get:
       operationId: listHttpMonitors
-      summary: List HTTP health monitors
+      summary: F5 Load Balancer List HTTP health monitors
       description: >-
         Retrieves all HTTP health monitors configured on the BIG-IP system.
         HTTP monitors verify availability by sending HTTP requests to pool
@@ -618,7 +618,7 @@ paths:
           $ref: '#/components/responses/Unauthorized'
     post:
       operationId: createHttpMonitor
-      summary: Create an HTTP health monitor
+      summary: F5 Load Balancer Create an HTTP health monitor
       description: >-
         Creates a new HTTP health monitor that sends HTTP requests to pool
         members to verify their availability and responsiveness.
@@ -645,7 +645,7 @@ paths:
   /ltm/monitor/https:
     get:
       operationId: listHttpsMonitors
-      summary: List HTTPS health monitors
+      summary: F5 Load Balancer List HTTPS health monitors
       description: >-
         Retrieves all HTTPS health monitors configured on the BIG-IP system.
         HTTPS monitors verify availability over TLS-encrypted connections.
@@ -664,7 +664,7 @@ paths:
   /ltm/monitor/tcp:
     get:
       operationId: listTcpMonitors
-      summary: List TCP health monitors
+      summary: F5 Load Balancer List TCP health monitors
       description: >-
         Retrieves all TCP health monitors configured on the BIG-IP system.
         TCP monitors verify that pool members are accepting connections
@@ -684,7 +684,7 @@ paths:
   /ltm/profile/http:
     get:
       operationId: listHttpProfiles
-      summary: List HTTP profiles
+      summary: F5 Load Balancer List HTTP profiles
       description: >-
         Retrieves all HTTP traffic profiles on the BIG-IP system. HTTP
         profiles configure how the BIG-IP processes HTTP traffic including
@@ -704,7 +704,7 @@ paths:
   /ltm/profile/tcp:
     get:
       operationId: listTcpProfiles
-      summary: List TCP profiles
+      summary: F5 Load Balancer List TCP profiles
       description: >-
         Retrieves all TCP traffic profiles on the BIG-IP system. TCP
         profiles optimize TCP connection behavior for different
@@ -724,7 +724,7 @@ paths:
   /ltm/profile/client-ssl:
     get:
       operationId: listClientSslProfiles
-      summary: List client SSL profiles
+      summary: F5 Load Balancer List client SSL profiles
       description: >-
         Retrieves all client-side SSL profiles on the BIG-IP system.
         Client SSL profiles manage TLS/SSL termination for connections
@@ -744,7 +744,7 @@ paths:
   /ltm/policy:
     get:
       operationId: listPolicies
-      summary: List local traffic policies
+      summary: F5 Load Balancer List local traffic policies
       description: >-
         Retrieves all local traffic policies on the BIG-IP system. Policies
         provide rule-based traffic steering, content manipulation, and
@@ -764,7 +764,7 @@ paths:
   /ltm/rule:
     get:
       operationId: listIRules
-      summary: List iRules
+      summary: F5 Load Balancer List iRules
       description: >-
         Retrieves all iRule resources on the BIG-IP system. iRules are
         Tcl-based scripts that provide custom traffic management logic
@@ -784,7 +784,7 @@ paths:
   /sys/file/ssl-cert:
     get:
       operationId: listSslCertificates
-      summary: List SSL certificates
+      summary: F5 Load Balancer List SSL certificates
       description: >-
         Retrieves all SSL certificate files installed on the BIG-IP system
         that are available for use in SSL profiles.
@@ -803,7 +803,7 @@ paths:
   /ltm/data-group/internal:
     get:
       operationId: listInternalDataGroups
-      summary: List internal data groups
+      summary: F5 Load Balancer List internal data groups
       description: >-
         Retrieves all internal data groups on the BIG-IP system. Data groups
         provide address, string, and integer lookups used in iRules and
@@ -823,7 +823,7 @@ paths:
   /ltm/snatpool:
     get:
       operationId: listSnatPools
-      summary: List SNAT pools
+      summary: F5 Load Balancer List SNAT pools
       description: >-
         Retrieves all SNAT pool resources on the BIG-IP system. SNAT pools
         define collections of translation addresses used for outbound
@@ -843,7 +843,7 @@ paths:
   /sys:
     get:
       operationId: getSystemInfo
-      summary: Get system information
+      summary: F5 Load Balancer Get system information
       description: >-
         Retrieves top-level system information and available sub-collections
         for the BIG-IP system.
@@ -862,7 +862,7 @@ paths:
   /sys/version:
     get:
       operationId: getSystemVersion
-      summary: Get system software version
+      summary: F5 Load Balancer Get system software version
       description: >-
         Retrieves the software version information for the BIG-IP system
         including product name, version, build number, and edition.
@@ -887,7 +887,7 @@ paths:
   /sys/device:
     get:
       operationId: listDevices
-      summary: List BIG-IP devices
+      summary: F5 Load Balancer List BIG-IP devices
       description: >-
         Retrieves information about all BIG-IP devices in the device trust
         group, including hostname, management address, failover state,

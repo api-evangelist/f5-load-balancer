@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: F5 BIG-IP Application Services 3 Extension (AS3) API
+  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) API
   description: >-
     The Application Services 3 Extension (AS3) provides a declarative API for
     managing application-specific configurations on BIG-IP systems. AS3 uses
@@ -52,7 +52,7 @@ paths:
   /declare:
     post:
       operationId: submitDeclaration
-      summary: Submit an AS3 declaration
+      summary: F5 Load Balancer Submit an AS3 declaration
       description: >-
         Submits an AS3 declaration to deploy or update application services
         configuration on the BIG-IP system. The declaration describes the
@@ -118,7 +118,7 @@ paths:
 
     get:
       operationId: getDeclaration
-      summary: Retrieve the current AS3 declaration
+      summary: F5 Load Balancer Retrieve the current AS3 declaration
       description: >-
         Retrieves the current AS3 declaration from the BIG-IP system.
         Returns the full declaration for all tenants or a specific tenant
@@ -160,7 +160,7 @@ paths:
 
     delete:
       operationId: deleteDeclaration
-      summary: Remove the AS3 declaration
+      summary: F5 Load Balancer Remove the AS3 declaration
       description: >-
         Removes the AS3 declaration and all associated configuration from the
         BIG-IP system. This deletes all tenants and their application services.
@@ -180,7 +180,7 @@ paths:
 
     patch:
       operationId: patchDeclaration
-      summary: Partially update the AS3 declaration
+      summary: F5 Load Balancer Partially update the AS3 declaration
       description: >-
         Modifies the existing AS3 declaration using a JSON Patch or JSON
         Merge Patch document. This allows incremental changes without
@@ -212,7 +212,7 @@ paths:
       - $ref: '#/components/parameters/TenantNameParam'
     get:
       operationId: getTenantDeclaration
-      summary: Retrieve declaration for a specific tenant
+      summary: F5 Load Balancer Retrieve declaration for a specific tenant
       description: >-
         Retrieves the AS3 declaration scoped to a specific tenant. Only
         the configuration for the named tenant is returned.
@@ -241,7 +241,7 @@ paths:
           $ref: '#/components/responses/NotFound'
     delete:
       operationId: deleteTenantDeclaration
-      summary: Remove a specific tenant declaration
+      summary: F5 Load Balancer Remove a specific tenant declaration
       description: >-
         Removes the declaration and all associated configuration for a
         specific tenant from the BIG-IP system.
@@ -262,7 +262,7 @@ paths:
   /task:
     get:
       operationId: listTasks
-      summary: List all AS3 tasks
+      summary: F5 Load Balancer List all AS3 tasks
       description: >-
         Retrieves a list of all asynchronous AS3 declaration processing
         tasks and their statuses.
@@ -283,7 +283,7 @@ paths:
       - $ref: '#/components/parameters/TaskIdParam'
     get:
       operationId: getTask
-      summary: Get status of a specific task
+      summary: F5 Load Balancer Get status of a specific task
       description: >-
         Retrieves the status and result of a specific asynchronous AS3
         declaration processing task identified by its task ID.
@@ -304,7 +304,7 @@ paths:
   /info:
     get:
       operationId: getInfo
-      summary: Get AS3 extension information
+      summary: F5 Load Balancer Get AS3 extension information
       description: >-
         Retrieves version, release, and schema version information for the
         installed AS3 extension on the BIG-IP system.

@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: F5 BIG-IP Declarative Onboarding (DO) API
+  title: F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API
   description: >-
     The Declarative Onboarding (DO) extension automates the initial BIG-IP
     system configuration and provisioning using a declarative JSON model. DO
@@ -62,7 +62,7 @@ paths:
   /:
     post:
       operationId: submitOnboardingDeclaration
-      summary: Submit a Declarative Onboarding declaration
+      summary: F5 Load Balancer Submit a Declarative Onboarding declaration
       description: >-
         Submits a Declarative Onboarding declaration to configure the BIG-IP
         system initial settings. The declaration describes licensing, DNS,
@@ -100,7 +100,7 @@ paths:
 
     get:
       operationId: getOnboardingDeclaration
-      summary: Retrieve the current DO declaration
+      summary: F5 Load Balancer Retrieve the current DO declaration
       description: >-
         Retrieves the most recently submitted Declarative Onboarding
         declaration from the BIG-IP system.
@@ -133,7 +133,7 @@ paths:
   /task:
     get:
       operationId: listOnboardingTasks
-      summary: List all DO tasks
+      summary: F5 Load Balancer List all DO tasks
       description: >-
         Retrieves an array of all Declarative Onboarding task records
         and their processing statuses.
@@ -156,7 +156,7 @@ paths:
       - $ref: '#/components/parameters/TaskIdParam'
     get:
       operationId: getOnboardingTask
-      summary: Get a specific DO task status
+      summary: F5 Load Balancer Get a specific DO task status
       description: >-
         Retrieves the status and result of a specific Declarative Onboarding
         task identified by its task ID.
@@ -177,7 +177,7 @@ paths:
   /config:
     get:
       operationId: listOriginalConfigs
-      summary: List original device configurations
+      summary: F5 Load Balancer List original device configurations
       description: >-
         Retrieves the original configurations for all devices managed by
         Declarative Onboarding before any DO modifications were applied.
@@ -207,7 +207,7 @@ paths:
           type: string
     get:
       operationId: getOriginalConfig
-      summary: Get original configuration for a device
+      summary: F5 Load Balancer Get original configuration for a device
       description: >-
         Retrieves the original configuration for a specific device identified
         by its machine ID, as it existed before Declarative Onboarding
@@ -229,7 +229,7 @@ paths:
   /inspect:
     get:
       operationId: inspectCurrentState
-      summary: Inspect current BIG-IP state
+      summary: F5 Load Balancer Inspect current BIG-IP state
       description: >-
         Returns the classes Declarative Onboarding is aware of and their
         current state on the BIG-IP system. Useful for understanding the
@@ -249,7 +249,7 @@ paths:
   /info:
     get:
       operationId: getDoInfo
-      summary: Get DO extension information
+      summary: F5 Load Balancer Get DO extension information
       description: >-
         Returns version and release information for the installed Declarative
         Onboarding extension, including current and minimum required
