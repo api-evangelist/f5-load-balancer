@@ -7,11 +7,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Load Balancer
   - Application Delivery
-  - Traffic Management
   - BIG-IP
+  - Load Balancer
   - Networking
+  - Traffic Management
 url: https://www.f5.com
 created: '2024-01-01'
 modified: '2026-03-16'
@@ -27,9 +27,9 @@ apis:
     humanURL: https://clouddocs.f5.com/api/icontrol-rest/
     baseURL: https://bigip-host/mgmt/tm
     tags:
-      - REST API
       - Configuration
       - Management
+      - REST API
     properties:
       - type: Documentation
         url: https://clouddocs.f5.com/api/icontrol-rest/
@@ -43,9 +43,9 @@ apis:
     humanURL: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
     baseURL: https://bigip-host/mgmt/shared/appsvcs
     tags:
-      - Declarative
-      - Automation
       - AS3
+      - Automation
+      - Declarative
     properties:
       - type: Documentation
         url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/

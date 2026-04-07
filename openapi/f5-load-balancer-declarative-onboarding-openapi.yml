@@ -38,26 +38,26 @@ security:
   - tokenAuth: []
 
 tags:
-  - name: Declarations
-    description: >-
-      Submit and retrieve Declarative Onboarding declarations for initial
-      BIG-IP device configuration and provisioning.
-  - name: Tasks
-    description: >-
-      Monitor the status of Declarative Onboarding task executions.
   - name: Config
     description: >-
       Retrieve the original device configuration before Declarative
       Onboarding modifications were applied.
-  - name: Inspect
+  - name: Declarations
     description: >-
-      Inspect the current state of BIG-IP configuration classes known
-      to Declarative Onboarding.
+      Submit and retrieve Declarative Onboarding declarations for initial
+      BIG-IP device configuration and provisioning.
   - name: Info
     description: >-
       Retrieve version and release information about the installed DO
       extension.
 
+  - name: Inspect
+    description: >-
+      Inspect the current state of BIG-IP configuration classes known
+      to Declarative Onboarding.
+  - name: Tasks
+    description: >-
+      Monitor the status of Declarative Onboarding task executions.
 paths:
   /:
     post:

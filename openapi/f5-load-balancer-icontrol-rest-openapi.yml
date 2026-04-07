@@ -36,65 +36,65 @@ security:
   - tokenAuth: []
 
 tags:
-  - name: Virtual Servers
+  - name: Data Groups
     description: >-
-      Manage virtual servers that direct client traffic to appropriate
-      server pools based on configured rules and profiles.
-    externalDocs:
-      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_virtual.html
-  - name: Pools
+      Manage internal and external data groups used for address, string,
+      and integer lookups in traffic processing decisions.
+  - name: iRules
     description: >-
-      Manage pools of backend servers for load distribution and health
-      monitoring.
-    externalDocs:
-      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_pool.html
-  - name: Pool Members
-    description: >-
-      Manage individual server members within load balancing pools including
-      their state, ratio, priority group, and connection limits.
-    externalDocs:
-      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_pool_members.html
-  - name: Nodes
-    description: >-
-      Manage backend server nodes identified by IP address or FQDN that
-      serve as the foundation for pool member definitions.
-    externalDocs:
-      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_node.html
+      Manage iRules for custom traffic management logic using the F5
+      Tcl-based scripting language.
   - name: Monitors
     description: >-
       Configure health monitors that verify the availability and performance
       of nodes, pool members, and services.
     externalDocs:
       url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_monitor.html
-  - name: Profiles
+  - name: Nodes
     description: >-
-      Manage traffic profiles that define how the BIG-IP processes different
-      types of network traffic including HTTP, TCP, SSL, and persistence.
+      Manage backend server nodes identified by IP address or FQDN that
+      serve as the foundation for pool member definitions.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_node.html
   - name: Policies
     description: >-
       Manage local traffic policies that provide rule-based traffic steering
       and content manipulation capabilities.
-  - name: iRules
+  - name: Pool Members
     description: >-
-      Manage iRules for custom traffic management logic using the F5
-      Tcl-based scripting language.
-  - name: SSL Certificates
+      Manage individual server members within load balancing pools including
+      their state, ratio, priority group, and connection limits.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_pool_members.html
+  - name: Pools
     description: >-
-      Manage SSL certificates and keys used for TLS/SSL termination and
-      re-encryption on virtual servers.
-  - name: Data Groups
+      Manage pools of backend servers for load distribution and health
+      monitoring.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_pool.html
+  - name: Profiles
     description: >-
-      Manage internal and external data groups used for address, string,
-      and integer lookups in traffic processing decisions.
+      Manage traffic profiles that define how the BIG-IP processes different
+      types of network traffic including HTTP, TCP, SSL, and persistence.
   - name: SNAT Pools
     description: >-
       Manage SNAT (Secure Network Address Translation) pools that define
       translation addresses for outbound connections.
+  - name: SSL Certificates
+    description: >-
+      Manage SSL certificates and keys used for TLS/SSL termination and
+      re-encryption on virtual servers.
   - name: System
     description: >-
       Access system-level information and configuration including device
       status, software versions, and global settings.
 
+  - name: Virtual Servers
+    description: >-
+      Manage virtual servers that direct client traffic to appropriate
+      server pools based on configured rules and profiles.
+    externalDocs:
+      url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_virtual.html
 paths:
   /ltm/virtual:
     get:

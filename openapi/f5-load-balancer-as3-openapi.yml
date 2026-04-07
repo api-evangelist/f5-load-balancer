@@ -40,14 +40,14 @@ tags:
     description: >-
       Submit, retrieve, and manage AS3 declarations that describe the desired
       application services configuration state on the BIG-IP system.
-  - name: Tasks
-    description: >-
-      Monitor the status of asynchronous declaration processing tasks.
   - name: Info
     description: >-
       Retrieve version and capability information about the installed AS3
       extension.
 
+  - name: Tasks
+    description: >-
+      Monitor the status of asynchronous declaration processing tasks.
 paths:
   /declare:
     post:
