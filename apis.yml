@@ -14,7 +14,7 @@ tags:
   - Traffic Management
 url: https://www.f5.com
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-04-28'
 position: Consumer
 access: 3rd-Party
 specificationVersion: '0.19'
@@ -35,6 +35,8 @@ apis:
         url: https://clouddocs.f5.com/api/icontrol-rest/
       - type: Authentication
         url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+      - type: OpenAPI
+        url: openapi/f5-load-balancer-icontrol-rest-openapi.yml
   - aid: f5-load-balancer:f5-bigip-as3-api
     name: F5 BIG-IP AS3 API
     description: >-
@@ -49,6 +51,25 @@ apis:
     properties:
       - type: Documentation
         url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+      - type: OpenAPI
+        url: openapi/f5-load-balancer-as3-openapi.yml
+  - aid: f5-load-balancer:f5-bigip-declarative-onboarding-api
+    name: F5 BIG-IP Declarative Onboarding API
+    description: >-
+      Declarative Onboarding (DO) extension for initial BIG-IP system
+      configuration and provisioning via JSON declarations covering
+      licensing, networking, user management, and module provisioning.
+    humanURL: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+    baseURL: https://bigip-host/mgmt/shared/declarative-onboarding
+    tags:
+      - Declarative
+      - Onboarding
+      - Provisioning
+    properties:
+      - type: Documentation
+        url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+      - type: OpenAPI
+        url: openapi/f5-load-balancer-declarative-onboarding-openapi.yml
 common:
   - type: Portal
     url: https://clouddocs.f5.com/

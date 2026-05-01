@@ -1,108 +1,87 @@
-# F5 Load Balancer API (f5-load-balancer)
-APIs for managing F5 BIG-IP Load Balancer configuration, monitoring, and operations
+# F5 Load Balancer (f5-load-balancer)
+APIs for managing F5 BIG-IP Load Balancer configuration, monitoring, and operations. F5 BIG-IP is an application delivery controller that provides intelligent traffic management, load balancing, and application security. This repository is an alias of the canonical [f5](https://github.com/api-evangelist/f5) entry, focused on the load balancer portfolio.
 
 **URL:** [Visit APIs.json URL](https://www.f5.com)
 
+## Scope
+
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
+
 ## Tags:
 
- - load balancer, application delivery, traffic management, ADC, BIG-IP, networking, infrastructure
+ - Application Delivery, BIG-IP, Load Balancer, Networking, Traffic Management
 
 ## Timestamps
 
-- **Created:** 2024 
-- **Modified:** 2024 
+- **Created:** 2024-01-01
+- **Modified:** 2026-04-28
 
 ## APIs
 
 ### F5 BIG-IP iControl REST API
-Primary REST API for managing F5 BIG-IP systems including virtual servers, pools, nodes, and policies
+Primary REST API for managing F5 BIG-IP systems including virtual servers, pools, nodes, and policies for application delivery and load balancing.
 
 **Human URL:** [https://clouddocs.f5.com/api/icontrol-rest/](https://clouddocs.f5.com/api/icontrol-rest/)
 
+**Base URL:** `https://bigip-host/mgmt/tm`
 
 #### Tags:
 
- - REST API, configuration, management, iControl
+ - Configuration, Management, REST API
 
 #### Properties
 
-- [X-documentation](https://clouddocs.f5.com/api/icontrol-rest/)
-- [X-openapi](https://cdn.f5.com/product/cloudsolutions/icontrol-rest-api-reference/latest/)
-- [X-authentication](https://clouddocs.f5.com/api/icontrol-rest/Authentication.html)
+- [Documentation](https://clouddocs.f5.com/api/icontrol-rest/)
+- [Authentication](https://clouddocs.f5.com/api/icontrol-rest/Authentication.html)
+- [OpenAPI](openapi/f5-load-balancer-icontrol-rest-openapi.yml)
 
 ### F5 BIG-IP AS3 API
-Application Services 3 Extension (AS3) for declarative API-based application deployment
+Application Services 3 Extension for declarative API-based application deployment using JSON declarations.
 
 **Human URL:** [https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/)
 
+**Base URL:** `https://bigip-host/mgmt/shared/appsvcs`
 
 #### Tags:
 
- - declarative, application services, automation, AS3
+ - AS3, Automation, Declarative
 
 #### Properties
 
-- [X-documentation](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/)
-- [X-schema](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/refguide/schema-reference.html)
-- [X-github](https://github.com/F5Networks/f5-appsvcs-extension)
-
-### F5 BIG-IP Telemetry Streaming API
-Telemetry Streaming (TS) for forwarding statistics and events to analytics consumers
-
-**Human URL:** [https://clouddocs.f5.com/products/extensions/f5-telemetry-streaming/latest/](https://clouddocs.f5.com/products/extensions/f5-telemetry-streaming/latest/)
-
-
-#### Tags:
-
- - telemetry, monitoring, metrics, logging
-
-#### Properties
-
-- [X-documentation](https://clouddocs.f5.com/products/extensions/f5-telemetry-streaming/latest/)
-- [X-github](https://github.com/F5Networks/f5-telemetry-streaming)
+- [Documentation](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/)
+- [OpenAPI](openapi/f5-load-balancer-as3-openapi.yml)
 
 ### F5 BIG-IP Declarative Onboarding API
-Declarative Onboarding (DO) for initial system configuration and provisioning
+Declarative Onboarding (DO) extension for initial BIG-IP system configuration and provisioning via JSON declarations.
 
 **Human URL:** [https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/](https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/)
 
+**Base URL:** `https://bigip-host/mgmt/shared/declarative-onboarding`
 
 #### Tags:
 
- - onboarding, provisioning, configuration, declarative
+ - Declarative, Onboarding, Provisioning
 
 #### Properties
 
-- [X-documentation](https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/)
-- [X-github](https://github.com/F5Networks/f5-declarative-onboarding)
-
-### F5 BIG-IQ Central Management API
-Centralized management API for multiple BIG-IP devices
-
-**Human URL:** [https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/)
-
-
-#### Tags:
-
- - centralized management, BIG-IQ, multi-device, orchestration
-
-#### Properties
-
-- [X-documentation](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/)
-- [X-api-reference](https://clouddocs.f5.com/products/big-iq/mgmt-api/latest/ApiReferences/)
+- [Documentation](https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/)
+- [OpenAPI](openapi/f5-load-balancer-declarative-onboarding-openapi.yml)
 
 ## Common Properties
 
-- [X-portal](https://clouddocs.f5.com/)
-- [X-support](https://www.f5.com/services/support)
-- [X-pricing](https://www.f5.com/trials)
-- [X-terms-of-service](https://www.f5.com/company/policies/terms-of-use)
-- [X-privacy-policy](https://www.f5.com/company/policies/privacy-notice)
-- [X-blog](https://www.f5.com/company/blog)
-- [X-github](https://github.com/F5Networks)
+- [Portal](https://clouddocs.f5.com/)
+- [Documentation](https://clouddocs.f5.com/api/)
+- [Support](https://www.f5.com/services/support)
+- [TermsOfService](https://www.f5.com/company/policies/terms-of-use)
+- [PrivacyPolicy](https://www.f5.com/company/policies/privacy-notice)
+- [Blog](https://www.f5.com/company/blog)
+- [GitHubOrganization](https://github.com/F5Networks)
+- [Website](https://www.f5.com)
 
 ## Maintainers
 
-**FN:** F5 Networks, Inc.
+**FN:** Kin Lane
 
-**Email:** support@f5.com
+**Email:** kin@apievangelist.com
