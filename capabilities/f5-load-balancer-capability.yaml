@@ -1,0 +1,359 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) API
+  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations
+    on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling
+    infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative
+    commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
+  tags:
+  - F5
+  - Load
+  - Balancer
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: f5-load-balancer
+    baseUri: https://192.168.1.245/mgmt/shared/appsvcs
+    description: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) API HTTP API.
+    authentication:
+      type: basic
+      username: '{{F5_LOAD_BALANCER_USERNAME}}'
+      password: '{{F5_LOAD_BALANCER_PASSWORD}}'
+    resources:
+    - name: declare
+      path: /declare
+      operations:
+      - name: submitdeclaration
+        method: POST
+        description: F5 Load Balancer Submit an AS3 declaration
+        inputParameters:
+        - name: async
+          in: query
+          type: boolean
+          description: When true, returns immediately with a task ID for asynchronous processing. Recommended for large declarations.
+        - name: show
+          in: query
+          type: string
+          description: Controls the level of detail in the response. Use full to include all configuration details, or base
+            for a summary.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: getdeclaration
+        method: GET
+        description: F5 Load Balancer Retrieve the current AS3 declaration
+        inputParameters:
+        - name: show
+          in: query
+          type: string
+          description: Controls the level of detail in the response.
+        - name: age
+          in: query
+          type: integer
+          description: Retrieve a previous declaration by age. Use 0 for the most recent, 1 for the previous, and so on.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletedeclaration
+        method: DELETE
+        description: F5 Load Balancer Remove the AS3 declaration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: patchdeclaration
+        method: PATCH
+        description: F5 Load Balancer Partially update the AS3 declaration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: declare-tenantname
+      path: /declare/{tenantName}
+      operations:
+      - name: gettenantdeclaration
+        method: GET
+        description: F5 Load Balancer Retrieve declaration for a specific tenant
+        inputParameters:
+        - name: show
+          in: query
+          type: string
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletetenantdeclaration
+        method: DELETE
+        description: F5 Load Balancer Remove a specific tenant declaration
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: task
+      path: /task
+      operations:
+      - name: listtasks
+        method: GET
+        description: F5 Load Balancer List all AS3 tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: task-taskid
+      path: /task/{taskId}
+      operations:
+      - name: gettask
+        method: GET
+        description: F5 Load Balancer Get status of a specific task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: info
+      path: /info
+      operations:
+      - name: getinfo
+        method: GET
+        description: F5 Load Balancer Get AS3 extension information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: f5-load-balancer-rest
+    description: REST adapter for F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) API.
+    resources:
+    - path: /declare
+      name: submitdeclaration
+      operations:
+      - method: POST
+        name: submitdeclaration
+        description: F5 Load Balancer Submit an AS3 declaration
+        call: f5-load-balancer.submitdeclaration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /declare
+      name: getdeclaration
+      operations:
+      - method: GET
+        name: getdeclaration
+        description: F5 Load Balancer Retrieve the current AS3 declaration
+        call: f5-load-balancer.getdeclaration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /declare
+      name: deletedeclaration
+      operations:
+      - method: DELETE
+        name: deletedeclaration
+        description: F5 Load Balancer Remove the AS3 declaration
+        call: f5-load-balancer.deletedeclaration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /declare
+      name: patchdeclaration
+      operations:
+      - method: PATCH
+        name: patchdeclaration
+        description: F5 Load Balancer Partially update the AS3 declaration
+        call: f5-load-balancer.patchdeclaration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /declare/{tenantName}
+      name: gettenantdeclaration
+      operations:
+      - method: GET
+        name: gettenantdeclaration
+        description: F5 Load Balancer Retrieve declaration for a specific tenant
+        call: f5-load-balancer.gettenantdeclaration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /declare/{tenantName}
+      name: deletetenantdeclaration
+      operations:
+      - method: DELETE
+        name: deletetenantdeclaration
+        description: F5 Load Balancer Remove a specific tenant declaration
+        call: f5-load-balancer.deletetenantdeclaration
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /task
+      name: listtasks
+      operations:
+      - method: GET
+        name: listtasks
+        description: F5 Load Balancer List all AS3 tasks
+        call: f5-load-balancer.listtasks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /task/{taskId}
+      name: gettask
+      operations:
+      - method: GET
+        name: gettask
+        description: F5 Load Balancer Get status of a specific task
+        call: f5-load-balancer.gettask
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /info
+      name: getinfo
+      operations:
+      - method: GET
+        name: getinfo
+        description: F5 Load Balancer Get AS3 extension information
+        call: f5-load-balancer.getinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: f5-load-balancer-mcp
+    transport: http
+    description: MCP adapter for F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) API for AI agent use.
+    tools:
+    - name: submitdeclaration
+      description: F5 Load Balancer Submit an AS3 declaration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: f5-load-balancer.submitdeclaration
+      with:
+        async: tools.async
+        show: tools.show
+      inputParameters:
+      - name: async
+        type: boolean
+        description: When true, returns immediately with a task ID for asynchronous processing. Recommended for large declarations.
+      - name: show
+        type: string
+        description: Controls the level of detail in the response. Use full to include all configuration details, or base
+          for a summary.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getdeclaration
+      description: F5 Load Balancer Retrieve the current AS3 declaration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: f5-load-balancer.getdeclaration
+      with:
+        show: tools.show
+        age: tools.age
+      inputParameters:
+      - name: show
+        type: string
+        description: Controls the level of detail in the response.
+      - name: age
+        type: integer
+        description: Retrieve a previous declaration by age. Use 0 for the most recent, 1 for the previous, and so on.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletedeclaration
+      description: F5 Load Balancer Remove the AS3 declaration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: f5-load-balancer.deletedeclaration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patchdeclaration
+      description: F5 Load Balancer Partially update the AS3 declaration
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: f5-load-balancer.patchdeclaration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettenantdeclaration
+      description: F5 Load Balancer Retrieve declaration for a specific tenant
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: f5-load-balancer.gettenantdeclaration
+      with:
+        show: tools.show
+      inputParameters:
+      - name: show
+        type: string
+        description: show
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletetenantdeclaration
+      description: F5 Load Balancer Remove a specific tenant declaration
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: f5-load-balancer.deletetenantdeclaration
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: listtasks
+      description: F5 Load Balancer List all AS3 tasks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: f5-load-balancer.listtasks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettask
+      description: F5 Load Balancer Get status of a specific task
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: f5-load-balancer.gettask
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getinfo
+      description: F5 Load Balancer Get AS3 extension information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: f5-load-balancer.getinfo
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    F5_LOAD_BALANCER_USERNAME: F5_LOAD_BALANCER_USERNAME
+    F5_LOAD_BALANCER_PASSWORD: F5_LOAD_BALANCER_PASSWORD
