@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: F5 Load Balancer
 providerId: f5-load-balancer
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Application Delivery
   - BIG-IP
@@ -12,88 +13,50 @@ tags:
   - Networking
   - Traffic Management
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the F5 Load Balancer API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: The F5 BIG-IP iControl REST, AS3, and Declarative Onboarding APIs are management interfaces
+  exposed by the customer's BIG-IP instance, not a public multi-tenant API. F5 does not publish per-second
+  rate limits for these management endpoints; throughput is constrained by the BIG-IP TMOS control plane
+  capacity of the deployed device/VE. iControl REST itself supports configurable client-side rate-limiting
+  policies for traffic plane data, but these are tools the customer configures, not a vendor-imposed
+  ceiling.
+notes: No vendor-published rate limit numbers for the management API surface. Throughput is bounded by
+  the deployed BIG-IP form factor (hardware model or VE size). Reconcile from F5 sizing guides for the
+  specific platform in use.
+sources:
+  - https://clouddocs.f5.com/api/icontrol-rest/
+  - https://www.f5.com/products/big-ip-services
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
+  serverError: 500
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - F5 BIG-IP iControl REST API
-      - F5 BIG-IP AS3 API
-      - F5 BIG-IP Declarative Onboarding API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - F5 BIG-IP iControl REST API
-      - F5 BIG-IP AS3 API
-      - F5 BIG-IP Declarative Onboarding API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - F5 BIG-IP iControl REST API
-      - F5 BIG-IP AS3 API
-      - F5 BIG-IP Declarative Onboarding API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - F5 BIG-IP iControl REST API
-      - F5 BIG-IP AS3 API
-      - F5 BIG-IP Declarative Onboarding API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - F5 BIG-IP iControl REST API
-      - F5 BIG-IP AS3 API
-      - F5 BIG-IP Declarative Onboarding API
+  - name: BIG-IP management plane (iControl REST)
+    scope: device
+    metric: varies
+    limit: bounded by BIG-IP control-plane capacity (hardware model or VE size); not a published number
+    notes: Customer-deployed; consult the F5 sizing guide for the specific BIG-IP platform.
+  - name: AS3 declarations
+    scope: device
+    metric: varies
+    limit: serialized through BIG-IP control plane; long-running declarations should be polled via task
+      endpoints
+  - name: Declarative Onboarding declarations
+    scope: device
+    metric: varies
+    limit: serialized through BIG-IP control plane; one onboarding operation at a time per device
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Customer-configured rate limiting
+    description: BIG-IP itself can apply rate-limit policies to traffic-plane (data path) flows; this is
+      a tool the customer configures, not a vendor cap on the management API.
+  - name: Async task pattern
+    description: AS3 and DO declarations are asynchronous — submit, then poll the returned task URL for
+      status; do not retry the submit while a task is running.
+  - name: Backoff on 5xx
+    description: BIG-IP control plane can return 5xx during heavy config commits; back off with jitter
+      and retry idempotent reads only.
+  - name: Authentication
+    description: Use token auth (POST /mgmt/shared/authn/login) and refresh tokens; basic auth is supported
+      but discouraged for automation.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

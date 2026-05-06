@@ -8,10 +8,11 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: F5 Load Balancer
 providerId: f5-load-balancer
-publisherName: F5 Load Balancer
-serviceCategory: API
+publisherName: F5, Inc.
+serviceCategory: Application Delivery / Networking
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - Application Delivery
   - BIG-IP
@@ -21,20 +22,28 @@ tags:
   - FinOps
   - Cost Management
   - FOCUS
-description: FinOps framework definition for the F5 Load Balancer API surface. Provides a FOCUS-aligned
-  mapping for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+description: 'FOCUS-aligned FinOps for F5 BIG-IP load balancer products. Cost is driven by license model
+  (Subscription / Perpetual / Flex Consumption Program) negotiated through F5 sales or a reseller; there
+  is no per-API-call charge. FinOps levers focus on instance-count, term length, and FCP true-up.'
+notes: F5 publishes no list prices; this artifact describes the FinOps shape. Reconcile cost values against
+  an active quote.
+sources:
+  - https://www.f5.com/products/get-f5
+  - https://www.f5.com/products/big-ip-services
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: Track BIG-IP instance counts (hardware models and VE sizes) per environment; pull FCP
+      activity reports quarterly; reconcile against support entitlement records.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Allocate license cost by tenant/business unit via partition/route-domain on BIG-IP, or
+      by VE deployment in cloud accounts. Tag VE instances in the cloud provider with team/product.
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Right-size BIG-IP VE flavors before renewal; consolidate workloads onto larger appliances
+      where TMOS capacity allows; choose FCP for variable demand and Perpetual+Support for steady workloads;
+      negotiate longer terms (3-yr) for better unit cost.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
+    description: Network/platform team owns BIG-IP entitlement; product teams own per-VS configuration
+      cost. Annual review of license vs. utilized capacity; quarterly FCP true-up.
 domains:
   - name: Understand Usage and Cost
     capabilities:
@@ -47,102 +56,80 @@ domains:
       - Planning and Estimating
       - Forecasting
       - Budgeting
-      - Benchmarking
       - Unit Economics
   - name: Optimize Usage and Cost
     capabilities:
       - Architecting for Cloud
       - Rate Optimization
       - Workload Optimization
-      - Cloud Sustainability
       - Licensing and SaaS
   - name: Manage the FinOps Practice
     capabilities:
       - FinOps Practice Operations
-      - FinOps Education and Enablement
       - Invoicing and Chargeback
       - Onboarding Workloads
-      - Intersecting Disciplines
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription / Perpetual / Flex Consumption
+  billingFrequency: Annual (Subscription/FCP), One-Time (Perpetual)
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
-    - Tax
-    - Credit
+    - Usage
     - Adjustment
-  chargeFrequency: Recurring
+    - Tax
+  chargeFrequency: Recurring (Subscription/FCP) or One-Time (Perpetual)
 focusColumns:
-  ServiceName: F5 Load Balancer
-  ServiceCategory: Developer Tools / API
-  ProviderName: F5 Load Balancer
-  PublisherName: F5 Load Balancer
-  InvoiceIssuerName: F5 Load Balancer
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: F5 BIG-IP
+  ServiceCategory: Application Delivery / Networking
+  ProviderName: F5
+  PublisherName: F5, Inc.
+  InvoiceIssuerName: F5, Inc.
+  PricingCategory: Subscription / Perpetual / Flex
+  PricingUnit: instance
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
-    aggregation: sum
+  - name: bigip_instances
+    description: Count of licensed BIG-IP instances (hardware or VE).
+    unit: instance
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - environment
       - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - form_factor
+  - name: fcp_commitment
+    description: Annual FCP commitment $; trues up to actual usage.
+    unit: USD
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
+      - year
+      - service
+  - name: support_entitlement
+    description: Active support contract coverage by service module.
+    unit: month
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - service
 apis:
   - name: F5 BIG-IP iControl REST API
     baseURL: https://bigip-host/mgmt/tm
-    tags:
-      - Configuration
-      - Management
-      - REST API
     serviceName: F5 BIG-IP iControl REST API
     serviceCategory: API
   - name: F5 BIG-IP AS3 API
     baseURL: https://bigip-host/mgmt/shared/appsvcs
-    tags:
-      - AS3
-      - Automation
-      - Declarative
     serviceName: F5 BIG-IP AS3 API
     serviceCategory: API
   - name: F5 BIG-IP Declarative Onboarding API
     baseURL: https://bigip-host/mgmt/shared/declarative-onboarding
-    tags:
-      - Declarative
-      - Onboarding
-      - Provisioning
     serviceName: F5 BIG-IP Declarative Onboarding API
     serviceCategory: API
 unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+  - name: Cost per BIG-IP instance / year
+    metric: total_license_cost / bigip_instances
+    target: model-dependent (set per platform)
+  - name: FCP true-up variance
+    metric: (actual_usage - committed) / committed
+    target: minimize positive variance
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
