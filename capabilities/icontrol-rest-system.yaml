@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: F5 Load Balancer F5 BIG-IP iControl REST API — System
+  description: 'F5 Load Balancer F5 BIG-IP iControl REST API — System. 3 operations. Lead operation: F5 Load Balancer Get
+    system information. Self-contained Naftiko capability covering one F5 Load Balancer business surface.'
+  tags:
+  - F5 Load Balancer
+  - System
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    F5_LOAD_BALANCER_API_KEY: F5_LOAD_BALANCER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: icontrol-rest-system
+    baseUri: https://{bigip_host}/mgmt/tm
+    description: F5 Load Balancer F5 BIG-IP iControl REST API — System business capability. Self-contained, no shared references.
+    resources:
+    - name: sys
+      path: /sys
+      operations:
+      - name: getsysteminfo
+        method: GET
+        description: F5 Load Balancer Get system information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sys-device
+      path: /sys/device
+      operations:
+      - name: listdevices
+        method: GET
+        description: F5 Load Balancer List BIG-IP devices
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sys-version
+      path: /sys/version
+      operations:
+      - name: getsystemversion
+        method: GET
+        description: F5 Load Balancer Get system software version
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-F5-Auth-Token
+      value: '{{env.F5_LOAD_BALANCER_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: icontrol-rest-system-rest
+    port: 8080
+    description: REST adapter for F5 Load Balancer F5 BIG-IP iControl REST API — System. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/sys
+      name: sys
+      description: REST surface for sys.
+      operations:
+      - method: GET
+        name: getsysteminfo
+        description: F5 Load Balancer Get system information
+        call: icontrol-rest-system.getsysteminfo
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sys/device
+      name: sys-device
+      description: REST surface for sys-device.
+      operations:
+      - method: GET
+        name: listdevices
+        description: F5 Load Balancer List BIG-IP devices
+        call: icontrol-rest-system.listdevices
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sys/version
+      name: sys-version
+      description: REST surface for sys-version.
+      operations:
+      - method: GET
+        name: getsystemversion
+        description: F5 Load Balancer Get system software version
+        call: icontrol-rest-system.getsystemversion
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: icontrol-rest-system-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for F5 Load Balancer F5 BIG-IP iControl REST API — System. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: f5-load-balancer-get-system
+      description: F5 Load Balancer Get system information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-system.getsysteminfo
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: f5-load-balancer-list-big
+      description: F5 Load Balancer List BIG-IP devices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-system.listdevices
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: f5-load-balancer-get-system-2
+      description: F5 Load Balancer Get system software version
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-system.getsystemversion
+      outputParameters:
+      - type: object
+        mapping: $.

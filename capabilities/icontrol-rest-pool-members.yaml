@@ -1,0 +1,200 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: F5 Load Balancer F5 BIG-IP iControl REST API — Pool Members
+  description: 'F5 Load Balancer F5 BIG-IP iControl REST API — Pool Members. 5 operations. Lead operation: F5 Load Balancer
+    List pool members. Self-contained Naftiko capability covering one F5 Load Balancer business surface.'
+  tags:
+  - F5 Load Balancer
+  - Pool Members
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    F5_LOAD_BALANCER_API_KEY: F5_LOAD_BALANCER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: icontrol-rest-pool-members
+    baseUri: https://{bigip_host}/mgmt/tm
+    description: F5 Load Balancer F5 BIG-IP iControl REST API — Pool Members business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: ltm-pool-poolName-members
+      path: /ltm/pool/{poolName}/members
+      operations:
+      - name: listpoolmembers
+        method: GET
+        description: F5 Load Balancer List pool members
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: addpoolmember
+        method: POST
+        description: F5 Load Balancer Add a member to a pool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: ltm-pool-poolName-members-memberName
+      path: /ltm/pool/{poolName}/members/{memberName}
+      operations:
+      - name: getpoolmember
+        method: GET
+        description: F5 Load Balancer Get a specific pool member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatepoolmember
+        method: PUT
+        description: F5 Load Balancer Update a pool member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletepoolmember
+        method: DELETE
+        description: F5 Load Balancer Remove a pool member
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-F5-Auth-Token
+      value: '{{env.F5_LOAD_BALANCER_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: icontrol-rest-pool-members-rest
+    port: 8080
+    description: REST adapter for F5 Load Balancer F5 BIG-IP iControl REST API — Pool Members. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ltm/pool/{poolname}/members
+      name: ltm-pool-poolname-members
+      description: REST surface for ltm-pool-poolName-members.
+      operations:
+      - method: GET
+        name: listpoolmembers
+        description: F5 Load Balancer List pool members
+        call: icontrol-rest-pool-members.listpoolmembers
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addpoolmember
+        description: F5 Load Balancer Add a member to a pool
+        call: icontrol-rest-pool-members.addpoolmember
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ltm/pool/{poolname}/members/{membername}
+      name: ltm-pool-poolname-members-membername
+      description: REST surface for ltm-pool-poolName-members-memberName.
+      operations:
+      - method: GET
+        name: getpoolmember
+        description: F5 Load Balancer Get a specific pool member
+        call: icontrol-rest-pool-members.getpoolmember
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatepoolmember
+        description: F5 Load Balancer Update a pool member
+        call: icontrol-rest-pool-members.updatepoolmember
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletepoolmember
+        description: F5 Load Balancer Remove a pool member
+        call: icontrol-rest-pool-members.deletepoolmember
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: icontrol-rest-pool-members-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for F5 Load Balancer F5 BIG-IP iControl REST API — Pool Members. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: f5-load-balancer-list-pool
+      description: F5 Load Balancer List pool members
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-pool-members.listpoolmembers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: f5-load-balancer-add-member
+      description: F5 Load Balancer Add a member to a pool
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: icontrol-rest-pool-members.addpoolmember
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: f5-load-balancer-get-specific
+      description: F5 Load Balancer Get a specific pool member
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-pool-members.getpoolmember
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: f5-load-balancer-update-pool
+      description: F5 Load Balancer Update a pool member
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-pool-members.updatepoolmember
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: f5-load-balancer-remove-pool
+      description: F5 Load Balancer Remove a pool member
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: icontrol-rest-pool-members.deletepoolmember
+      outputParameters:
+      - type: object
+        mapping: $.

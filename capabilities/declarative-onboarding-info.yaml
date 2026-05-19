@@ -1,0 +1,73 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Info
+  description: 'F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Info. 1 operations. Lead operation: F5 Load Balancer
+    Get DO extension information. Self-contained Naftiko capability covering one F5 Load Balancer business surface.'
+  tags:
+  - F5 Load Balancer
+  - Info
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    F5_LOAD_BALANCER_API_KEY: F5_LOAD_BALANCER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: declarative-onboarding-info
+    baseUri: https://{bigip_host}/mgmt/shared/declarative-onboarding
+    description: F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Info business capability. Self-contained, no
+      shared references.
+    resources:
+    - name: info
+      path: /info
+      operations:
+      - name: getdoinfo
+        method: GET
+        description: F5 Load Balancer Get DO extension information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-F5-Auth-Token
+      value: '{{env.F5_LOAD_BALANCER_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: declarative-onboarding-info-rest
+    port: 8080
+    description: REST adapter for F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Info. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/info
+      name: info
+      description: REST surface for info.
+      operations:
+      - method: GET
+        name: getdoinfo
+        description: F5 Load Balancer Get DO extension information
+        call: declarative-onboarding-info.getdoinfo
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: declarative-onboarding-info-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Info. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: f5-load-balancer-get-do
+      description: F5 Load Balancer Get DO extension information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: declarative-onboarding-info.getdoinfo
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,73 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Inspect
+  description: 'F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Inspect. 1 operations. Lead operation: F5 Load
+    Balancer Inspect current BIG-IP state. Self-contained Naftiko capability covering one F5 Load Balancer business surface.'
+  tags:
+  - F5 Load Balancer
+  - Inspect
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    F5_LOAD_BALANCER_API_KEY: F5_LOAD_BALANCER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: declarative-onboarding-inspect
+    baseUri: https://{bigip_host}/mgmt/shared/declarative-onboarding
+    description: F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Inspect business capability. Self-contained,
+      no shared references.
+    resources:
+    - name: inspect
+      path: /inspect
+      operations:
+      - name: inspectcurrentstate
+        method: GET
+        description: F5 Load Balancer Inspect current BIG-IP state
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-F5-Auth-Token
+      value: '{{env.F5_LOAD_BALANCER_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: declarative-onboarding-inspect-rest
+    port: 8080
+    description: REST adapter for F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Inspect. One Spectral-compliant
+      resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/inspect
+      name: inspect
+      description: REST surface for inspect.
+      operations:
+      - method: GET
+        name: inspectcurrentstate
+        description: F5 Load Balancer Inspect current BIG-IP state
+        call: declarative-onboarding-inspect.inspectcurrentstate
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: declarative-onboarding-inspect-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API — Inspect. One tool per consumed
+      operation, routed inline through this capability's consumes block.
+    tools:
+    - name: f5-load-balancer-inspect-current
+      description: F5 Load Balancer Inspect current BIG-IP state
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: declarative-onboarding-inspect.inspectcurrentstate
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,73 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: F5 Load Balancer F5 BIG-IP iControl REST API — SNAT Pools
+  description: 'F5 Load Balancer F5 BIG-IP iControl REST API — SNAT Pools. 1 operations. Lead operation: F5 Load Balancer
+    List SNAT pools. Self-contained Naftiko capability covering one F5 Load Balancer business surface.'
+  tags:
+  - F5 Load Balancer
+  - SNAT Pools
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    F5_LOAD_BALANCER_API_KEY: F5_LOAD_BALANCER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: icontrol-rest-snat-pools
+    baseUri: https://{bigip_host}/mgmt/tm
+    description: F5 Load Balancer F5 BIG-IP iControl REST API — SNAT Pools business capability. Self-contained, no shared
+      references.
+    resources:
+    - name: ltm-snatpool
+      path: /ltm/snatpool
+      operations:
+      - name: listsnatpools
+        method: GET
+        description: F5 Load Balancer List SNAT pools
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-F5-Auth-Token
+      value: '{{env.F5_LOAD_BALANCER_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: icontrol-rest-snat-pools-rest
+    port: 8080
+    description: REST adapter for F5 Load Balancer F5 BIG-IP iControl REST API — SNAT Pools. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ltm/snatpool
+      name: ltm-snatpool
+      description: REST surface for ltm-snatpool.
+      operations:
+      - method: GET
+        name: listsnatpools
+        description: F5 Load Balancer List SNAT pools
+        call: icontrol-rest-snat-pools.listsnatpools
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: icontrol-rest-snat-pools-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for F5 Load Balancer F5 BIG-IP iControl REST API — SNAT Pools. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: f5-load-balancer-list-snat
+      description: F5 Load Balancer List SNAT pools
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-snat-pools.listsnatpools
+      outputParameters:
+      - type: object
+        mapping: $.

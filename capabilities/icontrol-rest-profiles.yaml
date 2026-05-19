@@ -1,0 +1,136 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: F5 Load Balancer F5 BIG-IP iControl REST API — Profiles
+  description: 'F5 Load Balancer F5 BIG-IP iControl REST API — Profiles. 3 operations. Lead operation: F5 Load Balancer List
+    client SSL profiles. Self-contained Naftiko capability covering one F5 Load Balancer business surface.'
+  tags:
+  - F5 Load Balancer
+  - Profiles
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    F5_LOAD_BALANCER_API_KEY: F5_LOAD_BALANCER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: icontrol-rest-profiles
+    baseUri: https://{bigip_host}/mgmt/tm
+    description: F5 Load Balancer F5 BIG-IP iControl REST API — Profiles business capability. Self-contained, no shared references.
+    resources:
+    - name: ltm-profile-client-ssl
+      path: /ltm/profile/client-ssl
+      operations:
+      - name: listclientsslprofiles
+        method: GET
+        description: F5 Load Balancer List client SSL profiles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ltm-profile-http
+      path: /ltm/profile/http
+      operations:
+      - name: listhttpprofiles
+        method: GET
+        description: F5 Load Balancer List HTTP profiles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ltm-profile-tcp
+      path: /ltm/profile/tcp
+      operations:
+      - name: listtcpprofiles
+        method: GET
+        description: F5 Load Balancer List TCP profiles
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: apikey
+      key: X-F5-Auth-Token
+      value: '{{env.F5_LOAD_BALANCER_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: icontrol-rest-profiles-rest
+    port: 8080
+    description: REST adapter for F5 Load Balancer F5 BIG-IP iControl REST API — Profiles. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/ltm/profile/client-ssl
+      name: ltm-profile-client-ssl
+      description: REST surface for ltm-profile-client-ssl.
+      operations:
+      - method: GET
+        name: listclientsslprofiles
+        description: F5 Load Balancer List client SSL profiles
+        call: icontrol-rest-profiles.listclientsslprofiles
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ltm/profile/http
+      name: ltm-profile-http
+      description: REST surface for ltm-profile-http.
+      operations:
+      - method: GET
+        name: listhttpprofiles
+        description: F5 Load Balancer List HTTP profiles
+        call: icontrol-rest-profiles.listhttpprofiles
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ltm/profile/tcp
+      name: ltm-profile-tcp
+      description: REST surface for ltm-profile-tcp.
+      operations:
+      - method: GET
+        name: listtcpprofiles
+        description: F5 Load Balancer List TCP profiles
+        call: icontrol-rest-profiles.listtcpprofiles
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: icontrol-rest-profiles-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for F5 Load Balancer F5 BIG-IP iControl REST API — Profiles. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: f5-load-balancer-list-client
+      description: F5 Load Balancer List client SSL profiles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-profiles.listclientsslprofiles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: f5-load-balancer-list-http
+      description: F5 Load Balancer List HTTP profiles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-profiles.listhttpprofiles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: f5-load-balancer-list-tcp
+      description: F5 Load Balancer List TCP profiles
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: icontrol-rest-profiles.listtcpprofiles
+      outputParameters:
+      - type: object
+        mapping: $.
