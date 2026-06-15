@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) API",
+    "version": "3.50.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Declarations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer Retrieve the current AS3 declaration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/declare",
+            "params": [
+              {
+                "name": "show",
+                "value": "",
+                "type": "query",
+                "description": "Controls the level of detail in the response."
+              },
+              {
+                "name": "age",
+                "value": "",
+                "type": "query",
+                "description": "Retrieve a previous declaration by age. Use 0 for the most recent, 1 for the previous, and so on."
+              }
+            ]
+          },
+          "docs": "Retrieves the current AS3 declaration from the BIG-IP system. Returns the full declaration for all tenants or a specific tenant when the tenant path is appended to the URL."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Submit an AS3 declaration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/declare",
+            "params": [
+              {
+                "name": "async",
+                "value": "",
+                "type": "query",
+                "description": "When true, returns immediately with a task ID for asynchronous processing. Recommended for large declarations."
+              },
+              {
+                "name": "show",
+                "value": "",
+                "type": "query",
+                "description": "Controls the level of detail in the response. Use full to include all configuration details, or base for a summary."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits an AS3 declaration to deploy or update application services configuration on the BIG-IP system. The declaration describes the desired configuration state using a JSON document. AS3 processes the declaration and configures the BIG-IP to match. Use the async=true query parameter for large declarations to receive a task ID for status polling."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Partially update the AS3 declaration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/declare",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies the existing AS3 declaration using a JSON Patch or JSON Merge Patch document. This allows incremental changes without resubmitting the entire declaration."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Remove the AS3 declaration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/declare"
+          },
+          "docs": "Removes the AS3 declaration and all associated configuration from the BIG-IP system. This deletes all tenants and their application services."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Retrieve declaration for a specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/declare/:tenantName",
+            "params": [
+              {
+                "name": "tenantName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the AS3 tenant whose declaration to retrieve or manage."
+              },
+              {
+                "name": "show",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the AS3 declaration scoped to a specific tenant. Only the configuration for the named tenant is returned."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Remove a specific tenant declaration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/declare/:tenantName",
+            "params": [
+              {
+                "name": "tenantName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the AS3 tenant whose declaration to retrieve or manage."
+              }
+            ]
+          },
+          "docs": "Removes the declaration and all associated configuration for a specific tenant from the BIG-IP system."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List all AS3 tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/task"
+          },
+          "docs": "Retrieves a list of all asynchronous AS3 declaration processing tasks and their statuses."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get status of a specific task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/task/:taskId",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asynchronous task."
+              }
+            ]
+          },
+          "docs": "Retrieves the status and result of a specific asynchronous AS3 declaration processing task identified by its task ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer Get AS3 extension information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/info"
+          },
+          "docs": "Retrieves version, release, and schema version information for the installed AS3 extension on the BIG-IP system."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

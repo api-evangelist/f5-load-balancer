@@ -1,0 +1,2172 @@
+{
+  "item": [
+    {
+      "id": "fee7f185-924f-4fc1-9434-09d2cbce9c80",
+      "name": "Declarations",
+      "description": {
+        "content": "Submit, retrieve, and manage AS3 declarations that describe the desired application services configuration state on the BIG-IP system.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "662dbb68-6941-48cc-92ad-b2c6c3b98665",
+          "name": "F5 Load Balancer Submit an AS3 declaration",
+          "request": {
+            "name": "F5 Load Balancer Submit an AS3 declaration",
+            "description": {
+              "content": "Submits an AS3 declaration to deploy or update application services configuration on the BIG-IP system. The declaration describes the desired configuration state using a JSON document. AS3 processes the declaration and configures the BIG-IP to match. Use the async=true query parameter for large declarations to receive a task ID for status polling.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "declare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "async",
+                  "value": "false",
+                  "description": "When true, returns immediately with a task ID for asynchronous processing. Recommended for large declarations."
+                },
+                {
+                  "disabled": false,
+                  "key": "show",
+                  "value": "<string>",
+                  "description": "Controls the level of detail in the response. Use full to include all configuration details, or base for a summary."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"class\": \"<string>\",\n  \"action\": \"deploy\",\n  \"persist\": true,\n  \"declaration\": {\n    \"class\": \"<string>\",\n    \"schemaVersion\": \"<string>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"remark\": \"<string>\",\n    \"updateMode\": \"<string>\",\n    \"key_0\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "13d13d4e-1895-43cb-b34b-6a542f307557",
+              "name": "Declaration processed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "async",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class\": \"<string>\",\n  \"action\": \"deploy\",\n  \"persist\": true,\n  \"declaration\": {\n    \"class\": \"<string>\",\n    \"schemaVersion\": \"<string>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"remark\": \"<string>\",\n    \"updateMode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"code\": 3690,\n      \"message\": \"string\",\n      \"lineCount\": 2064,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 1181\n    },\n    {\n      \"code\": 2255,\n      \"message\": \"string\",\n      \"lineCount\": 3204,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 749\n    }\n  ],\n  \"declaration\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce1b443a-6f44-4fae-89dd-237ff412028a",
+              "name": "Declaration accepted for asynchronous processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "async",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class\": \"<string>\",\n  \"action\": \"deploy\",\n  \"persist\": true,\n  \"declaration\": {\n    \"class\": \"<string>\",\n    \"schemaVersion\": \"<string>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"remark\": \"<string>\",\n    \"updateMode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"results\": [\n    {\n      \"code\": 5892,\n      \"message\": \"string\",\n      \"tenant\": \"string\"\n    },\n    {\n      \"code\": 8139,\n      \"message\": \"string\",\n      \"tenant\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05167edb-763b-4cee-a941-0a078aa710d6",
+              "name": "The request was malformed or the declaration failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "async",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class\": \"<string>\",\n  \"action\": \"deploy\",\n  \"persist\": true,\n  \"declaration\": {\n    \"class\": \"<string>\",\n    \"schemaVersion\": \"<string>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"remark\": \"<string>\",\n    \"updateMode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46558e8d-f4a5-4986-88cb-f5a99b2aae7e",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "async",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class\": \"<string>\",\n  \"action\": \"deploy\",\n  \"persist\": true,\n  \"declaration\": {\n    \"class\": \"<string>\",\n    \"schemaVersion\": \"<string>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"remark\": \"<string>\",\n    \"updateMode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c067a7af-94bd-47a2-b2af-16c49bc3d002",
+              "name": "Declaration validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "async",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class\": \"<string>\",\n  \"action\": \"deploy\",\n  \"persist\": true,\n  \"declaration\": {\n    \"class\": \"<string>\",\n    \"schemaVersion\": \"<string>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"remark\": \"<string>\",\n    \"updateMode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"code\": 3690,\n      \"message\": \"string\",\n      \"lineCount\": 2064,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 1181\n    },\n    {\n      \"code\": 2255,\n      \"message\": \"string\",\n      \"lineCount\": 3204,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 749\n    }\n  ],\n  \"declaration\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6fb6e92-d30f-481b-a8fb-8486316b3f7d",
+              "name": "An internal error occurred processing the declaration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "async",
+                      "value": "false"
+                    },
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"class\": \"<string>\",\n  \"action\": \"deploy\",\n  \"persist\": true,\n  \"declaration\": {\n    \"class\": \"<string>\",\n    \"schemaVersion\": \"<string>\",\n    \"id\": \"<string>\",\n    \"label\": \"<string>\",\n    \"remark\": \"<string>\",\n    \"updateMode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5ec9f08-d028-488b-8b6b-831d1f40cd27",
+          "name": "F5 Load Balancer Retrieve the current AS3 declaration",
+          "request": {
+            "name": "F5 Load Balancer Retrieve the current AS3 declaration",
+            "description": {
+              "content": "Retrieves the current AS3 declaration from the BIG-IP system. Returns the full declaration for all tenants or a specific tenant when the tenant path is appended to the URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "declare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "show",
+                  "value": "<string>",
+                  "description": "Controls the level of detail in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "age",
+                  "value": "<integer>",
+                  "description": "Retrieve a previous declaration by age. Use 0 for the most recent, 1 for the previous, and so on."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "719f4dd3-5ee0-4b38-995b-c65868584a9c",
+              "name": "Current declaration retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"class\": \"string\",\n  \"action\": \"deploy\",\n  \"persist\": true,\n  \"declaration\": {\n    \"class\": \"string\",\n    \"schemaVersion\": \"string\",\n    \"id\": \"string\",\n    \"label\": \"string\",\n    \"remark\": \"string\",\n    \"updateMode\": \"complete\",\n    \"key_0\": {},\n    \"key_1\": {},\n    \"key_2\": {},\n    \"key_3\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adc7464c-a715-4874-99af-9b7c29e50a08",
+              "name": "No declaration has been submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4290cb51-f26d-4a5d-b79e-f1cb7a21974a",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "age",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d52464c8-b9ee-46eb-8bab-49be21dec89a",
+          "name": "F5 Load Balancer Remove the AS3 declaration",
+          "request": {
+            "name": "F5 Load Balancer Remove the AS3 declaration",
+            "description": {
+              "content": "Removes the AS3 declaration and all associated configuration from the BIG-IP system. This deletes all tenants and their application services.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "declare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59972d96-47b3-46c0-adfc-413ef2cb858f",
+              "name": "Declaration removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"code\": 3690,\n      \"message\": \"string\",\n      \"lineCount\": 2064,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 1181\n    },\n    {\n      \"code\": 2255,\n      \"message\": \"string\",\n      \"lineCount\": 3204,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 749\n    }\n  ],\n  \"declaration\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08a7f62f-1d5b-42f1-a841-372121c2d98f",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f67e9f5-5a53-456d-bca3-3298d5cb611d",
+              "name": "An internal error occurred processing the declaration.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88f0228d-cc3f-49ba-ac77-7aa7f24c11e8",
+          "name": "F5 Load Balancer Partially update the AS3 declaration",
+          "request": {
+            "name": "F5 Load Balancer Partially update the AS3 declaration",
+            "description": {
+              "content": "Modifies the existing AS3 declaration using a JSON Patch or JSON Merge Patch document. This allows incremental changes without resubmitting the entire declaration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "declare"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {},\n    \"from\": \"<string>\"\n  },\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"value\": {},\n    \"from\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e753f1e6-cb01-495e-b813-71cc192ff662",
+              "name": "Declaration patched successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"string\",\n    \"value\": {},\n    \"from\": \"string\"\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"string\",\n    \"value\": {},\n    \"from\": \"string\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"code\": 3690,\n      \"message\": \"string\",\n      \"lineCount\": 2064,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 1181\n    },\n    {\n      \"code\": 2255,\n      \"message\": \"string\",\n      \"lineCount\": 3204,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 749\n    }\n  ],\n  \"declaration\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4afa0d5-2bef-4927-a617-92fd624c2372",
+              "name": "The request was malformed or the declaration failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"string\",\n    \"value\": {},\n    \"from\": \"string\"\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"string\",\n    \"value\": {},\n    \"from\": \"string\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "28172ec4-8b51-4dfd-8168-70b90f3aad8c",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"replace\",\n    \"path\": \"string\",\n    \"value\": {},\n    \"from\": \"string\"\n  },\n  {\n    \"op\": \"copy\",\n    \"path\": \"string\",\n    \"value\": {},\n    \"from\": \"string\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13f094e1-a341-45c9-b4ad-c79dcf4d6b0d",
+          "name": "F5 Load Balancer Retrieve declaration for a specific tenant",
+          "request": {
+            "name": "F5 Load Balancer Retrieve declaration for a specific tenant",
+            "description": {
+              "content": "Retrieves the AS3 declaration scoped to a specific tenant. Only the configuration for the named tenant is returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "declare",
+                ":tenantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "show",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantName",
+                  "description": "(Required) Name of the AS3 tenant whose declaration to retrieve or manage."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9334b3da-dc65-4ebf-accb-1f36be935634",
+              "name": "Tenant declaration retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare",
+                    ":tenantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantName",
+                      "description": "(Required) Name of the AS3 tenant whose declaration to retrieve or manage."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "073f5bf6-8a34-46e4-9dd2-9b489081cfa7",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare",
+                    ":tenantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantName",
+                      "description": "(Required) Name of the AS3 tenant whose declaration to retrieve or manage."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b0aa369-9965-4eb7-a3db-48866e4c9858",
+              "name": "The requested tenant or task was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare",
+                    ":tenantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "show",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantName",
+                      "description": "(Required) Name of the AS3 tenant whose declaration to retrieve or manage."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0dba857-c3ca-4c90-b5c9-f82c9420a2dd",
+          "name": "F5 Load Balancer Remove a specific tenant declaration",
+          "request": {
+            "name": "F5 Load Balancer Remove a specific tenant declaration",
+            "description": {
+              "content": "Removes the declaration and all associated configuration for a specific tenant from the BIG-IP system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "declare",
+                ":tenantName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenantName",
+                  "description": "(Required) Name of the AS3 tenant whose declaration to retrieve or manage."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24de8cd6-d4b7-4edf-8cdc-5e8d0f60e0a3",
+              "name": "Tenant declaration removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare",
+                    ":tenantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantName",
+                      "description": "(Required) Name of the AS3 tenant whose declaration to retrieve or manage."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"code\": 3690,\n      \"message\": \"string\",\n      \"lineCount\": 2064,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 1181\n    },\n    {\n      \"code\": 2255,\n      \"message\": \"string\",\n      \"lineCount\": 3204,\n      \"host\": \"string\",\n      \"tenant\": \"string\",\n      \"runTime\": 749\n    }\n  ],\n  \"declaration\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a02bfee-33ea-4437-8b5b-1c68360f1c34",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare",
+                    ":tenantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantName",
+                      "description": "(Required) Name of the AS3 tenant whose declaration to retrieve or manage."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3abc0494-9d99-40ef-90b2-182033dc12ea",
+              "name": "The requested tenant or task was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "declare",
+                    ":tenantName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenantName",
+                      "description": "(Required) Name of the AS3 tenant whose declaration to retrieve or manage."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "8a941abc-5699-4942-a595-83abe30c28a6",
+      "name": "Info",
+      "description": {
+        "content": "Retrieve version and capability information about the installed AS3 extension.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "256175d0-fa08-4a1f-9e6d-933c7cd9d7ce",
+          "name": "F5 Load Balancer Get AS3 extension information",
+          "request": {
+            "name": "F5 Load Balancer Get AS3 extension information",
+            "description": {
+              "content": "Retrieves version, release, and schema version information for the installed AS3 extension on the BIG-IP system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0e96e089-03f9-464d-8bbf-781650b3dd07",
+              "name": "AS3 information retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"release\": \"string\",\n  \"schemaCurrent\": \"string\",\n  \"schemaMinimum\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1cf7893e-ad4f-46a4-8b47-8c60921ad0ea",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f2b437d1-f446-4a03-b663-b4356cc66032",
+      "name": "Tasks",
+      "description": {
+        "content": "Monitor the status of asynchronous declaration processing tasks.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eff4512c-a40e-4b32-b4ec-99f0fe4bdcf6",
+          "name": "F5 Load Balancer List all AS3 tasks",
+          "request": {
+            "name": "F5 Load Balancer List all AS3 tasks",
+            "description": {
+              "content": "Retrieves a list of all asynchronous AS3 declaration processing tasks and their statuses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39ea1fd6-e6cb-48ba-94f2-2abb37d5e0b4",
+              "name": "Task list retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"string\",\n      \"results\": [\n        {\n          \"code\": 6551,\n          \"message\": \"string\",\n          \"tenant\": \"string\"\n        },\n        {\n          \"code\": 206,\n          \"message\": \"string\",\n          \"tenant\": \"string\"\n        }\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"results\": [\n        {\n          \"code\": 1286,\n          \"message\": \"string\",\n          \"tenant\": \"string\"\n        },\n        {\n          \"code\": 7684,\n          \"message\": \"string\",\n          \"tenant\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77c98cc8-2b5f-4ec3-a297-2ad88fcf972c",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b5b61d3-2aa3-4f44-b869-cf8f6cba7c2b",
+          "name": "F5 Load Balancer Get status of a specific task",
+          "request": {
+            "name": "F5 Load Balancer Get status of a specific task",
+            "description": {
+              "content": "Retrieves the status and result of a specific asynchronous AS3 declaration processing task identified by its task ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":taskId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "taskId",
+                  "description": "(Required) Unique identifier of the asynchronous task."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d7036e5-9799-439e-a70e-18310f3db095",
+              "name": "Task status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "taskId",
+                      "description": "(Required) Unique identifier of the asynchronous task."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"results\": [\n    {\n      \"code\": 5892,\n      \"message\": \"string\",\n      \"tenant\": \"string\"\n    },\n    {\n      \"code\": 8139,\n      \"message\": \"string\",\n      \"tenant\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6863fa26-e31d-4f64-8bdf-4f2a643ccdc7",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "taskId",
+                      "description": "(Required) Unique identifier of the asynchronous task."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3e89d06-1383-4e2b-a4e9-a962dca7d4ea",
+              "name": "The requested tenant or task was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "taskId",
+                      "description": "(Required) Unique identifier of the asynchronous task."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 222,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the BIG-IP device",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.245",
+      "key": "bigip_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{bigip_host}}/mgmt/shared/appsvcs",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "cc809e0e-00e0-4e49-a19e-0e6afcd2af18",
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.\n\nContact Support:\n Name: F5 Networks Support\n Email: support@f5.com",
+      "type": "text/plain"
+    }
+  }
+}

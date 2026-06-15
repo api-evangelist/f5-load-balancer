@@ -1,0 +1,173 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API",
+    "version": "1.41.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Declarations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer Retrieve the current DO declaration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/declarative-onboarding/",
+            "params": [
+              {
+                "name": "statusCodes",
+                "value": "",
+                "type": "query",
+                "description": "When set to legacy, uses status codes compatible with older DO versions."
+              }
+            ]
+          },
+          "docs": "Retrieves the most recently submitted Declarative Onboarding declaration from the BIG-IP system."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Submit a Declarative Onboarding declaration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{bigip_host}/mgmt/shared/declarative-onboarding/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submits a Declarative Onboarding declaration to configure the BIG-IP system initial settings. The declaration describes licensing, DNS, NTP, VLANs, self IPs, provisioning, and other device-level settings. Processing is asynchronous and returns a task ID for status monitoring."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List all DO tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/declarative-onboarding/task"
+          },
+          "docs": "Retrieves an array of all Declarative Onboarding task records and their processing statuses."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get a specific DO task status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/declarative-onboarding/task/:taskId",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier for the DO processing task."
+              }
+            ]
+          },
+          "docs": "Retrieves the status and result of a specific Declarative Onboarding task identified by its task ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List original device configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/declarative-onboarding/config"
+          },
+          "docs": "Retrieves the original configurations for all devices managed by Declarative Onboarding before any DO modifications were applied."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get original configuration for a device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/declarative-onboarding/config/:machineId",
+            "params": [
+              {
+                "name": "machineId",
+                "value": "",
+                "type": "path",
+                "description": "The machine ID of the BIG-IP device whose original configuration to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves the original configuration for a specific device identified by its machine ID, as it existed before Declarative Onboarding modifications."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Inspect",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer Inspect current BIG-IP state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/declarative-onboarding/inspect"
+          },
+          "docs": "Returns the classes Declarative Onboarding is aware of and their current state on the BIG-IP system. Useful for understanding the current device configuration in DO terms."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Info",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer Get DO extension information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/declarative-onboarding/info"
+          },
+          "docs": "Returns version and release information for the installed Declarative Onboarding extension, including current and minimum required schema versions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

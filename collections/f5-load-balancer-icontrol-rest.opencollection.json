@@ -1,0 +1,789 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP iControl REST API",
+    "version": "15.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Virtual Servers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List all virtual servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/virtual",
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to restrict returned resources."
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return."
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to skip before returning results."
+              },
+              {
+                "name": "expandSubcollections",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, inline sub-collections in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a collection of all virtual server resources configured on the BIG-IP system. Returns virtual server properties including destination address, pool assignment, profiles, and operational state."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Create a virtual server",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/virtual",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new virtual server resource on the BIG-IP system. The virtual server defines a traffic destination address and port to which the BIG-IP listens for client connections."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get a specific virtual server",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/virtual/:virtualName",
+            "params": [
+              {
+                "name": "virtualName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+              }
+            ]
+          },
+          "docs": "Retrieves a single virtual server resource identified by name, including all of its configuration properties and operational state."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Update a virtual server",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/virtual/:virtualName",
+            "params": [
+              {
+                "name": "virtualName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the configuration of an existing virtual server resource. All writable properties should be included in the request body."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Partially update a virtual server",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/virtual/:virtualName",
+            "params": [
+              {
+                "name": "virtualName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modifies specific properties of an existing virtual server without requiring the full resource representation."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Delete a virtual server",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/virtual/:virtualName",
+            "params": [
+              {
+                "name": "virtualName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+              }
+            ]
+          },
+          "docs": "Removes a virtual server resource from the BIG-IP system. Existing connections may be disrupted depending on the virtual server state."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List all pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool",
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to restrict returned resources."
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return."
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to skip before returning results."
+              },
+              {
+                "name": "expandSubcollections",
+                "value": "",
+                "type": "query",
+                "description": "When set to true, inline sub-collections in the response."
+              }
+            ]
+          },
+          "docs": "Retrieves a collection of all load balancing pool resources configured on the BIG-IP system. Pools contain members that receive traffic distributed by virtual servers."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Create a pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new load balancing pool on the BIG-IP system. A pool is a collection of backend server members to which the BIG-IP distributes client traffic."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get a specific pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              }
+            ]
+          },
+          "docs": "Retrieves a single pool resource identified by name including its configuration and load balancing settings."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Update a pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the configuration of an existing pool resource."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Delete a pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              }
+            ]
+          },
+          "docs": "Removes a pool resource from the BIG-IP system. Any virtual servers referencing this pool should be updated before deletion."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Pool Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List pool members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool/:poolName/members",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to restrict returned resources."
+              }
+            ]
+          },
+          "docs": "Retrieves a collection of all members within a specific pool including their addresses, ports, and operational states."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Add a member to a pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool/:poolName/members",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new server member to the specified pool. The member is identified by its node address and service port."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get a specific pool member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool/:poolName/members/:memberName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              },
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool member in address:port format (e.g., ~Common~10.0.0.1:80)."
+              }
+            ]
+          },
+          "docs": "Retrieves a single pool member resource including its configuration, health status, and statistics."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Update a pool member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool/:poolName/members/:memberName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              },
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool member in address:port format (e.g., ~Common~10.0.0.1:80)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the configuration of a specific pool member."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Remove a pool member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/pool/:poolName/members/:memberName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              },
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool member in address:port format (e.g., ~Common~10.0.0.1:80)."
+              }
+            ]
+          },
+          "docs": "Removes a server member from the specified pool."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Nodes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List all nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/node",
+            "params": [
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to restrict returned resources."
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of resources to return."
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of resources to skip before returning results."
+              }
+            ]
+          },
+          "docs": "Retrieves a collection of all node resources on the BIG-IP system. Nodes represent backend servers identified by their IP addresses or FQDNs."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Create a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/node",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new node resource representing a backend server on the network. Nodes are the foundation for pool members."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get a specific node",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/node/:nodeName",
+            "params": [
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node resource, optionally prefixed with the partition path."
+              }
+            ]
+          },
+          "docs": "Retrieves a single node resource including its address, monitoring status, and configuration."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Update a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/node/:nodeName",
+            "params": [
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node resource, optionally prefixed with the partition path."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the configuration of an existing node resource."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Delete a node",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/node/:nodeName",
+            "params": [
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node resource, optionally prefixed with the partition path."
+              }
+            ]
+          },
+          "docs": "Removes a node resource from the BIG-IP system. The node must not be referenced by any pool members."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List HTTP health monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/monitor/http"
+          },
+          "docs": "Retrieves all HTTP health monitors configured on the BIG-IP system. HTTP monitors verify availability by sending HTTP requests to pool members and evaluating the responses."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Create an HTTP health monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/monitor/http",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new HTTP health monitor that sends HTTP requests to pool members to verify their availability and responsiveness."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer List HTTPS health monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/monitor/https"
+          },
+          "docs": "Retrieves all HTTPS health monitors configured on the BIG-IP system. HTTPS monitors verify availability over TLS-encrypted connections."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer List TCP health monitors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/monitor/tcp"
+          },
+          "docs": "Retrieves all TCP health monitors configured on the BIG-IP system. TCP monitors verify that pool members are accepting connections on the specified port."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List HTTP profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/profile/http"
+          },
+          "docs": "Retrieves all HTTP traffic profiles on the BIG-IP system. HTTP profiles configure how the BIG-IP processes HTTP traffic including compression, caching, and header manipulation."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer List TCP profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/profile/tcp"
+          },
+          "docs": "Retrieves all TCP traffic profiles on the BIG-IP system. TCP profiles optimize TCP connection behavior for different application and network scenarios."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer List client SSL profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/profile/client-ssl"
+          },
+          "docs": "Retrieves all client-side SSL profiles on the BIG-IP system. Client SSL profiles manage TLS/SSL termination for connections between clients and the BIG-IP."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List local traffic policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/policy"
+          },
+          "docs": "Retrieves all local traffic policies on the BIG-IP system. Policies provide rule-based traffic steering, content manipulation, and request/response modification."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "iRules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List iRules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/rule"
+          },
+          "docs": "Retrieves all iRule resources on the BIG-IP system. iRules are Tcl-based scripts that provide custom traffic management logic for virtual servers."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SSL Certificates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List SSL certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/sys/file/ssl-cert"
+          },
+          "docs": "Retrieves all SSL certificate files installed on the BIG-IP system that are available for use in SSL profiles."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Data Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List internal data groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/data-group/internal"
+          },
+          "docs": "Retrieves all internal data groups on the BIG-IP system. Data groups provide address, string, and integer lookups used in iRules and traffic policies for decision-making."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "SNAT Pools",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List SNAT pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/ltm/snatpool"
+          },
+          "docs": "Retrieves all SNAT pool resources on the BIG-IP system. SNAT pools define collections of translation addresses used for outbound connection source address translation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer Get system information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/sys"
+          },
+          "docs": "Retrieves top-level system information and available sub-collections for the BIG-IP system."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get system software version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/sys/version"
+          },
+          "docs": "Retrieves the software version information for the BIG-IP system including product name, version, build number, and edition."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer List BIG-IP devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/tm/sys/device"
+          },
+          "docs": "Retrieves information about all BIG-IP devices in the device trust group, including hostname, management address, failover state, and device group membership."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

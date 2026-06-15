@@ -1,0 +1,1723 @@
+{
+  "item": [
+    {
+      "id": "97e7afbc-ab5a-4e1a-9300-1df9ffb29243",
+      "name": "Config",
+      "description": {
+        "content": "Retrieve the original device configuration before Declarative Onboarding modifications were applied.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9df82e6b-5bd2-4ac8-a5d9-8ae44fda28a5",
+          "name": "F5 Load Balancer List original device configurations",
+          "request": {
+            "name": "F5 Load Balancer List original device configurations",
+            "description": {
+              "content": "Retrieves the original configurations for all devices managed by Declarative Onboarding before any DO modifications were applied.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8381a275-d7d0-4e87-87dd-fded88999086",
+              "name": "Original configurations retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b23642af-c56a-4baf-8db9-a65c7f23e46b",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31bb5c73-8633-4df4-b3cd-bc094ab029ca",
+          "name": "F5 Load Balancer Get original configuration for a device",
+          "request": {
+            "name": "F5 Load Balancer Get original configuration for a device",
+            "description": {
+              "content": "Retrieves the original configuration for a specific device identified by its machine ID, as it existed before Declarative Onboarding modifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "config",
+                ":machineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "machineId",
+                  "description": "(Required) The machine ID of the BIG-IP device whose original configuration to retrieve."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f89c996-9452-49e7-a246-866f10a81737",
+              "name": "Original device configuration retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config",
+                    ":machineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "machineId",
+                      "description": "(Required) The machine ID of the BIG-IP device whose original configuration to retrieve."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "baa5041b-cf92-4211-8134-91983a6e2a82",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config",
+                    ":machineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "machineId",
+                      "description": "(Required) The machine ID of the BIG-IP device whose original configuration to retrieve."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3939a7b3-822f-44d0-9b01-98cf69ee5112",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "config",
+                    ":machineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "machineId",
+                      "description": "(Required) The machine ID of the BIG-IP device whose original configuration to retrieve."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "97bcdb57-a902-40d5-93e3-3632533e9529",
+      "name": "Declarations",
+      "description": {
+        "content": "Submit and retrieve Declarative Onboarding declarations for initial BIG-IP device configuration and provisioning.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb627d9a-3296-45ef-a850-e8bfce5f6987",
+          "name": "F5 Load Balancer Submit a Declarative Onboarding declaration",
+          "request": {
+            "name": "F5 Load Balancer Submit a Declarative Onboarding declaration",
+            "description": {
+              "content": "Submits a Declarative Onboarding declaration to configure the BIG-IP system initial settings. The declaration describes licensing, DNS, NTP, VLANs, self IPs, provisioning, and other device-level settings. Processing is asynchronous and returns a task ID for status monitoring.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"schemaVersion\": \"<string>\",\n  \"class\": \"<string>\",\n  \"async\": false,\n  \"label\": \"<string>\",\n  \"Common\": {\n    \"class\": \"<string>\",\n    \"hostname\": \"<hostname>\",\n    \"myLicense\": {\n      \"class\": \"<string>\",\n      \"licenseType\": \"<string>\",\n      \"regKey\": \"<string>\"\n    },\n    \"myDns\": {\n      \"class\": \"<string>\",\n      \"nameServers\": [\n        \"<ipv4>\",\n        \"<ipv4>\"\n      ],\n      \"search\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"myNtp\": {\n      \"class\": \"<string>\",\n      \"servers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"timezone\": \"<string>\"\n    },\n    \"myProvisioning\": {\n      \"class\": \"<string>\",\n      \"ltm\": \"<string>\",\n      \"asm\": \"<string>\",\n      \"gtm\": \"<string>\",\n      \"afm\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f06e9386-fac0-4bbf-bd3f-bc75b3636a7d",
+              "name": "Declaration processed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemaVersion\": \"<string>\",\n  \"class\": \"<string>\",\n  \"async\": false,\n  \"label\": \"<string>\",\n  \"Common\": {\n    \"class\": \"<string>\",\n    \"hostname\": \"<hostname>\",\n    \"myLicense\": {\n      \"class\": \"<string>\",\n      \"licenseType\": \"<string>\",\n      \"regKey\": \"<string>\"\n    },\n    \"myDns\": {\n      \"class\": \"<string>\",\n      \"nameServers\": [\n        \"<ipv4>\",\n        \"<ipv4>\"\n      ],\n      \"search\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"myNtp\": {\n      \"class\": \"<string>\",\n      \"servers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"timezone\": \"<string>\"\n    },\n    \"myProvisioning\": {\n      \"class\": \"<string>\",\n      \"ltm\": \"<string>\",\n      \"asm\": \"<string>\",\n      \"gtm\": \"<string>\",\n      \"afm\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"result\": {\n    \"class\": \"string\",\n    \"code\": 6235,\n    \"status\": \"string\",\n    \"message\": \"string\",\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"declaration\": {\n    \"schemaVersion\": \"string\",\n    \"class\": \"string\",\n    \"async\": false,\n    \"label\": \"string\",\n    \"Common\": {\n      \"class\": \"string\",\n      \"hostname\": \"EDcOBZvsZWk.nq\",\n      \"myLicense\": {\n        \"class\": \"string\",\n        \"licenseType\": \"licensePool\",\n        \"regKey\": \"string\"\n      },\n      \"myDns\": {\n        \"class\": \"string\",\n        \"nameServers\": [\n          \"101.153.22.112\",\n          \"128.19.238.109\"\n        ],\n        \"search\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"myNtp\": {\n        \"class\": \"string\",\n        \"servers\": [\n          \"string\",\n          \"string\"\n        ],\n        \"timezone\": \"string\"\n      },\n      \"myProvisioning\": {\n        \"class\": \"string\",\n        \"ltm\": \"minimum\",\n        \"asm\": \"dedicated\",\n        \"gtm\": \"minimum\",\n        \"afm\": \"nominal\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "201338a7-fa6c-48a3-a6ce-81595247fc26",
+              "name": "Declaration accepted for asynchronous processing",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemaVersion\": \"<string>\",\n  \"class\": \"<string>\",\n  \"async\": false,\n  \"label\": \"<string>\",\n  \"Common\": {\n    \"class\": \"<string>\",\n    \"hostname\": \"<hostname>\",\n    \"myLicense\": {\n      \"class\": \"<string>\",\n      \"licenseType\": \"<string>\",\n      \"regKey\": \"<string>\"\n    },\n    \"myDns\": {\n      \"class\": \"<string>\",\n      \"nameServers\": [\n        \"<ipv4>\",\n        \"<ipv4>\"\n      ],\n      \"search\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"myNtp\": {\n      \"class\": \"<string>\",\n      \"servers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"timezone\": \"<string>\"\n    },\n    \"myProvisioning\": {\n      \"class\": \"<string>\",\n      \"ltm\": \"<string>\",\n      \"asm\": \"<string>\",\n      \"gtm\": \"<string>\",\n      \"afm\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"result\": {\n    \"class\": \"string\",\n    \"code\": 9100,\n    \"status\": \"ROLLING_BACK\",\n    \"message\": \"string\",\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"declaration\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7ccae9d-1936-4fe6-aaba-261e3e7c3675",
+              "name": "The declaration was malformed or contained invalid properties.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemaVersion\": \"<string>\",\n  \"class\": \"<string>\",\n  \"async\": false,\n  \"label\": \"<string>\",\n  \"Common\": {\n    \"class\": \"<string>\",\n    \"hostname\": \"<hostname>\",\n    \"myLicense\": {\n      \"class\": \"<string>\",\n      \"licenseType\": \"<string>\",\n      \"regKey\": \"<string>\"\n    },\n    \"myDns\": {\n      \"class\": \"<string>\",\n      \"nameServers\": [\n        \"<ipv4>\",\n        \"<ipv4>\"\n      ],\n      \"search\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"myNtp\": {\n      \"class\": \"<string>\",\n      \"servers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"timezone\": \"<string>\"\n    },\n    \"myProvisioning\": {\n      \"class\": \"<string>\",\n      \"ltm\": \"<string>\",\n      \"asm\": \"<string>\",\n      \"gtm\": \"<string>\",\n      \"afm\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5de3a128-41da-4645-8120-da002400f2d6",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemaVersion\": \"<string>\",\n  \"class\": \"<string>\",\n  \"async\": false,\n  \"label\": \"<string>\",\n  \"Common\": {\n    \"class\": \"<string>\",\n    \"hostname\": \"<hostname>\",\n    \"myLicense\": {\n      \"class\": \"<string>\",\n      \"licenseType\": \"<string>\",\n      \"regKey\": \"<string>\"\n    },\n    \"myDns\": {\n      \"class\": \"<string>\",\n      \"nameServers\": [\n        \"<ipv4>\",\n        \"<ipv4>\"\n      ],\n      \"search\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"myNtp\": {\n      \"class\": \"<string>\",\n      \"servers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"timezone\": \"<string>\"\n    },\n    \"myProvisioning\": {\n      \"class\": \"<string>\",\n      \"ltm\": \"<string>\",\n      \"asm\": \"<string>\",\n      \"gtm\": \"<string>\",\n      \"afm\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e908a630-6092-41a1-9354-f7b5dbd19d01",
+              "name": "Declaration validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemaVersion\": \"<string>\",\n  \"class\": \"<string>\",\n  \"async\": false,\n  \"label\": \"<string>\",\n  \"Common\": {\n    \"class\": \"<string>\",\n    \"hostname\": \"<hostname>\",\n    \"myLicense\": {\n      \"class\": \"<string>\",\n      \"licenseType\": \"<string>\",\n      \"regKey\": \"<string>\"\n    },\n    \"myDns\": {\n      \"class\": \"<string>\",\n      \"nameServers\": [\n        \"<ipv4>\",\n        \"<ipv4>\"\n      ],\n      \"search\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"myNtp\": {\n      \"class\": \"<string>\",\n      \"servers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"timezone\": \"<string>\"\n    },\n    \"myProvisioning\": {\n      \"class\": \"<string>\",\n      \"ltm\": \"<string>\",\n      \"asm\": \"<string>\",\n      \"gtm\": \"<string>\",\n      \"afm\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "65d70706-242d-4564-a74c-4317280ecbab",
+              "name": "An internal error occurred during declaration processing.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"schemaVersion\": \"<string>\",\n  \"class\": \"<string>\",\n  \"async\": false,\n  \"label\": \"<string>\",\n  \"Common\": {\n    \"class\": \"<string>\",\n    \"hostname\": \"<hostname>\",\n    \"myLicense\": {\n      \"class\": \"<string>\",\n      \"licenseType\": \"<string>\",\n      \"regKey\": \"<string>\"\n    },\n    \"myDns\": {\n      \"class\": \"<string>\",\n      \"nameServers\": [\n        \"<ipv4>\",\n        \"<ipv4>\"\n      ],\n      \"search\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"myNtp\": {\n      \"class\": \"<string>\",\n      \"servers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"timezone\": \"<string>\"\n    },\n    \"myProvisioning\": {\n      \"class\": \"<string>\",\n      \"ltm\": \"<string>\",\n      \"asm\": \"<string>\",\n      \"gtm\": \"<string>\",\n      \"afm\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "294553eb-b989-4fc6-b039-df4eccf55af4",
+          "name": "F5 Load Balancer Retrieve the current DO declaration",
+          "request": {
+            "name": "F5 Load Balancer Retrieve the current DO declaration",
+            "description": {
+              "content": "Retrieves the most recently submitted Declarative Onboarding declaration from the BIG-IP system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "statusCodes",
+                  "value": "<string>",
+                  "description": "When set to legacy, uses status codes compatible with older DO versions."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5339434c-9d9f-4bba-8cce-c491a2f13df7",
+              "name": "Declaration retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "statusCodes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"schemaVersion\": \"string\",\n  \"class\": \"string\",\n  \"async\": false,\n  \"label\": \"string\",\n  \"Common\": {\n    \"class\": \"string\",\n    \"hostname\": \"HElHhUmdMyhblGrHgl.lb\",\n    \"myLicense\": {\n      \"class\": \"string\",\n      \"licenseType\": \"regKey\",\n      \"regKey\": \"string\"\n    },\n    \"myDns\": {\n      \"class\": \"string\",\n      \"nameServers\": [\n        \"29.85.66.162\",\n        \"159.67.18.61\"\n      ],\n      \"search\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"myNtp\": {\n      \"class\": \"string\",\n      \"servers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"timezone\": \"string\"\n    },\n    \"myProvisioning\": {\n      \"class\": \"string\",\n      \"ltm\": \"dedicated\",\n      \"asm\": \"minimum\",\n      \"gtm\": \"dedicated\",\n      \"afm\": \"nominal\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c032acba-0282-4c4d-9c5d-3ee562a35f37",
+              "name": "No declaration has been submitted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "statusCodes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0a1115ef-d06a-44e0-af8e-2cce3baf7905",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "statusCodes",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "3a7415ab-339d-4b37-afb4-61b77d5a0bea",
+      "name": "Info",
+      "description": {
+        "content": "Retrieve version and release information about the installed DO extension.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9eadf20b-7c64-4235-bb7f-72c467ec24a7",
+          "name": "F5 Load Balancer Get DO extension information",
+          "request": {
+            "name": "F5 Load Balancer Get DO extension information",
+            "description": {
+              "content": "Returns version and release information for the installed Declarative Onboarding extension, including current and minimum required schema versions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a94e716a-cdfa-410c-bf6b-77f175a19441",
+              "name": "DO information retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"version\": \"string\",\n  \"release\": \"string\",\n  \"schemaCurrent\": \"string\",\n  \"schemaMinimum\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd2e05e3-7347-453d-9ee8-2528869765c6",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "f2c786ff-ee54-476f-bcb0-35c40b14165f",
+      "name": "Inspect",
+      "description": {
+        "content": "Inspect the current state of BIG-IP configuration classes known to Declarative Onboarding.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "16603f96-58db-4407-be8f-610909ba09ac",
+          "name": "F5 Load Balancer Inspect current BIG-IP state",
+          "request": {
+            "name": "F5 Load Balancer Inspect current BIG-IP state",
+            "description": {
+              "content": "Returns the classes Declarative Onboarding is aware of and their current state on the BIG-IP system. Useful for understanding the current device configuration in DO terms.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inspect"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f0c6e7bd-6273-43bd-ac2a-b04c70489a61",
+              "name": "Current state inspection retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inspect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5251898-cdcd-4e89-9875-e9b7732c8618",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inspect"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "082c4817-f5d3-4499-ba3c-22fd2f3a83b6",
+      "name": "Tasks",
+      "description": {
+        "content": "Monitor the status of Declarative Onboarding task executions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ff8c0dd4-21f8-485e-bed7-4aa14c164630",
+          "name": "F5 Load Balancer List all DO tasks",
+          "request": {
+            "name": "F5 Load Balancer List all DO tasks",
+            "description": {
+              "content": "Retrieves an array of all Declarative Onboarding task records and their processing statuses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57f0164f-e1c6-4ff0-8501-0fc598a014ff",
+              "name": "Task list retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"result\": {\n      \"class\": \"string\",\n      \"code\": 1150,\n      \"status\": \"ROLLING_BACK\",\n      \"message\": \"string\",\n      \"errors\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"declaration\": {}\n  },\n  {\n    \"id\": \"string\",\n    \"result\": {\n      \"class\": \"string\",\n      \"code\": 6161,\n      \"status\": \"ERROR\",\n      \"message\": \"string\",\n      \"errors\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"declaration\": {}\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0385e5a1-2f64-4cfb-aa30-e15f41a10b97",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "882f8424-e485-467d-8866-10fafe4a81a7",
+          "name": "F5 Load Balancer Get a specific DO task status",
+          "request": {
+            "name": "F5 Load Balancer Get a specific DO task status",
+            "description": {
+              "content": "Retrieves the status and result of a specific Declarative Onboarding task identified by its task ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "task",
+                ":taskId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "taskId",
+                  "description": "(Required) Unique identifier for the DO processing task."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ec7b41ff-7fef-49a7-89b2-1ce4582e3384",
+              "name": "Task status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "taskId",
+                      "description": "(Required) Unique identifier for the DO processing task."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"result\": {\n    \"class\": \"string\",\n    \"code\": 9100,\n    \"status\": \"ROLLING_BACK\",\n    \"message\": \"string\",\n    \"errors\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  \"declaration\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe279bbd-2a38-4166-bca4-17efffb1dc26",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "taskId",
+                      "description": "(Required) Unique identifier for the DO processing task."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e99a5ae1-d0d1-4d29-a222-8e307a27f0c5",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "task",
+                    ":taskId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "taskId",
+                      "description": "(Required) Unique identifier for the DO processing task."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 7456,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.245",
+      "key": "bigip_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{bigip_host}}/mgmt/shared/declarative-onboarding",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "71385df9-f5bb-4555-af10-f78d15e69386",
+    "name": "F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Declarative Onboarding (DO) extension automates the initial BIG-IP system configuration and provisioning using a declarative JSON model. DO handles Layer 1-3 onboarding tasks including licensing, DNS and NTP configuration, VLAN setup, self IP assignment, user management, and module provisioning. Administrators submit a single JSON declaration describing the desired initial device state, and DO configures the BIG-IP system accordingly.\n\nContact Support:\n Name: F5 Networks Support\n Email: support@f5.com",
+      "type": "text/plain"
+    }
+  }
+}
