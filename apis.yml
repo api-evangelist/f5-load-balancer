@@ -4,7 +4,7 @@ description: >-
   APIs for managing F5 BIG-IP Load Balancer configuration, monitoring, and operations. F5 BIG-IP is an application
   delivery controller that provides intelligent traffic management, load balancing, and application security.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Application Delivery
   - BIG-IP
