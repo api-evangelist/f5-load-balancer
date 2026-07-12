@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/f5-load-balancer-as3-openapi.yml, openapi/f5-load-balancer-declarative-onboarding-openapi.yml,
+  openapi/f5-load-balancer-icontrol-rest-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication using BIG-IP admin credentials.
+  sources:
+  - openapi/f5-load-balancer-as3-openapi.yml
+  - openapi/f5-load-balancer-declarative-onboarding-openapi.yml
+  - openapi/f5-load-balancer-icontrol-rest-openapi.yml
+- name: tokenAuth
+  type: apiKey
+  in: header
+  parameter: X-F5-Auth-Token
+  description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+  sources:
+  - openapi/f5-load-balancer-as3-openapi.yml
+  - openapi/f5-load-balancer-declarative-onboarding-openapi.yml
+  - openapi/f5-load-balancer-icontrol-rest-openapi.yml

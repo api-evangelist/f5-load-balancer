@@ -67,6 +67,12 @@ apis:
       - type: OpenAPI
         url: openapi/f5-load-balancer-declarative-onboarding-openapi.yml
 common:
+  - type: TrustCenter
+    url: security/f5-load-balancer-trust-center.yml
+  - type: DomainSecurity
+    url: security/f5-load-balancer-domain-security.yml
+  - type: Authentication
+    url: authentication/f5-load-balancer-authentication.yml
   - type: Portal
     url: https://clouddocs.f5.com/
   - type: Documentation
