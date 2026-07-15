@@ -67,6 +67,8 @@ apis:
       - type: OpenAPI
         url: openapi/f5-load-balancer-declarative-onboarding-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/f5-load-balancer-agentic-access.yml
   - type: TrustCenter
     url: security/f5-load-balancer-trust-center.yml
   - type: DomainSecurity
