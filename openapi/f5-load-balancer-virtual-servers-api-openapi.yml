@@ -1,0 +1,408 @@
+openapi: 3.1.0
+info:
+  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Virtual Servers API
+  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
+  version: 3.50.0
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+servers:
+- url: https://{bigip_host}/mgmt/shared/appsvcs
+  description: BIG-IP AS3 Extension Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device
+security:
+- basicAuth: []
+- tokenAuth: []
+tags:
+- name: Virtual Servers
+  description: Manage virtual servers that direct client traffic to appropriate server pools based on configured rules and profiles.
+  externalDocs:
+    url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_virtual.html
+paths:
+  /ltm/virtual:
+    get:
+      operationId: listVirtualServers
+      summary: F5 Load Balancer List all virtual servers
+      description: Retrieves a collection of all virtual server resources configured on the BIG-IP system. Returns virtual server properties including destination address, pool assignment, profiles, and operational state.
+      tags:
+      - Virtual Servers
+      parameters:
+      - $ref: '#/components/parameters/SelectParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/TopParam'
+      - $ref: '#/components/parameters/SkipParam'
+      - $ref: '#/components/parameters/ExpandSubcollectionsParam'
+      responses:
+        '200':
+          description: Successfully retrieved virtual server collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServerCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      operationId: createVirtualServer
+      summary: F5 Load Balancer Create a virtual server
+      description: Creates a new virtual server resource on the BIG-IP system. The virtual server defines a traffic destination address and port to which the BIG-IP listens for client connections.
+      tags:
+      - Virtual Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualServer'
+      responses:
+        '200':
+          description: Virtual server created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Virtual server with the specified name already exists
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /ltm/virtual/{virtualName}:
+    parameters:
+    - $ref: '#/components/parameters/VirtualNameParam'
+    get:
+      operationId: getVirtualServer
+      summary: F5 Load Balancer Get a specific virtual server
+      description: Retrieves a single virtual server resource identified by name, including all of its configuration properties and operational state.
+      tags:
+      - Virtual Servers
+      responses:
+        '200':
+          description: Successfully retrieved virtual server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServer'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateVirtualServer
+      summary: F5 Load Balancer Update a virtual server
+      description: Replaces the configuration of an existing virtual server resource. All writable properties should be included in the request body.
+      tags:
+      - Virtual Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualServer'
+      responses:
+        '200':
+          description: Virtual server updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: patchVirtualServer
+      summary: F5 Load Balancer Partially update a virtual server
+      description: Modifies specific properties of an existing virtual server without requiring the full resource representation.
+      tags:
+      - Virtual Servers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VirtualServer'
+      responses:
+        '200':
+          description: Virtual server patched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VirtualServer'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteVirtualServer
+      summary: F5 Load Balancer Delete a virtual server
+      description: Removes a virtual server resource from the BIG-IP system. Existing connections may be disrupted depending on the virtual server state.
+      tags:
+      - Virtual Servers
+      responses:
+        '200':
+          description: Virtual server deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+    VirtualNameParam:
+      name: virtualName
+      in: path
+      required: true
+      description: Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual).
+      schema:
+        type: string
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: OData filter expression to restrict returned resources.
+      schema:
+        type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    ExpandSubcollectionsParam:
+      name: expandSubcollections
+      in: query
+      required: false
+      description: When set to true, inline sub-collections in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
+    VirtualServerCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:virtual:virtualcollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/VirtualServer'
+    VirtualServer:
+      type: object
+      required:
+      - name
+      - destination
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:virtual:virtualstate
+          readOnly: true
+        name:
+          type: string
+          description: Unique name of the virtual server within its partition.
+          minLength: 1
+          maxLength: 255
+        fullPath:
+          type: string
+          description: Full administrative path including partition.
+          readOnly: true
+        generation:
+          type: integer
+          description: Configuration generation counter.
+          readOnly: true
+        selfLink:
+          type: string
+          format: uri
+          readOnly: true
+        destination:
+          type: string
+          description: Destination IP address and port the virtual server listens on in /partition/address:port format.
+        description:
+          type: string
+          description: User-defined description of the virtual server.
+        enabled:
+          type: boolean
+          description: Whether the virtual server accepts and processes client traffic.
+        disabled:
+          type: boolean
+          description: Whether the virtual server is administratively disabled.
+        ipProtocol:
+          type: string
+          description: Network protocol the virtual server handles.
+          enum:
+          - tcp
+          - udp
+          - sctp
+          - any
+        mask:
+          type: string
+          description: Network mask for the destination address.
+        pool:
+          type: string
+          description: Default pool that receives traffic from this virtual server.
+        source:
+          type: string
+          description: Source address filter for accepted connections.
+        sourcePort:
+          type: string
+          description: Source port translation behavior.
+          enum:
+          - preserve
+          - preserve-strict
+          - change
+        connectionLimit:
+          type: integer
+          description: Maximum concurrent connections. Zero means unlimited.
+          minimum: 0
+        translateAddress:
+          type: string
+          description: Whether destination address translation is enabled.
+          enum:
+          - enabled
+          - disabled
+        translatePort:
+          type: string
+          description: Whether destination port translation is enabled.
+          enum:
+          - enabled
+          - disabled
+        mirror:
+          type: string
+          description: Whether connection and persistence mirroring is enabled.
+          enum:
+          - enabled
+          - disabled
+        partition:
+          type: string
+          description: Administrative partition containing this resource.
+        persist:
+          type: array
+          description: Persistence profiles applied to the virtual server.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              tmDefault:
+                type: string
+        profiles:
+          type: array
+          description: Traffic processing profiles applied to this virtual server.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              context:
+                type: string
+                enum:
+                - all
+                - clientside
+                - serverside
+              fullPath:
+                type: string
+        rules:
+          type: array
+          description: iRules applied to this virtual server.
+          items:
+            type: string
+        vlansEnabled:
+          type: boolean
+          description: Whether the virtual server is enabled on specific VLANs.
+        vlans:
+          type: array
+          description: VLANs on which the virtual server is enabled or disabled.
+          items:
+            type: string
+        rateLimit:
+          type: string
+          description: Maximum new connections per second.
+  responses:
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: An internal server error occurred on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+externalDocs:
+  description: F5 BIG-IP AS3 Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/

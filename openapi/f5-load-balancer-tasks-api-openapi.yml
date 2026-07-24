@@ -1,0 +1,131 @@
+openapi: 3.1.0
+info:
+  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Tasks API
+  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
+  version: 3.50.0
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+servers:
+- url: https://{bigip_host}/mgmt/shared/appsvcs
+  description: BIG-IP AS3 Extension Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device
+security:
+- basicAuth: []
+- tokenAuth: []
+tags:
+- name: Tasks
+  description: Monitor the status of asynchronous declaration processing tasks.
+paths:
+  /task:
+    get:
+      operationId: listTasks
+      summary: F5 Load Balancer List all AS3 tasks
+      description: Retrieves a list of all asynchronous AS3 declaration processing tasks and their statuses.
+      tags:
+      - Tasks
+      responses:
+        '200':
+          description: Task list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3TaskList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /task/{taskId}:
+    parameters:
+    - $ref: '#/components/parameters/TaskIdParam'
+    get:
+      operationId: getTask
+      summary: F5 Load Balancer Get status of a specific task
+      description: Retrieves the status and result of a specific asynchronous AS3 declaration processing task identified by its task ID.
+      tags:
+      - Tasks
+      responses:
+        '200':
+          description: Task status retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AS3TaskResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    AS3TaskList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AS3TaskResponse'
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    AS3TaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique task identifier.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              tenant:
+                type: string
+  responses:
+    NotFound:
+      description: The requested tenant or task was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    TaskIdParam:
+      name: taskId
+      in: path
+      required: true
+      description: Unique identifier of the asynchronous task.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+externalDocs:
+  description: F5 BIG-IP AS3 Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/

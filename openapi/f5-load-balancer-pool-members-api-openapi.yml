@@ -1,0 +1,284 @@
+openapi: 3.1.0
+info:
+  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Pool Members API
+  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
+  version: 3.50.0
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+servers:
+- url: https://{bigip_host}/mgmt/shared/appsvcs
+  description: BIG-IP AS3 Extension Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device
+security:
+- basicAuth: []
+- tokenAuth: []
+tags:
+- name: Pool Members
+  description: Manage individual server members within load balancing pools including their state, ratio, priority group, and connection limits.
+  externalDocs:
+    url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_pool_members.html
+paths:
+  /ltm/pool/{poolName}/members:
+    parameters:
+    - $ref: '#/components/parameters/PoolNameParam'
+    get:
+      operationId: listPoolMembers
+      summary: F5 Load Balancer List pool members
+      description: Retrieves a collection of all members within a specific pool including their addresses, ports, and operational states.
+      tags:
+      - Pool Members
+      parameters:
+      - $ref: '#/components/parameters/SelectParam'
+      - $ref: '#/components/parameters/FilterParam'
+      responses:
+        '200':
+          description: Successfully retrieved pool member collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolMemberCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: addPoolMember
+      summary: F5 Load Balancer Add a member to a pool
+      description: Adds a new server member to the specified pool. The member is identified by its node address and service port.
+      tags:
+      - Pool Members
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PoolMember'
+      responses:
+        '200':
+          description: Pool member added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolMember'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /ltm/pool/{poolName}/members/{memberName}:
+    parameters:
+    - $ref: '#/components/parameters/PoolNameParam'
+    - $ref: '#/components/parameters/MemberNameParam'
+    get:
+      operationId: getPoolMember
+      summary: F5 Load Balancer Get a specific pool member
+      description: Retrieves a single pool member resource including its configuration, health status, and statistics.
+      tags:
+      - Pool Members
+      responses:
+        '200':
+          description: Successfully retrieved pool member
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolMember'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updatePoolMember
+      summary: F5 Load Balancer Update a pool member
+      description: Replaces the configuration of a specific pool member.
+      tags:
+      - Pool Members
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PoolMember'
+      responses:
+        '200':
+          description: Pool member updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolMember'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePoolMember
+      summary: F5 Load Balancer Remove a pool member
+      description: Removes a server member from the specified pool.
+      tags:
+      - Pool Members
+      responses:
+        '200':
+          description: Pool member removed successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    PoolMember:
+      type: object
+      required:
+      - name
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:members:membersstate
+          readOnly: true
+        name:
+          type: string
+          description: Member name in address:port format.
+        fullPath:
+          type: string
+          readOnly: true
+        address:
+          type: string
+          description: IP address of the pool member.
+          format: ipv4
+        connectionLimit:
+          type: integer
+          description: Maximum concurrent connections for this member.
+          minimum: 0
+        description:
+          type: string
+          description: User-defined description.
+        dynamicRatio:
+          type: integer
+          description: Dynamic ratio weight for load balancing.
+        monitor:
+          type: string
+          description: Health monitor override for this member.
+        partition:
+          type: string
+        priorityGroup:
+          type: integer
+          description: Priority group number. Higher values receive traffic first.
+          minimum: 0
+        ratio:
+          type: integer
+          description: Ratio weight for proportional load balancing.
+          minimum: 1
+        session:
+          type: string
+          description: Session availability state.
+          enum:
+          - user-enabled
+          - user-disabled
+          - monitor-enabled
+        state:
+          type: string
+          description: Operational state of the member.
+          enum:
+          - user-up
+          - user-down
+          - up
+          - down
+          - unchecked
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
+    PoolMemberCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:members:memberscollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoolMember'
+  parameters:
+    MemberNameParam:
+      name: memberName
+      in: path
+      required: true
+      description: Name of the pool member in address:port format (e.g., ~Common~10.0.0.1:80).
+      schema:
+        type: string
+    PoolNameParam:
+      name: poolName
+      in: path
+      required: true
+      description: Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool).
+      schema:
+        type: string
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: OData filter expression to restrict returned resources.
+      schema:
+        type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+externalDocs:
+  description: F5 BIG-IP AS3 Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/

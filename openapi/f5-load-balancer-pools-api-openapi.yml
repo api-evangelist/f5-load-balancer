@@ -1,0 +1,328 @@
+openapi: 3.1.0
+info:
+  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Pools API
+  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
+  version: 3.50.0
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+servers:
+- url: https://{bigip_host}/mgmt/shared/appsvcs
+  description: BIG-IP AS3 Extension Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device
+security:
+- basicAuth: []
+- tokenAuth: []
+tags:
+- name: Pools
+  description: Manage pools of backend servers for load distribution and health monitoring.
+  externalDocs:
+    url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_pool.html
+paths:
+  /ltm/pool:
+    get:
+      operationId: listPools
+      summary: F5 Load Balancer List all pools
+      description: Retrieves a collection of all load balancing pool resources configured on the BIG-IP system. Pools contain members that receive traffic distributed by virtual servers.
+      tags:
+      - Pools
+      parameters:
+      - $ref: '#/components/parameters/SelectParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/TopParam'
+      - $ref: '#/components/parameters/SkipParam'
+      - $ref: '#/components/parameters/ExpandSubcollectionsParam'
+      responses:
+        '200':
+          description: Successfully retrieved pool collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PoolCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createPool
+      summary: F5 Load Balancer Create a pool
+      description: Creates a new load balancing pool on the BIG-IP system. A pool is a collection of backend server members to which the BIG-IP distributes client traffic.
+      tags:
+      - Pools
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pool'
+      responses:
+        '200':
+          description: Pool created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Pool with the specified name already exists
+  /ltm/pool/{poolName}:
+    parameters:
+    - $ref: '#/components/parameters/PoolNameParam'
+    get:
+      operationId: getPool
+      summary: F5 Load Balancer Get a specific pool
+      description: Retrieves a single pool resource identified by name including its configuration and load balancing settings.
+      tags:
+      - Pools
+      responses:
+        '200':
+          description: Successfully retrieved pool
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pool'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updatePool
+      summary: F5 Load Balancer Update a pool
+      description: Replaces the configuration of an existing pool resource.
+      tags:
+      - Pools
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pool'
+      responses:
+        '200':
+          description: Pool updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pool'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePool
+      summary: F5 Load Balancer Delete a pool
+      description: Removes a pool resource from the BIG-IP system. Any virtual servers referencing this pool should be updated before deletion.
+      tags:
+      - Pools
+      responses:
+        '200':
+          description: Pool deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+    PoolNameParam:
+      name: poolName
+      in: path
+      required: true
+      description: Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool).
+      schema:
+        type: string
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: OData filter expression to restrict returned resources.
+      schema:
+        type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    ExpandSubcollectionsParam:
+      name: expandSubcollections
+      in: query
+      required: false
+      description: When set to true, inline sub-collections in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
+    PoolCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:poolcollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Pool'
+    Pool:
+      type: object
+      required:
+      - name
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:poolstate
+          readOnly: true
+        name:
+          type: string
+          description: Name of the pool resource.
+          minLength: 1
+          maxLength: 255
+        fullPath:
+          type: string
+          readOnly: true
+        generation:
+          type: integer
+          readOnly: true
+        selfLink:
+          type: string
+          format: uri
+          readOnly: true
+        description:
+          type: string
+          description: User-defined description of the pool.
+        loadBalancingMode:
+          type: string
+          description: Algorithm used to distribute traffic across pool members.
+          enum:
+          - round-robin
+          - ratio-member
+          - least-connections-member
+          - observed-member
+          - predictive-member
+          - ratio-node
+          - least-connections-node
+          - fastest-node
+          - observed-node
+          - predictive-node
+          - dynamic-ratio-node
+          - fastest-app-response
+          - least-sessions
+          - dynamic-ratio-member
+          - weighted-least-connections-member
+          - weighted-least-connections-node
+        monitor:
+          type: string
+          description: Health monitor(s) applied to pool members.
+        partition:
+          type: string
+          description: Administrative partition containing this pool.
+        allowNat:
+          type: string
+          description: Whether the pool can load balance NAT connections.
+          enum:
+          - 'yes'
+          - 'no'
+        allowSnat:
+          type: string
+          description: Whether the pool can load balance SNAT connections.
+          enum:
+          - 'yes'
+          - 'no'
+        minActiveMembers:
+          type: integer
+          description: Minimum active members before priority-group activation.
+          minimum: 0
+        slowRampTime:
+          type: integer
+          description: Seconds to ramp up traffic to newly enabled members.
+          minimum: 0
+        reselectTries:
+          type: integer
+          description: Reselection attempts after a passive failure detection.
+          minimum: 0
+        serviceDownAction:
+          type: string
+          description: Action when all pool members are unavailable.
+          enum:
+          - none
+          - reset
+          - reselect
+          - drop
+  responses:
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+externalDocs:
+  description: F5 BIG-IP AS3 Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/

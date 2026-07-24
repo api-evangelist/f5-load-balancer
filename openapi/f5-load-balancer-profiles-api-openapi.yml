@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Profiles API
+  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
+  version: 3.50.0
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+servers:
+- url: https://{bigip_host}/mgmt/shared/appsvcs
+  description: BIG-IP AS3 Extension Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device
+security:
+- basicAuth: []
+- tokenAuth: []
+tags:
+- name: Profiles
+  description: Manage traffic profiles that define how the BIG-IP processes different types of network traffic including HTTP, TCP, SSL, and persistence.
+paths:
+  /ltm/profile/http:
+    get:
+      operationId: listHttpProfiles
+      summary: F5 Load Balancer List HTTP profiles
+      description: Retrieves all HTTP traffic profiles on the BIG-IP system. HTTP profiles configure how the BIG-IP processes HTTP traffic including compression, caching, and header manipulation.
+      tags:
+      - Profiles
+      responses:
+        '200':
+          description: Successfully retrieved HTTP profile collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ltm/profile/tcp:
+    get:
+      operationId: listTcpProfiles
+      summary: F5 Load Balancer List TCP profiles
+      description: Retrieves all TCP traffic profiles on the BIG-IP system. TCP profiles optimize TCP connection behavior for different application and network scenarios.
+      tags:
+      - Profiles
+      responses:
+        '200':
+          description: Successfully retrieved TCP profile collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ltm/profile/client-ssl:
+    get:
+      operationId: listClientSslProfiles
+      summary: F5 Load Balancer List client SSL profiles
+      description: Retrieves all client-side SSL profiles on the BIG-IP system. Client SSL profiles manage TLS/SSL termination for connections between clients and the BIG-IP.
+      tags:
+      - Profiles
+      responses:
+        '200':
+          description: Successfully retrieved client SSL profile collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
+    ProfileCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            type: object
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+externalDocs:
+  description: F5 BIG-IP AS3 Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/

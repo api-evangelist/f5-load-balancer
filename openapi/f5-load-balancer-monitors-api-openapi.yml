@@ -1,0 +1,224 @@
+openapi: 3.1.0
+info:
+  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Monitors API
+  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
+  version: 3.50.0
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+servers:
+- url: https://{bigip_host}/mgmt/shared/appsvcs
+  description: BIG-IP AS3 Extension Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device
+security:
+- basicAuth: []
+- tokenAuth: []
+tags:
+- name: Monitors
+  description: Configure health monitors that verify the availability and performance of nodes, pool members, and services.
+  externalDocs:
+    url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_monitor.html
+paths:
+  /ltm/monitor/http:
+    get:
+      operationId: listHttpMonitors
+      summary: F5 Load Balancer List HTTP health monitors
+      description: Retrieves all HTTP health monitors configured on the BIG-IP system. HTTP monitors verify availability by sending HTTP requests to pool members and evaluating the responses.
+      tags:
+      - Monitors
+      responses:
+        '200':
+          description: Successfully retrieved HTTP monitor collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createHttpMonitor
+      summary: F5 Load Balancer Create an HTTP health monitor
+      description: Creates a new HTTP health monitor that sends HTTP requests to pool members to verify their availability and responsiveness.
+      tags:
+      - Monitors
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HttpMonitor'
+      responses:
+        '200':
+          description: HTTP monitor created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HttpMonitor'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ltm/monitor/https:
+    get:
+      operationId: listHttpsMonitors
+      summary: F5 Load Balancer List HTTPS health monitors
+      description: Retrieves all HTTPS health monitors configured on the BIG-IP system. HTTPS monitors verify availability over TLS-encrypted connections.
+      tags:
+      - Monitors
+      responses:
+        '200':
+          description: Successfully retrieved HTTPS monitor collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /ltm/monitor/tcp:
+    get:
+      operationId: listTcpMonitors
+      summary: F5 Load Balancer List TCP health monitors
+      description: Retrieves all TCP health monitors configured on the BIG-IP system. TCP monitors verify that pool members are accepting connections on the specified port.
+      tags:
+      - Monitors
+      responses:
+        '200':
+          description: Successfully retrieved TCP monitor collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonitorCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
+    HttpMonitor:
+      type: object
+      required:
+      - name
+      properties:
+        kind:
+          type: string
+          readOnly: true
+        name:
+          type: string
+          description: Name of the health monitor.
+        fullPath:
+          type: string
+          readOnly: true
+        generation:
+          type: integer
+          readOnly: true
+        selfLink:
+          type: string
+          format: uri
+          readOnly: true
+        description:
+          type: string
+          description: User-defined description of the monitor.
+        destination:
+          type: string
+          description: Destination IP and port to monitor. Use * for wildcard.
+        interval:
+          type: integer
+          description: Seconds between health check probes.
+          minimum: 1
+        timeout:
+          type: integer
+          description: Seconds before declaring a member down after failed checks.
+          minimum: 1
+        send:
+          type: string
+          description: HTTP request string to send to the monitored node.
+        recv:
+          type: string
+          description: Expected response content string that indicates a healthy member.
+        recvDisable:
+          type: string
+          description: Response content string that marks a member as disabled.
+        reverse:
+          type: string
+          description: Whether the monitor marks a node down when the recv string is found.
+          enum:
+          - enabled
+          - disabled
+        transparent:
+          type: string
+          description: Whether the monitor pings through the pool member to the specified destination.
+          enum:
+          - enabled
+          - disabled
+        upInterval:
+          type: integer
+          description: Seconds between health checks when a node is up.
+        manualResume:
+          type: string
+          description: Whether manual intervention is required to re-enable a node.
+          enum:
+          - enabled
+          - disabled
+        partition:
+          type: string
+        defaultsFrom:
+          type: string
+          description: Parent monitor from which this monitor inherits settings.
+    MonitorCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HttpMonitor'
+  responses:
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+externalDocs:
+  description: F5 BIG-IP AS3 Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/

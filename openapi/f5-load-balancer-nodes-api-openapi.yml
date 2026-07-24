@@ -1,0 +1,303 @@
+openapi: 3.1.0
+info:
+  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Nodes API
+  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
+  version: 3.50.0
+  contact:
+    name: F5 Networks Support
+    email: support@f5.com
+    url: https://www.f5.com/services/support
+  license:
+    name: Apache-2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://www.f5.com/company/policies/terms-of-use
+servers:
+- url: https://{bigip_host}/mgmt/shared/appsvcs
+  description: BIG-IP AS3 Extension Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device
+security:
+- basicAuth: []
+- tokenAuth: []
+tags:
+- name: Nodes
+  description: Manage backend server nodes identified by IP address or FQDN that serve as the foundation for pool member definitions.
+  externalDocs:
+    url: https://clouddocs.f5.com/api/icontrol-rest/APIRef_tm_ltm_node.html
+paths:
+  /ltm/node:
+    get:
+      operationId: listNodes
+      summary: F5 Load Balancer List all nodes
+      description: Retrieves a collection of all node resources on the BIG-IP system. Nodes represent backend servers identified by their IP addresses or FQDNs.
+      tags:
+      - Nodes
+      parameters:
+      - $ref: '#/components/parameters/SelectParam'
+      - $ref: '#/components/parameters/FilterParam'
+      - $ref: '#/components/parameters/TopParam'
+      - $ref: '#/components/parameters/SkipParam'
+      responses:
+        '200':
+          description: Successfully retrieved node collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NodeCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createNode
+      summary: F5 Load Balancer Create a node
+      description: Creates a new node resource representing a backend server on the network. Nodes are the foundation for pool members.
+      tags:
+      - Nodes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Node'
+      responses:
+        '200':
+          description: Node created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '409':
+          description: Node with the specified name already exists
+  /ltm/node/{nodeName}:
+    parameters:
+    - $ref: '#/components/parameters/NodeNameParam'
+    get:
+      operationId: getNode
+      summary: F5 Load Balancer Get a specific node
+      description: Retrieves a single node resource including its address, monitoring status, and configuration.
+      tags:
+      - Nodes
+      responses:
+        '200':
+          description: Successfully retrieved node
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateNode
+      summary: F5 Load Balancer Update a node
+      description: Replaces the configuration of an existing node resource.
+      tags:
+      - Nodes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Node'
+      responses:
+        '200':
+          description: Node updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteNode
+      summary: F5 Load Balancer Delete a node
+      description: Removes a node resource from the BIG-IP system. The node must not be referenced by any pool members.
+      tags:
+      - Nodes
+      responses:
+        '200':
+          description: Node deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: OData filter expression to restrict returned resources.
+      schema:
+        type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
+    NodeNameParam:
+      name: nodeName
+      in: path
+      required: true
+      description: Name of the node resource, optionally prefixed with the partition path.
+      schema:
+        type: string
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
+    Node:
+      type: object
+      required:
+      - name
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:node:nodestate
+          readOnly: true
+        name:
+          type: string
+          description: Name of the node, typically its IP address.
+        fullPath:
+          type: string
+          readOnly: true
+        address:
+          type: string
+          description: IP address of the node.
+          format: ipv4
+        connectionLimit:
+          type: integer
+          minimum: 0
+        description:
+          type: string
+        dynamicRatio:
+          type: integer
+        fqdn:
+          type: object
+          description: FQDN configuration for DNS-based address resolution.
+          properties:
+            addressFamily:
+              type: string
+              enum:
+              - ipv4
+              - ipv6
+            autopopulate:
+              type: string
+              enum:
+              - enabled
+              - disabled
+            downInterval:
+              type: integer
+            interval:
+              type: string
+            tmName:
+              type: string
+              format: hostname
+        monitor:
+          type: string
+          description: Health monitor applied to the node.
+        partition:
+          type: string
+        rateLimit:
+          type: string
+        ratio:
+          type: integer
+          minimum: 1
+        session:
+          type: string
+          enum:
+          - user-enabled
+          - user-disabled
+          - monitor-enabled
+        state:
+          type: string
+          enum:
+          - user-up
+          - user-down
+          - up
+          - down
+          - unchecked
+    NodeCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:node:nodecollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Node'
+  responses:
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using BIG-IP admin credentials.
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-F5-Auth-Token
+      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+externalDocs:
+  description: F5 BIG-IP AS3 Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
