@@ -4,7 +4,20 @@ description: >-
   APIs for managing F5 BIG-IP Load Balancer configuration, monitoring, and operations. F5 BIG-IP is an application
   delivery controller that provides intelligent traffic management, load balancing, and application security.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/f5-load-balancer.png
 tags:
   - Application Delivery
   - BIG-IP
@@ -18,54 +31,335 @@ position: Consumer
 access: 3rd-Party
 specificationVersion: '0.19'
 apis:
-  - aid: f5-load-balancer:f5-bigip-icontrol-rest-api
-    name: F5 BIG-IP iControl REST API
-    description: >-
-      Primary REST API for managing F5 BIG-IP systems including virtual servers, pools, nodes, and policies for
-      application delivery and load balancing.
-    humanURL: https://clouddocs.f5.com/api/icontrol-rest/
-    baseURL: https://bigip-host/mgmt/tm
-    tags:
-      - Configuration
-      - Management
-      - REST API
-    properties:
-      - type: Documentation
-        url: https://clouddocs.f5.com/api/icontrol-rest/
-      - type: Authentication
-        url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
-      - type: OpenAPI
-        url: openapi/f5-load-balancer-icontrol-rest-openapi.yml
-  - aid: f5-load-balancer:f5-bigip-as3-api
-    name: F5 BIG-IP AS3 API
-    description: Application Services 3 Extension for declarative API-based application deployment using JSON declarations.
-    humanURL: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
-    baseURL: https://bigip-host/mgmt/shared/appsvcs
-    tags:
-      - AS3
-      - Automation
-      - Declarative
-    properties:
-      - type: Documentation
-        url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
-      - type: OpenAPI
-        url: openapi/f5-load-balancer-as3-openapi.yml
-  - aid: f5-load-balancer:f5-bigip-declarative-onboarding-api
-    name: F5 BIG-IP Declarative Onboarding API
-    description: >-
-      Declarative Onboarding (DO) extension for initial BIG-IP system configuration and provisioning via JSON
-      declarations covering licensing, networking, user management, and module provisioning.
-    humanURL: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
-    baseURL: https://bigip-host/mgmt/shared/declarative-onboarding
-    tags:
-      - Declarative
-      - Onboarding
-      - Provisioning
-    properties:
-      - type: Documentation
-        url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
-      - type: OpenAPI
-        url: openapi/f5-load-balancer-declarative-onboarding-openapi.yml
+- aid: f5-load-balancer:f5-load-balancer-config-api
+  name: F5 Load Balancer Config API
+  description: >-
+    Retrieve the original device configuration before Declarative Onboarding modifications were applied.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Config
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-config-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-data-groups-api
+  name: F5 Load Balancer Data Groups API
+  description: >-
+    Manage internal and external data groups used for address, string, and integer lookups in traffic
+    processing decisions.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Data Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-data-groups-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-declarations-api
+  name: F5 Load Balancer Declarations API
+  description: >-
+    Submit, retrieve, and manage AS3 declarations that describe the desired application services configuration
+    state on the BIG-IP system.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Declarations
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-declarations-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-info-api
+  name: F5 Load Balancer Info API
+  description: Retrieve version and capability information about the installed AS3 extension.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Info
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-info-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-inspect-api
+  name: F5 Load Balancer Inspect API
+  description: >-
+    Inspect the current state of BIG-IP configuration classes known to Declarative Onboarding.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Inspect
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-inspect-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-irules-api
+  name: F5 Load Balancer iRules API
+  description: >-
+    Manage iRules for custom traffic management logic using the F5 Tcl-based scripting language.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - iRules
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-irules-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-monitors-api
+  name: F5 Load Balancer Monitors API
+  description: >-
+    Configure health monitors that verify the availability and performance of nodes, pool members, and
+    services.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Monitors
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-monitors-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-nodes-api
+  name: F5 Load Balancer Nodes API
+  description: >-
+    Manage backend server nodes identified by IP address or FQDN that serve as the foundation for pool
+    member definitions.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Nodes
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-nodes-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-policies-api
+  name: F5 Load Balancer Policies API
+  description: >-
+    Manage local traffic policies that provide rule-based traffic steering and content manipulation capabilities.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-policies-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-pool-members-api
+  name: F5 Load Balancer Pool Members API
+  description: >-
+    Manage individual server members within load balancing pools including their state, ratio, priority
+    group, and connection limits.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Pool Members
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-pool-members-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-pools-api
+  name: F5 Load Balancer Pools API
+  description: Manage pools of backend servers for load distribution and health monitoring.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-pools-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-profiles-api
+  name: F5 Load Balancer Profiles API
+  description: >-
+    Manage traffic profiles that define how the BIG-IP processes different types of network traffic including
+    HTTP, TCP, SSL, and persistence.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Profiles
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-profiles-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-snat-pools-api
+  name: F5 Load Balancer SNAT Pools API
+  description: >-
+    Manage SNAT (Secure Network Address Translation) pools that define translation addresses for outbound
+    connections.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - SNAT Pools
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-snat-pools-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-ssl-certificates-api
+  name: F5 Load Balancer SSL Certificates API
+  description: >-
+    Manage SSL certificates and keys used for TLS/SSL termination and re-encryption on virtual servers.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - SSL Certificates
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-ssl-certificates-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-system-api
+  name: F5 Load Balancer System API
+  description: >-
+    Access system-level information and configuration including device status, software versions, and
+    global settings.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - System
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-system-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-tasks-api
+  name: F5 Load Balancer Tasks API
+  description: Monitor the status of asynchronous declaration processing tasks.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-tasks-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
+- aid: f5-load-balancer:f5-load-balancer-virtual-servers-api
+  name: F5 Load Balancer Virtual Servers API
+  description: >-
+    Manage virtual servers that direct client traffic to appropriate server pools based on configured
+    rules and profiles.
+  humanURL: https://clouddocs.f5.com/api/icontrol-rest/
+  baseURL: https://bigip-host/mgmt/tm
+  tags:
+  - Virtual Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/f5-load-balancer-virtual-servers-api-openapi.yml
+  - type: Documentation
+    url: https://clouddocs.f5.com/api/icontrol-rest/
+  - type: Authentication
+    url: https://clouddocs.f5.com/api/icontrol-rest/Authentication.html
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  - type: Documentation
+    url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
 common:
   - type: AgenticAccess
     url: agentic-access/f5-load-balancer-agentic-access.yml
