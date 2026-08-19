@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config System API",
+    "version": "3.50.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "System",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer Get system information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/sys"
+          },
+          "docs": "Retrieves top-level system information and available sub-collections for the BIG-IP system."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get system software version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/sys/version"
+          },
+          "docs": "Retrieves the software version information for the BIG-IP system including product name, version, build number, and edition."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer List BIG-IP devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/sys/device"
+          },
+          "docs": "Retrieves information about all BIG-IP devices in the device trust group, including hostname, management address, failover state, and device group membership."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config iRules API",
+    "version": "3.50.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "iRules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List iRules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/rule"
+          },
+          "docs": "Retrieves all iRule resources on the BIG-IP system. iRules are Tcl-based scripts that provide custom traffic management logic for virtual servers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

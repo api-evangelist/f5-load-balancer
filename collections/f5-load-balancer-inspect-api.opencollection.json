@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Inspect API",
+    "version": "3.50.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inspect",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer Inspect current BIG-IP state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/inspect"
+          },
+          "docs": "Returns the classes Declarative Onboarding is aware of and their current state on the BIG-IP system. Useful for understanding the current device configuration in DO terms."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

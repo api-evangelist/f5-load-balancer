@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config API",
+    "version": "3.50.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Config",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List original device configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/config"
+          },
+          "docs": "Retrieves the original configurations for all devices managed by Declarative Onboarding before any DO modifications were applied."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get original configuration for a device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/config/:machineId",
+            "params": [
+              {
+                "name": "machineId",
+                "value": "",
+                "type": "path",
+                "description": "The machine ID of the BIG-IP device whose original configuration to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieves the original configuration for a specific device identified by its machine ID, as it existed before Declarative Onboarding modifications."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Pool Members API",
+    "version": "3.50.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Pool Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List pool members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/pool/:poolName/members",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              },
+              {
+                "name": "$select",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of properties to include in the response."
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression to restrict returned resources."
+              }
+            ]
+          },
+          "docs": "Retrieves a collection of all members within a specific pool including their addresses, ports, and operational states."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Add a member to a pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/pool/:poolName/members",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new server member to the specified pool. The member is identified by its node address and service port."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get a specific pool member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/pool/:poolName/members/:memberName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              },
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool member in address:port format (e.g., ~Common~10.0.0.1:80)."
+              }
+            ]
+          },
+          "docs": "Retrieves a single pool member resource including its configuration, health status, and statistics."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Update a pool member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/pool/:poolName/members/:memberName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              },
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool member in address:port format (e.g., ~Common~10.0.0.1:80)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Replaces the configuration of a specific pool member."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Remove a pool member",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/pool/:poolName/members/:memberName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+              },
+              {
+                "name": "memberName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pool member in address:port format (e.g., ~Common~10.0.0.1:80)."
+              }
+            ]
+          },
+          "docs": "Removes a server member from the specified pool."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

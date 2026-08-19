@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Profiles API",
+    "version": "3.50.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List HTTP profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/profile/http"
+          },
+          "docs": "Retrieves all HTTP traffic profiles on the BIG-IP system. HTTP profiles configure how the BIG-IP processes HTTP traffic including compression, caching, and header manipulation."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer List TCP profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/profile/tcp"
+          },
+          "docs": "Retrieves all TCP traffic profiles on the BIG-IP system. TCP profiles optimize TCP connection behavior for different application and network scenarios."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer List client SSL profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/ltm/profile/client-ssl"
+          },
+          "docs": "Retrieves all client-side SSL profiles on the BIG-IP system. Client SSL profiles manage TLS/SSL termination for connections between clients and the BIG-IP."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

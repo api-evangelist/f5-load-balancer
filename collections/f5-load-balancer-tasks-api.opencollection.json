@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Tasks API",
+    "version": "3.50.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "F5 Load Balancer List all AS3 tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/task"
+          },
+          "docs": "Retrieves a list of all asynchronous AS3 declaration processing tasks and their statuses."
+        },
+        {
+          "info": {
+            "name": "F5 Load Balancer Get status of a specific task",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{bigip_host}/mgmt/shared/appsvcs/task/:taskId",
+            "params": [
+              {
+                "name": "taskId",
+                "value": "",
+                "type": "path",
+                "description": "Unique identifier of the asynchronous task."
+              }
+            ]
+          },
+          "docs": "Retrieves the status and result of a specific asynchronous AS3 declaration processing task identified by its task ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

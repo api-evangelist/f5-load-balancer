@@ -1,0 +1,1330 @@
+{
+  "item": [
+    {
+      "id": "b699f874-3ed7-429b-9475-00c6ed19f059",
+      "name": "Nodes",
+      "description": {
+        "content": "Manage backend server nodes identified by IP address or FQDN that serve as the foundation for pool member definitions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2e548721-5c14-456c-b377-a96b06fb4e0f",
+          "name": "F5 Load Balancer List all nodes",
+          "request": {
+            "name": "F5 Load Balancer List all nodes",
+            "description": {
+              "content": "Retrieves a collection of all node resources on the BIG-IP system. Nodes represent backend servers identified by their IP addresses or FQDNs.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "node"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression to restrict returned resources."
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of resources to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of resources to skip before returning results."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "86a18c46-3449-4b97-913f-f64744b8895f",
+              "name": "Successfully retrieved node collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"string\",\n  \"selfLink\": \"https://RuRMJKUyxutiYPkIrfBC.dmad\",\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"address\": \"51.121.95.36\",\n      \"connectionLimit\": 2703,\n      \"description\": \"string\",\n      \"dynamicRatio\": 4281,\n      \"fqdn\": {\n        \"addressFamily\": \"ipv6\",\n        \"autopopulate\": \"disabled\",\n        \"downInterval\": 3702,\n        \"interval\": \"string\",\n        \"tmName\": \"ByGD.jtk\"\n      },\n      \"monitor\": \"string\",\n      \"partition\": \"string\",\n      \"rateLimit\": \"string\",\n      \"ratio\": 4253,\n      \"session\": \"monitor-enabled\",\n      \"state\": \"user-up\"\n    },\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"address\": \"10.28.165.159\",\n      \"connectionLimit\": 7426,\n      \"description\": \"string\",\n      \"dynamicRatio\": 9864,\n      \"fqdn\": {\n        \"addressFamily\": \"ipv6\",\n        \"autopopulate\": \"enabled\",\n        \"downInterval\": 1992,\n        \"interval\": \"string\",\n        \"tmName\": \"jvHrpefdFyiPQaPgYcdpLCzSZL.mti\"\n      },\n      \"monitor\": \"string\",\n      \"partition\": \"string\",\n      \"rateLimit\": \"string\",\n      \"ratio\": 8706,\n      \"session\": \"user-disabled\",\n      \"state\": \"user-up\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b58fe7e6-b085-4db0-8464-039b16df4e90",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9997,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4db13cb-0d5c-4933-a9e4-bbd458cb8dba",
+          "name": "F5 Load Balancer Create a node",
+          "request": {
+            "name": "F5 Load Balancer Create a node",
+            "description": {
+              "content": "Creates a new node resource representing a backend server on the network. Nodes are the foundation for pool members.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "node"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c64f29c-9106-4174-819c-78fcdae205b8",
+              "name": "Node created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"address\": \"74.114.144.35\",\n  \"connectionLimit\": 7289,\n  \"description\": \"string\",\n  \"dynamicRatio\": 4958,\n  \"fqdn\": {\n    \"addressFamily\": \"ipv6\",\n    \"autopopulate\": \"enabled\",\n    \"downInterval\": 8193,\n    \"interval\": \"string\",\n    \"tmName\": \"GfCOACrjxLjWXxcHXiObVeXvcgiCQKB.by\"\n  },\n  \"monitor\": \"string\",\n  \"partition\": \"string\",\n  \"rateLimit\": \"string\",\n  \"ratio\": 819,\n  \"session\": \"user-disabled\",\n  \"state\": \"user-down\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "393cfe62-f87d-42a4-b563-bcbcd95accb3",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9997,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a5ceb42d-f908-490a-afae-e4115ad3a728",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9324,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "264b4931-bd4f-448e-bf9a-09ec5f1c9e73",
+              "name": "Node with the specified name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c415f115-c5cd-4b6d-bddd-d9ea9a8ac485",
+          "name": "F5 Load Balancer Get a specific node",
+          "request": {
+            "name": "F5 Load Balancer Get a specific node",
+            "description": {
+              "content": "Retrieves a single node resource including its address, monitoring status, and configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "node",
+                ":nodeName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeName",
+                  "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb11d81c-29b9-4942-be96-9440a721b296",
+              "name": "Successfully retrieved node",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"address\": \"74.114.144.35\",\n  \"connectionLimit\": 7289,\n  \"description\": \"string\",\n  \"dynamicRatio\": 4958,\n  \"fqdn\": {\n    \"addressFamily\": \"ipv6\",\n    \"autopopulate\": \"enabled\",\n    \"downInterval\": 8193,\n    \"interval\": \"string\",\n    \"tmName\": \"GfCOACrjxLjWXxcHXiObVeXvcgiCQKB.by\"\n  },\n  \"monitor\": \"string\",\n  \"partition\": \"string\",\n  \"rateLimit\": \"string\",\n  \"ratio\": 819,\n  \"session\": \"user-disabled\",\n  \"state\": \"user-down\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da87829a-48a9-4b34-94f1-3fd7d3c8e391",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9324,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "511a4f32-29cc-49eb-b547-c6af9da0c5f8",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9997,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d1ba287-79d0-4714-97c5-2bd1974cd33e",
+          "name": "F5 Load Balancer Update a node",
+          "request": {
+            "name": "F5 Load Balancer Update a node",
+            "description": {
+              "content": "Replaces the configuration of an existing node resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "node",
+                ":nodeName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeName",
+                  "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7af7c660-f149-40b0-af00-5d7ed79a0f91",
+              "name": "Node updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"address\": \"74.114.144.35\",\n  \"connectionLimit\": 7289,\n  \"description\": \"string\",\n  \"dynamicRatio\": 4958,\n  \"fqdn\": {\n    \"addressFamily\": \"ipv6\",\n    \"autopopulate\": \"enabled\",\n    \"downInterval\": 8193,\n    \"interval\": \"string\",\n    \"tmName\": \"GfCOACrjxLjWXxcHXiObVeXvcgiCQKB.by\"\n  },\n  \"monitor\": \"string\",\n  \"partition\": \"string\",\n  \"rateLimit\": \"string\",\n  \"ratio\": 819,\n  \"session\": \"user-disabled\",\n  \"state\": \"user-down\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e17de0aa-6d75-449b-acc0-4a7972127bd3",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9324,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53a1b655-d601-4dea-983c-7f437ad2b251",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9324,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9722948f-c455-4506-ac0e-d01abc379e6c",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"address\": \"<ipv4>\",\n  \"connectionLimit\": \"<integer>\",\n  \"description\": \"<string>\",\n  \"dynamicRatio\": \"<integer>\",\n  \"fqdn\": {\n    \"addressFamily\": \"<string>\",\n    \"autopopulate\": \"<string>\",\n    \"downInterval\": \"<integer>\",\n    \"interval\": \"<string>\",\n    \"tmName\": \"<hostname>\"\n  },\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"rateLimit\": \"<string>\",\n  \"ratio\": \"<integer>\",\n  \"session\": \"<string>\",\n  \"state\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9324,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4804ccee-8b99-4a1d-a526-5e9b627d514c",
+          "name": "F5 Load Balancer Delete a node",
+          "request": {
+            "name": "F5 Load Balancer Delete a node",
+            "description": {
+              "content": "Removes a node resource from the BIG-IP system. The node must not be referenced by any pool members.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "node",
+                ":nodeName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "nodeName",
+                  "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3bba5f13-5467-45a0-bec8-f02becec5ac8",
+              "name": "Node deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "307c4f22-5c77-43a4-b32c-9ecd0fe8d745",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9324,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "764f0625-91e5-40d0-93e3-1054d67002b5",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "node",
+                    ":nodeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "nodeName",
+                      "description": "(Required) Name of the node resource, optionally prefixed with the partition path."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9324,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the BIG-IP device",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.245",
+      "key": "bigip_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{bigip_host}}/mgmt/shared/appsvcs",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "94824147-6c1c-486d-9517-4c308c2a8a23",
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Nodes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.\n\nContact Support:\n Name: F5 Networks Support\n Email: support@f5.com",
+      "type": "text/plain"
+    }
+  }
+}

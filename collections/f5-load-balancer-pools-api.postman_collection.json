@@ -1,0 +1,1344 @@
+{
+  "item": [
+    {
+      "id": "c5ad374d-6ab0-45ed-b1e2-9c0d6bffa927",
+      "name": "Pools",
+      "description": {
+        "content": "Manage pools of backend servers for load distribution and health monitoring.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f54077fb-de2e-466d-bd40-8d5cc1c4340e",
+          "name": "F5 Load Balancer List all pools",
+          "request": {
+            "name": "F5 Load Balancer List all pools",
+            "description": {
+              "content": "Retrieves a collection of all load balancing pool resources configured on the BIG-IP system. Pools contain members that receive traffic distributed by virtual servers.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "pool"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression to restrict returned resources."
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of resources to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of resources to skip before returning results."
+                },
+                {
+                  "disabled": false,
+                  "key": "expandSubcollections",
+                  "value": "<string>",
+                  "description": "When set to true, inline sub-collections in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "54597ab8-c8e8-469c-9c86-6400e654ca40",
+              "name": "Successfully retrieved pool collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "expandSubcollections",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"string\",\n  \"selfLink\": \"http://DgTC.orkMA.WNimp.qzrNfSzVp8XFUFuJ-y7CnR7HAkV\",\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 6935,\n      \"selfLink\": \"http://lWBDaoONNcLdozPzDCGAYXZCCxKg.qppjJ7bFtPo5KRXcvd,jyd8jgKccGePfWAjMJWzA,ckdtSQ3cyodZU4mMWRqDSSHkogKIcpyM3YW\",\n      \"description\": \"string\",\n      \"loadBalancingMode\": \"dynamic-ratio-node\",\n      \"monitor\": \"string\",\n      \"partition\": \"string\",\n      \"allowNat\": \"yes\",\n      \"allowSnat\": \"no\",\n      \"minActiveMembers\": 1486,\n      \"slowRampTime\": 9918,\n      \"reselectTries\": 6974,\n      \"serviceDownAction\": \"drop\"\n    },\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 25,\n      \"selfLink\": \"https://AWrMoilkgSrmfSrBmeWjvTNNdfPzLfng.vuja1ydP0gDgaHCjzrsZt6SRSdXmN9Qv\",\n      \"description\": \"string\",\n      \"loadBalancingMode\": \"least-connections-member\",\n      \"monitor\": \"string\",\n      \"partition\": \"string\",\n      \"allowNat\": \"no\",\n      \"allowSnat\": \"yes\",\n      \"minActiveMembers\": 1793,\n      \"slowRampTime\": 2598,\n      \"reselectTries\": 9537,\n      \"serviceDownAction\": \"drop\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3700a25d-5374-462a-89b8-c96b9aebc6aa",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "expandSubcollections",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2242,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a6c043f-e24c-4b30-a9f0-a0c099850f54",
+          "name": "F5 Load Balancer Create a pool",
+          "request": {
+            "name": "F5 Load Balancer Create a pool",
+            "description": {
+              "content": "Creates a new load balancing pool on the BIG-IP system. A pool is a collection of backend server members to which the BIG-IP distributes client traffic.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "pool"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "57b12b26-5e1e-487a-ba48-0a6fb3f6dc66",
+              "name": "Pool created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"generation\": 8684,\n  \"selfLink\": \"https://FXAQFYQANz.sqVYf8n1-fnzjs-ZNwC2wORcPokDrB1xT1LqF3edHKI2khnDB7\",\n  \"description\": \"string\",\n  \"loadBalancingMode\": \"weighted-least-connections-member\",\n  \"monitor\": \"string\",\n  \"partition\": \"string\",\n  \"allowNat\": \"yes\",\n  \"allowSnat\": \"no\",\n  \"minActiveMembers\": 9713,\n  \"slowRampTime\": 9095,\n  \"reselectTries\": 1332,\n  \"serviceDownAction\": \"drop\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68fa8461-45b8-4e32-a8be-e22029cee035",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2242,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4d3e32b-8d2e-499b-91f4-d329129fa4dc",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1965,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c8484da-48cf-4b6c-a08c-251e496c8973",
+              "name": "Pool with the specified name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa1f1217-4eb5-4efe-8acd-d1c4592fab95",
+          "name": "F5 Load Balancer Get a specific pool",
+          "request": {
+            "name": "F5 Load Balancer Get a specific pool",
+            "description": {
+              "content": "Retrieves a single pool resource identified by name including its configuration and load balancing settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "pool",
+                ":poolName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolName",
+                  "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "173c4e96-9b98-4550-828e-39ab50f3ec99",
+              "name": "Successfully retrieved pool",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"generation\": 8684,\n  \"selfLink\": \"https://FXAQFYQANz.sqVYf8n1-fnzjs-ZNwC2wORcPokDrB1xT1LqF3edHKI2khnDB7\",\n  \"description\": \"string\",\n  \"loadBalancingMode\": \"weighted-least-connections-member\",\n  \"monitor\": \"string\",\n  \"partition\": \"string\",\n  \"allowNat\": \"yes\",\n  \"allowSnat\": \"no\",\n  \"minActiveMembers\": 9713,\n  \"slowRampTime\": 9095,\n  \"reselectTries\": 1332,\n  \"serviceDownAction\": \"drop\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a75780a-89f5-4245-b25d-3019081326b9",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1965,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3600fa1d-66c5-4854-a1ac-c5db88cc1383",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2242,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da5a432c-217f-4ba0-89e8-fa9597f1447b",
+          "name": "F5 Load Balancer Update a pool",
+          "request": {
+            "name": "F5 Load Balancer Update a pool",
+            "description": {
+              "content": "Replaces the configuration of an existing pool resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "pool",
+                ":poolName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolName",
+                  "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff9e043c-32ea-488c-ba28-16e1c913733d",
+              "name": "Pool updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"generation\": 8684,\n  \"selfLink\": \"https://FXAQFYQANz.sqVYf8n1-fnzjs-ZNwC2wORcPokDrB1xT1LqF3edHKI2khnDB7\",\n  \"description\": \"string\",\n  \"loadBalancingMode\": \"weighted-least-connections-member\",\n  \"monitor\": \"string\",\n  \"partition\": \"string\",\n  \"allowNat\": \"yes\",\n  \"allowSnat\": \"no\",\n  \"minActiveMembers\": 9713,\n  \"slowRampTime\": 9095,\n  \"reselectTries\": 1332,\n  \"serviceDownAction\": \"drop\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c36ce049-35be-4ef9-aef5-86b17ec392b7",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1965,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20faa356-18c6-4e45-8f06-4dd49ae1cca2",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1965,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcef3762-c99d-45a8-bbf9-21c354ccbede",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"loadBalancingMode\": \"<string>\",\n  \"monitor\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"allowNat\": \"<string>\",\n  \"allowSnat\": \"<string>\",\n  \"minActiveMembers\": \"<integer>\",\n  \"slowRampTime\": \"<integer>\",\n  \"reselectTries\": \"<integer>\",\n  \"serviceDownAction\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1965,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1ac331a2-c0b6-4b11-8f52-d05ffd7c1194",
+          "name": "F5 Load Balancer Delete a pool",
+          "request": {
+            "name": "F5 Load Balancer Delete a pool",
+            "description": {
+              "content": "Removes a pool resource from the BIG-IP system. Any virtual servers referencing this pool should be updated before deletion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "pool",
+                ":poolName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "poolName",
+                  "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c7a123f6-2eb2-455d-bcb0-9410bcf4c3b5",
+              "name": "Pool deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd0d7996-d307-49ef-9493-3aea43838e42",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1965,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "55a5a708-554f-48ea-aaf2-b88f24ef1c42",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "pool",
+                    ":poolName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "poolName",
+                      "description": "(Required) Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 1965,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the BIG-IP device",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.245",
+      "key": "bigip_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{bigip_host}}/mgmt/shared/appsvcs",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c6f06e2f-62a0-46cf-b21f-432719243994",
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Pools API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.\n\nContact Support:\n Name: F5 Networks Support\n Email: support@f5.com",
+      "type": "text/plain"
+    }
+  }
+}

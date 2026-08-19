@@ -1,0 +1,1807 @@
+{
+  "item": [
+    {
+      "id": "52b834d7-bebe-41a3-8041-5c7c222eb41d",
+      "name": "Virtual Servers",
+      "description": {
+        "content": "Manage virtual servers that direct client traffic to appropriate server pools based on configured rules and profiles.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "07b5693a-71c0-4c56-be6b-e7d94c6ff8b3",
+          "name": "F5 Load Balancer List all virtual servers",
+          "request": {
+            "name": "F5 Load Balancer List all virtual servers",
+            "description": {
+              "content": "Retrieves a collection of all virtual server resources configured on the BIG-IP system. Returns virtual server properties including destination address, pool assignment, profiles, and operational state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "virtual"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$select",
+                  "value": "<string>",
+                  "description": "Comma-separated list of properties to include in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression to restrict returned resources."
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of resources to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of resources to skip before returning results."
+                },
+                {
+                  "disabled": false,
+                  "key": "expandSubcollections",
+                  "value": "<string>",
+                  "description": "When set to true, inline sub-collections in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffe2221c-ca4e-4638-8ae4-7866f51b4834",
+              "name": "Successfully retrieved virtual server collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "expandSubcollections",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"string\",\n  \"selfLink\": \"https://uSYOinNKpgweYbMAM.glbHKY9xT+vKNmenrNY+EaJAJyqSwXsl1PZyu,HqFgUyjooOq5gnGob4+PtH\",\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"destination\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 8911,\n      \"selfLink\": \"http://KFMZrgKpcjNQGBGwbW.opqjCfQlWmegKy8vldPrFPsCH-DfAYXo3QnGNJS+7sTexGEG\",\n      \"description\": \"string\",\n      \"enabled\": false,\n      \"disabled\": false,\n      \"ipProtocol\": \"any\",\n      \"mask\": \"string\",\n      \"pool\": \"string\",\n      \"source\": \"string\",\n      \"sourcePort\": \"preserve\",\n      \"connectionLimit\": 9387,\n      \"translateAddress\": \"enabled\",\n      \"translatePort\": \"disabled\",\n      \"mirror\": \"disabled\",\n      \"partition\": \"string\",\n      \"persist\": [\n        {\n          \"name\": \"string\",\n          \"tmDefault\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"tmDefault\": \"string\"\n        }\n      ],\n      \"profiles\": [\n        {\n          \"name\": \"string\",\n          \"context\": \"clientside\",\n          \"fullPath\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"context\": \"clientside\",\n          \"fullPath\": \"string\"\n        }\n      ],\n      \"rules\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vlansEnabled\": false,\n      \"vlans\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rateLimit\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"destination\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 132,\n      \"selfLink\": \"https://LdjwHspWNnVHzKwFLEaAoC.xvabCJC5FnGfCg2ETD.QgZav0,xRD2FX1TA2sqxagWN4oMSbNdZnRbJZ802jTt5tMEl8Y\",\n      \"description\": \"string\",\n      \"enabled\": false,\n      \"disabled\": false,\n      \"ipProtocol\": \"sctp\",\n      \"mask\": \"string\",\n      \"pool\": \"string\",\n      \"source\": \"string\",\n      \"sourcePort\": \"change\",\n      \"connectionLimit\": 4346,\n      \"translateAddress\": \"disabled\",\n      \"translatePort\": \"disabled\",\n      \"mirror\": \"enabled\",\n      \"partition\": \"string\",\n      \"persist\": [\n        {\n          \"name\": \"string\",\n          \"tmDefault\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"tmDefault\": \"string\"\n        }\n      ],\n      \"profiles\": [\n        {\n          \"name\": \"string\",\n          \"context\": \"all\",\n          \"fullPath\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"context\": \"serverside\",\n          \"fullPath\": \"string\"\n        }\n      ],\n      \"rules\": [\n        \"string\",\n        \"string\"\n      ],\n      \"vlansEnabled\": false,\n      \"vlans\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rateLimit\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5105ca6a-9e3d-4165-a938-672520d0f10d",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "expandSubcollections",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6958,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "973d2c37-863f-4d04-9cd6-05cde5b77a91",
+              "name": "An internal server error occurred on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$select",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "expandSubcollections",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6958,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45e7bab6-c984-46c9-95bc-f5d9b09f219e",
+          "name": "F5 Load Balancer Create a virtual server",
+          "request": {
+            "name": "F5 Load Balancer Create a virtual server",
+            "description": {
+              "content": "Creates a new virtual server resource on the BIG-IP system. The virtual server defines a traffic destination address and port to which the BIG-IP listens for client connections.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "virtual"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d2f68550-cbe2-4c3f-9b86-1c9c333199ba",
+              "name": "Virtual server created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"destination\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"generation\": 7034,\n  \"selfLink\": \"http://WKDAaVIrpMYeYnNLXdlriPxK.cnaJuxtdZBYzVjSiBGyghTodKxyOkwzRr1lAyF7KfqYKiajAndk8bi\",\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"disabled\": false,\n  \"ipProtocol\": \"tcp\",\n  \"mask\": \"string\",\n  \"pool\": \"string\",\n  \"source\": \"string\",\n  \"sourcePort\": \"preserve-strict\",\n  \"connectionLimit\": 4071,\n  \"translateAddress\": \"disabled\",\n  \"translatePort\": \"disabled\",\n  \"mirror\": \"enabled\",\n  \"partition\": \"string\",\n  \"persist\": [\n    {\n      \"name\": \"string\",\n      \"tmDefault\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"tmDefault\": \"string\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"string\",\n      \"context\": \"serverside\",\n      \"fullPath\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"context\": \"all\",\n      \"fullPath\": \"string\"\n    }\n  ],\n  \"rules\": [\n    \"string\",\n    \"string\"\n  ],\n  \"vlansEnabled\": false,\n  \"vlans\": [\n    \"string\",\n    \"string\"\n  ],\n  \"rateLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9ad8e28e-b6bf-4ce3-8dd3-16ef8c35c054",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6958,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98fb7988-0be7-4d05-874a-df7659179b95",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d396e16-025a-4dfd-ba10-0b2b21821b00",
+              "name": "Virtual server with the specified name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6660ece8-f356-480c-b9a2-a371eb3b6df0",
+              "name": "An internal server error occurred on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebb7b554-cdc2-4c23-8154-87954081f290",
+          "name": "F5 Load Balancer Get a specific virtual server",
+          "request": {
+            "name": "F5 Load Balancer Get a specific virtual server",
+            "description": {
+              "content": "Retrieves a single virtual server resource identified by name, including all of its configuration properties and operational state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "virtual",
+                ":virtualName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "virtualName",
+                  "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8029dd75-ea8e-4e81-aaff-3ba0bbdaed53",
+              "name": "Successfully retrieved virtual server",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"destination\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"generation\": 7034,\n  \"selfLink\": \"http://WKDAaVIrpMYeYnNLXdlriPxK.cnaJuxtdZBYzVjSiBGyghTodKxyOkwzRr1lAyF7KfqYKiajAndk8bi\",\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"disabled\": false,\n  \"ipProtocol\": \"tcp\",\n  \"mask\": \"string\",\n  \"pool\": \"string\",\n  \"source\": \"string\",\n  \"sourcePort\": \"preserve-strict\",\n  \"connectionLimit\": 4071,\n  \"translateAddress\": \"disabled\",\n  \"translatePort\": \"disabled\",\n  \"mirror\": \"enabled\",\n  \"partition\": \"string\",\n  \"persist\": [\n    {\n      \"name\": \"string\",\n      \"tmDefault\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"tmDefault\": \"string\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"string\",\n      \"context\": \"serverside\",\n      \"fullPath\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"context\": \"all\",\n      \"fullPath\": \"string\"\n    }\n  ],\n  \"rules\": [\n    \"string\",\n    \"string\"\n  ],\n  \"vlansEnabled\": false,\n  \"vlans\": [\n    \"string\",\n    \"string\"\n  ],\n  \"rateLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ff9e9057-a4a8-4194-8d5e-5eebb2768264",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea512d5c-2ba0-4f34-af54-eca5e2c1a359",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 6958,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "982713f3-cbb5-4953-a7dd-27af7fc69da6",
+          "name": "F5 Load Balancer Update a virtual server",
+          "request": {
+            "name": "F5 Load Balancer Update a virtual server",
+            "description": {
+              "content": "Replaces the configuration of an existing virtual server resource. All writable properties should be included in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "virtual",
+                ":virtualName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "virtualName",
+                  "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5863a9ba-5f23-47ea-b5ba-a7d28edb8d75",
+              "name": "Virtual server updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"destination\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"generation\": 7034,\n  \"selfLink\": \"http://WKDAaVIrpMYeYnNLXdlriPxK.cnaJuxtdZBYzVjSiBGyghTodKxyOkwzRr1lAyF7KfqYKiajAndk8bi\",\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"disabled\": false,\n  \"ipProtocol\": \"tcp\",\n  \"mask\": \"string\",\n  \"pool\": \"string\",\n  \"source\": \"string\",\n  \"sourcePort\": \"preserve-strict\",\n  \"connectionLimit\": 4071,\n  \"translateAddress\": \"disabled\",\n  \"translatePort\": \"disabled\",\n  \"mirror\": \"enabled\",\n  \"partition\": \"string\",\n  \"persist\": [\n    {\n      \"name\": \"string\",\n      \"tmDefault\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"tmDefault\": \"string\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"string\",\n      \"context\": \"serverside\",\n      \"fullPath\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"context\": \"all\",\n      \"fullPath\": \"string\"\n    }\n  ],\n  \"rules\": [\n    \"string\",\n    \"string\"\n  ],\n  \"vlansEnabled\": false,\n  \"vlans\": [\n    \"string\",\n    \"string\"\n  ],\n  \"rateLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "264909f6-66fa-401b-9a4a-ea74c13cacf7",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca0b9097-828c-4b4d-8f54-59f34d999d52",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfb6fd7f-a7d8-4a10-831b-ffab46cf548a",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf710999-d6ec-41c8-871f-bff3ecc402b4",
+          "name": "F5 Load Balancer Partially update a virtual server",
+          "request": {
+            "name": "F5 Load Balancer Partially update a virtual server",
+            "description": {
+              "content": "Modifies specific properties of an existing virtual server without requiring the full resource representation.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "virtual",
+                ":virtualName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "virtualName",
+                  "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3255915a-8b83-42e4-b2c6-c5acbd26eb29",
+              "name": "Virtual server patched successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"destination\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"generation\": 7034,\n  \"selfLink\": \"http://WKDAaVIrpMYeYnNLXdlriPxK.cnaJuxtdZBYzVjSiBGyghTodKxyOkwzRr1lAyF7KfqYKiajAndk8bi\",\n  \"description\": \"string\",\n  \"enabled\": true,\n  \"disabled\": false,\n  \"ipProtocol\": \"tcp\",\n  \"mask\": \"string\",\n  \"pool\": \"string\",\n  \"source\": \"string\",\n  \"sourcePort\": \"preserve-strict\",\n  \"connectionLimit\": 4071,\n  \"translateAddress\": \"disabled\",\n  \"translatePort\": \"disabled\",\n  \"mirror\": \"enabled\",\n  \"partition\": \"string\",\n  \"persist\": [\n    {\n      \"name\": \"string\",\n      \"tmDefault\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"tmDefault\": \"string\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"string\",\n      \"context\": \"serverside\",\n      \"fullPath\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"context\": \"all\",\n      \"fullPath\": \"string\"\n    }\n  ],\n  \"rules\": [\n    \"string\",\n    \"string\"\n  ],\n  \"vlansEnabled\": false,\n  \"vlans\": [\n    \"string\",\n    \"string\"\n  ],\n  \"rateLimit\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fb0743e-1e7b-4a84-b5b9-28a21e58e39e",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "674a4a79-b1a6-454a-939d-11685cbd65df",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd91c8d6-e8a2-4fa8-8956-abca91909474",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"description\": \"<string>\",\n  \"enabled\": \"<boolean>\",\n  \"disabled\": \"<boolean>\",\n  \"ipProtocol\": \"<string>\",\n  \"mask\": \"<string>\",\n  \"pool\": \"<string>\",\n  \"source\": \"<string>\",\n  \"sourcePort\": \"<string>\",\n  \"connectionLimit\": \"<integer>\",\n  \"translateAddress\": \"<string>\",\n  \"translatePort\": \"<string>\",\n  \"mirror\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"persist\": [\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"tmDefault\": \"<string>\"\n    }\n  ],\n  \"profiles\": [\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"context\": \"<string>\",\n      \"fullPath\": \"<string>\"\n    }\n  ],\n  \"rules\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"vlansEnabled\": \"<boolean>\",\n  \"vlans\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"rateLimit\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9c33ba5-ca50-4208-81df-2101b6af9419",
+          "name": "F5 Load Balancer Delete a virtual server",
+          "request": {
+            "name": "F5 Load Balancer Delete a virtual server",
+            "description": {
+              "content": "Removes a virtual server resource from the BIG-IP system. Existing connections may be disrupted depending on the virtual server state.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "virtual",
+                ":virtualName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "virtualName",
+                  "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                },
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc56ebfd-0bb0-443f-850b-a88870e2ee12",
+              "name": "Virtual server deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4a94eee4-8f49-4ea9-90eb-2ff7267f38c3",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98517b7d-b3d8-475c-9768-9b3bd2ba376e",
+              "name": "The requested resource was not found on the BIG-IP system.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "virtual",
+                    ":virtualName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "virtualName",
+                      "description": "(Required) Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual)."
+                    },
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 9446,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the BIG-IP device",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.245",
+      "key": "bigip_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{bigip_host}}/mgmt/shared/appsvcs",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1d833f32-5000-4fca-bce2-f51f8244d22c",
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Virtual Servers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.\n\nContact Support:\n Name: F5 Networks Support\n Email: support@f5.com",
+      "type": "text/plain"
+    }
+  }
+}

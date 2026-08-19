@@ -1,0 +1,735 @@
+{
+  "item": [
+    {
+      "id": "03f60316-da42-49b8-8b33-6c7e47220f17",
+      "name": "Monitors",
+      "description": {
+        "content": "Configure health monitors that verify the availability and performance of nodes, pool members, and services.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cd851928-65b9-4bde-af1c-bd18423da5bf",
+          "name": "F5 Load Balancer List HTTP health monitors",
+          "request": {
+            "name": "F5 Load Balancer List HTTP health monitors",
+            "description": {
+              "content": "Retrieves all HTTP health monitors configured on the BIG-IP system. HTTP monitors verify availability by sending HTTP requests to pool members and evaluating the responses.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "monitor",
+                "http"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "900e3923-8c1f-4c44-a40d-07459c63dcc6",
+              "name": "Successfully retrieved HTTP monitor collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"string\",\n  \"selfLink\": \"http://kjTuOhvypBVvblFzyUODicnJ.xkdFiDN+ebyUE,xqIovqnU,v0S7GN8aF\",\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 3912,\n      \"selfLink\": \"https://fODldImDZpLwHHNqnyZUoFI.ddyWJhiOQm\",\n      \"description\": \"string\",\n      \"destination\": \"string\",\n      \"interval\": 8856,\n      \"timeout\": 1076,\n      \"send\": \"string\",\n      \"recv\": \"string\",\n      \"recvDisable\": \"string\",\n      \"reverse\": \"enabled\",\n      \"transparent\": \"disabled\",\n      \"upInterval\": 8525,\n      \"manualResume\": \"enabled\",\n      \"partition\": \"string\",\n      \"defaultsFrom\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 3223,\n      \"selfLink\": \"http://MOfWIs.qqwfSgeKSpbOtQuR9Dqu4o,U.Mu.eYNIwb\",\n      \"description\": \"string\",\n      \"destination\": \"string\",\n      \"interval\": 9740,\n      \"timeout\": 30,\n      \"send\": \"string\",\n      \"recv\": \"string\",\n      \"recvDisable\": \"string\",\n      \"reverse\": \"disabled\",\n      \"transparent\": \"disabled\",\n      \"upInterval\": 6471,\n      \"manualResume\": \"enabled\",\n      \"partition\": \"string\",\n      \"defaultsFrom\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b563fcb-5452-405e-89ca-ba8c6bf542c4",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2298,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba1c3dc1-a1b9-4c2c-965a-a65cfa7b65b0",
+          "name": "F5 Load Balancer Create an HTTP health monitor",
+          "request": {
+            "name": "F5 Load Balancer Create an HTTP health monitor",
+            "description": {
+              "content": "Creates a new HTTP health monitor that sends HTTP requests to pool members to verify their availability and responsiveness.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "monitor",
+                "http"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"interval\": \"<integer>\",\n  \"timeout\": \"<integer>\",\n  \"send\": \"<string>\",\n  \"recv\": \"<string>\",\n  \"recvDisable\": \"<string>\",\n  \"reverse\": \"<string>\",\n  \"transparent\": \"<string>\",\n  \"upInterval\": \"<integer>\",\n  \"manualResume\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"defaultsFrom\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6389f6fc-2574-4573-b853-917ca9b828f7",
+              "name": "HTTP monitor created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"interval\": \"<integer>\",\n  \"timeout\": \"<integer>\",\n  \"send\": \"<string>\",\n  \"recv\": \"<string>\",\n  \"recvDisable\": \"<string>\",\n  \"reverse\": \"<string>\",\n  \"transparent\": \"<string>\",\n  \"upInterval\": \"<integer>\",\n  \"manualResume\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"defaultsFrom\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"kind\": \"string\",\n  \"fullPath\": \"string\",\n  \"generation\": 6351,\n  \"selfLink\": \"https://QrIyuQNhSZOgkceKfFWRklAMeXJG.ptnanJT-ZT1wzBWMOzLr0-KuSd\",\n  \"description\": \"string\",\n  \"destination\": \"string\",\n  \"interval\": 9416,\n  \"timeout\": 7340,\n  \"send\": \"string\",\n  \"recv\": \"string\",\n  \"recvDisable\": \"string\",\n  \"reverse\": \"disabled\",\n  \"transparent\": \"enabled\",\n  \"upInterval\": 8447,\n  \"manualResume\": \"enabled\",\n  \"partition\": \"string\",\n  \"defaultsFrom\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b32a3644-63e2-44bb-8222-c9f3275d0b28",
+              "name": "The request was malformed or contained invalid parameters.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"interval\": \"<integer>\",\n  \"timeout\": \"<integer>\",\n  \"send\": \"<string>\",\n  \"recv\": \"<string>\",\n  \"recvDisable\": \"<string>\",\n  \"reverse\": \"<string>\",\n  \"transparent\": \"<string>\",\n  \"upInterval\": \"<integer>\",\n  \"manualResume\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"defaultsFrom\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 2298,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6585332e-a6ac-4061-bb43-0765013bc377",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "http"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"destination\": \"<string>\",\n  \"interval\": \"<integer>\",\n  \"timeout\": \"<integer>\",\n  \"send\": \"<string>\",\n  \"recv\": \"<string>\",\n  \"recvDisable\": \"<string>\",\n  \"reverse\": \"<string>\",\n  \"transparent\": \"<string>\",\n  \"upInterval\": \"<integer>\",\n  \"manualResume\": \"<string>\",\n  \"partition\": \"<string>\",\n  \"defaultsFrom\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4737,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d033093b-91dc-4ad3-aeb0-210f64e1ab0e",
+          "name": "F5 Load Balancer List HTTPS health monitors",
+          "request": {
+            "name": "F5 Load Balancer List HTTPS health monitors",
+            "description": {
+              "content": "Retrieves all HTTPS health monitors configured on the BIG-IP system. HTTPS monitors verify availability over TLS-encrypted connections.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "monitor",
+                "https"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f3427024-a846-40fb-aed4-04944fdba282",
+              "name": "Successfully retrieved HTTPS monitor collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "https"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"string\",\n  \"selfLink\": \"http://kjTuOhvypBVvblFzyUODicnJ.xkdFiDN+ebyUE,xqIovqnU,v0S7GN8aF\",\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 3912,\n      \"selfLink\": \"https://fODldImDZpLwHHNqnyZUoFI.ddyWJhiOQm\",\n      \"description\": \"string\",\n      \"destination\": \"string\",\n      \"interval\": 8856,\n      \"timeout\": 1076,\n      \"send\": \"string\",\n      \"recv\": \"string\",\n      \"recvDisable\": \"string\",\n      \"reverse\": \"enabled\",\n      \"transparent\": \"disabled\",\n      \"upInterval\": 8525,\n      \"manualResume\": \"enabled\",\n      \"partition\": \"string\",\n      \"defaultsFrom\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 3223,\n      \"selfLink\": \"http://MOfWIs.qqwfSgeKSpbOtQuR9Dqu4o,U.Mu.eYNIwb\",\n      \"description\": \"string\",\n      \"destination\": \"string\",\n      \"interval\": 9740,\n      \"timeout\": 30,\n      \"send\": \"string\",\n      \"recv\": \"string\",\n      \"recvDisable\": \"string\",\n      \"reverse\": \"disabled\",\n      \"transparent\": \"disabled\",\n      \"upInterval\": 6471,\n      \"manualResume\": \"enabled\",\n      \"partition\": \"string\",\n      \"defaultsFrom\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73d2e927-ecef-4ff2-941d-4370ffac2567",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "https"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4737,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8a9e388-457e-4ab7-9d8b-a2e435221db8",
+          "name": "F5 Load Balancer List TCP health monitors",
+          "request": {
+            "name": "F5 Load Balancer List TCP health monitors",
+            "description": {
+              "content": "Retrieves all TCP health monitors configured on the BIG-IP system. TCP monitors verify that pool members are accepting connections on the specified port.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ltm",
+                "monitor",
+                "tcp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Hostname or IP address of the BIG-IP device",
+                  "type": "any",
+                  "value": "{{bigip_host}}",
+                  "key": "bigip_host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9634a60b-348a-4ed8-a33d-b837036e63aa",
+              "name": "Successfully retrieved TCP monitor collection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "tcp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"string\",\n  \"selfLink\": \"http://kjTuOhvypBVvblFzyUODicnJ.xkdFiDN+ebyUE,xqIovqnU,v0S7GN8aF\",\n  \"items\": [\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 3912,\n      \"selfLink\": \"https://fODldImDZpLwHHNqnyZUoFI.ddyWJhiOQm\",\n      \"description\": \"string\",\n      \"destination\": \"string\",\n      \"interval\": 8856,\n      \"timeout\": 1076,\n      \"send\": \"string\",\n      \"recv\": \"string\",\n      \"recvDisable\": \"string\",\n      \"reverse\": \"enabled\",\n      \"transparent\": \"disabled\",\n      \"upInterval\": 8525,\n      \"manualResume\": \"enabled\",\n      \"partition\": \"string\",\n      \"defaultsFrom\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"kind\": \"string\",\n      \"fullPath\": \"string\",\n      \"generation\": 3223,\n      \"selfLink\": \"http://MOfWIs.qqwfSgeKSpbOtQuR9Dqu4o,U.Mu.eYNIwb\",\n      \"description\": \"string\",\n      \"destination\": \"string\",\n      \"interval\": 9740,\n      \"timeout\": 30,\n      \"send\": \"string\",\n      \"recv\": \"string\",\n      \"recvDisable\": \"string\",\n      \"reverse\": \"disabled\",\n      \"transparent\": \"disabled\",\n      \"upInterval\": 6471,\n      \"manualResume\": \"enabled\",\n      \"partition\": \"string\",\n      \"defaultsFrom\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5c2f428-63d5-4d7c-baa4-8a754f762295",
+              "name": "Authentication credentials were missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ltm",
+                    "monitor",
+                    "tcp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Hostname or IP address of the BIG-IP device",
+                      "type": "any",
+                      "value": "{{bigip_host}}",
+                      "key": "bigip_host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 4737,\n  \"message\": \"string\",\n  \"errorStack\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Hostname or IP address of the BIG-IP device",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "192.168.1.245",
+      "key": "bigip_host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{bigip_host}}/mgmt/shared/appsvcs",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "eb9cb190-10d2-49b7-b98a-646abbb7bc08",
+    "name": "F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Monitors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.\n\nContact Support:\n Name: F5 Networks Support\n Email: support@f5.com",
+      "type": "text/plain"
+    }
+  }
+}
