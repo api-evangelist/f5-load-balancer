@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Inspect API
   description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
@@ -42,6 +42,13 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -50,13 +57,6 @@ components:
           type: integer
         message:
           type: string
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Nodes API
   description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
@@ -133,26 +133,11 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    SkipParam:
-      name: $skip
-      in: query
-      required: false
-      description: Number of resources to skip before returning results.
-      schema:
-        type: integer
-        minimum: 0
     FilterParam:
       name: $filter
       in: query
       required: false
       description: OData filter expression to restrict returned resources.
-      schema:
-        type: string
-    SelectParam:
-      name: $select
-      in: query
-      required: false
-      description: Comma-separated list of properties to include in the response.
       schema:
         type: string
     TopParam:
@@ -163,6 +148,21 @@ components:
       schema:
         type: integer
         minimum: 1
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
     NodeNameParam:
       name: nodeName
       in: path
@@ -170,7 +170,39 @@ components:
       description: Name of the node resource, optionally prefixed with the partition path.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    NodeCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:node:nodecollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Node'
     ErrorResponse:
       type: object
       properties:
@@ -256,38 +288,6 @@ components:
           - up
           - down
           - unchecked
-    NodeCollection:
-      type: object
-      properties:
-        kind:
-          type: string
-          const: tm:ltm:node:nodecollectionstate
-        selfLink:
-          type: string
-          format: uri
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Node'
-  responses:
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or contained invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

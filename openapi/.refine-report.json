@@ -41,6 +41,25 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "f5-load-balancer-config-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-data-groups-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-declarations-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-info-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-inspect-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-irules-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-monitors-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-nodes-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-policies-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-pool-members-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-pools-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-profiles-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-snat-pools-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-ssl-certificates-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-system-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-tasks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "f5-load-balancer-virtual-servers-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
