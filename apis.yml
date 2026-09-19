@@ -186,6 +186,8 @@ apis:
   humanURL: https://clouddocs.f5.com/api/icontrol-rest/
   baseURL: https://bigip-host/mgmt/tm
   tags:
+  - Node
+  tags_raw:
   - Nodes
   properties:
   - type: OpenAPI
