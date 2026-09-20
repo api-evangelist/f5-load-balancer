@@ -1,0 +1,64 @@
+slug: f5-load-balancer
+provider: F5 Load Balancer
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Telecommunications
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 5
+edges:
+- tag: Virtual Servers
+  spec_file: f5-load-balancer-virtual-servers-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: POST /ltm/virtual createVirtualServer 'Create a virtual server'; 'intelligent traffic management,
+    load balancing'
+  reason: Full CRUD over load-balancer virtual servers is configuration of enterprise network/application
+    delivery infrastructure — IT Infrastructure Management.
+- tag: Config
+  spec_file: f5-load-balancer-config-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /config/{machineId}  getOriginalConfig  Get original configuration for a device
+  reason: Retrieval of original device configurations for BIG-IP application delivery controllers — IT
+    infrastructure (network device) configuration management. Not telecom carrier network element configuration;
+    the vendor is an enterprise ADC.
+- tag: Declarations
+  spec_file: f5-load-balancer-declarations-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: POST /declare  submitDeclaration  Submit an AS3 declaration; POST /  submitOnboardingDeclaration  Submit
+    a Declarative Onboarding declaration
+  reason: Declarative configuration and onboarding of BIG-IP load balancing/traffic-management infrastructure
+    — infrastructure-as-code for network infrastructure, mapping to IT Infrastructure Management.
+- tag: Pool Members
+  spec_file: f5-load-balancer-pool-members-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: POST /ltm/pool/{poolName}/members  addPoolMember  Add a member to a pool
+  reason: Management of load-balancing pool members (backend server endpoints) — IT infrastructure configuration
+    for traffic management.
+- tag: Profiles
+  spec_file: f5-load-balancer-profiles-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: GET /ltm/profile/http listHttpProfiles — 'List HTTP profiles'; 'List client SSL profiles'
+    on BIG-IP application delivery controller
+  reason: Layer 4-7 traffic profiles on a load balancer are network/application-delivery infrastructure
+    configuration, i.e. IT Infrastructure Management, not a telecom carrier network capability.
