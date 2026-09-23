@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Inspect API
-  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
-  version: 3.50.0
+  title: F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO)…
+  description: The Declarative Onboarding (DO) extension automates the initial BIG-IP system configuration and provisioning using a declarative JSON model. DO handles Layer 1-3 onboarding tasks including licensing, DNS and NTP configuration, VLAN setup, self IP assignment, user management, and module provisioning. Administrators submit a single JSON declaration describing the desired initial device state, and DO configures the BIG-IP system accordingly.
+  version: 1.41.0
   contact:
     name: F5 Networks Support
     email: support@f5.com
@@ -12,12 +12,12 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.f5.com/company/policies/terms-of-use
 servers:
-- url: https://{bigip_host}/mgmt/shared/appsvcs
-  description: BIG-IP AS3 Extension Endpoint
+- url: https://{bigip_host}/mgmt/shared/declarative-onboarding
+  description: BIG-IP Declarative Onboarding Endpoint
   variables:
     bigip_host:
       default: 192.168.1.245
-      description: Hostname or IP address of the BIG-IP device
+      description: Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.
 security:
 - basicAuth: []
 - tokenAuth: []
@@ -42,13 +42,6 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -57,6 +50,13 @@ components:
           type: integer
         message:
           type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http
@@ -66,7 +66,7 @@ components:
       type: apiKey
       in: header
       name: X-F5-Auth-Token
-      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+      description: Token-based authentication from /mgmt/shared/authn/login.
 externalDocs:
-  description: F5 BIG-IP AS3 Documentation
-  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  description: F5 BIG-IP Declarative Onboarding Documentation
+  url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/

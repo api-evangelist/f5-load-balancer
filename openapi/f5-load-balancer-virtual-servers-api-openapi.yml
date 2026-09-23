@@ -1,19 +1,19 @@
 openapi: 3.2.0
 info:
-  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Virtual Servers API
-  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
-  version: 3.50.0
+  title: F5 Load Balancer F5 BIG-IP iControl REST Virtual Servers API
+  description: The iControl REST API provides programmatic access to manage and configure F5 BIG-IP devices. It enables automation of Local Traffic Manager (LTM) resources including virtual servers, pools, nodes, pool members, monitors, profiles, and policies for application delivery, load balancing, and network management. iControl REST is a RESTful interface that allows any configuration or management task achievable through the BIG-IP command line to be performed programmatically.
+  version: 15.1.0
   contact:
     name: F5 Networks Support
     email: support@f5.com
     url: https://www.f5.com/services/support
   license:
-    name: Apache-2.0
-    url: https://www.apache.org/licenses/LICENSE-2.0
+    name: Proprietary
+    url: https://www.f5.com/company/policies/terms-of-use
   termsOfService: https://www.f5.com/company/policies/terms-of-use
 servers:
-- url: https://{bigip_host}/mgmt/shared/appsvcs
-  description: BIG-IP AS3 Extension Endpoint
+- url: https://{bigip_host}/mgmt/tm
+  description: BIG-IP Management Interface
   variables:
     bigip_host:
       default: 192.168.1.245
@@ -162,63 +162,9 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    FilterParam:
-      name: $filter
-      in: query
-      required: false
-      description: OData filter expression to restrict returned resources.
-      schema:
-        type: string
-    ExpandSubcollectionsParam:
-      name: expandSubcollections
-      in: query
-      required: false
-      description: When set to true, inline sub-collections in the response.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-    TopParam:
-      name: $top
-      in: query
-      required: false
-      description: Maximum number of resources to return.
-      schema:
-        type: integer
-        minimum: 1
-    SelectParam:
-      name: $select
-      in: query
-      required: false
-      description: Comma-separated list of properties to include in the response.
-      schema:
-        type: string
-    SkipParam:
-      name: $skip
-      in: query
-      required: false
-      description: Number of resources to skip before returning results.
-      schema:
-        type: integer
-        minimum: 0
-    VirtualNameParam:
-      name: virtualName
-      in: path
-      required: true
-      description: Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual).
-      schema:
-        type: string
   responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or contained invalid parameters.
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
       content:
         application/json:
           schema:
@@ -229,8 +175,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
       content:
         application/json:
           schema:
@@ -393,6 +345,54 @@ components:
         rateLimit:
           type: string
           description: Maximum new connections per second.
+  parameters:
+    ExpandSubcollectionsParam:
+      name: expandSubcollections
+      in: query
+      required: false
+      description: When set to true, inline sub-collections in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
+    VirtualNameParam:
+      name: virtualName
+      in: path
+      required: true
+      description: Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual).
+      schema:
+        type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: OData filter expression to restrict returned resources.
+      schema:
+        type: string
   securitySchemes:
     basicAuth:
       type: http
@@ -402,7 +402,7 @@ components:
       type: apiKey
       in: header
       name: X-F5-Auth-Token
-      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
+      description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint. Tokens expire after a configurable timeout period.
 externalDocs:
-  description: F5 BIG-IP AS3 Documentation
-  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+  description: F5 iControl REST API Documentation
+  url: https://clouddocs.f5.com/api/icontrol-rest/

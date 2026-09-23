@@ -1,8 +1,6 @@
 openapi: 3.2.0
 info:
-  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Declarations API
-  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
-  version: 3.50.0
+  title: F5 Load Balancer Declarations API
   contact:
     name: F5 Networks Support
     email: support@f5.com
@@ -11,6 +9,8 @@ info:
     name: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.f5.com/company/policies/terms-of-use
+  version: '1.0'
+  description: 'Operations tagged Declarations across 2 of this provider''s published API definitions: f5-load-balancer-as3-openapi.yml, f5-load-balancer-declarative-onboarding-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{bigip_host}/mgmt/shared/appsvcs
   description: BIG-IP AS3 Extension Endpoint
@@ -18,6 +18,12 @@ servers:
     bigip_host:
       default: 192.168.1.245
       description: Hostname or IP address of the BIG-IP device
+- url: https://{bigip_host}/mgmt/shared/declarative-onboarding
+  description: BIG-IP Declarative Onboarding Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.
 security:
 - basicAuth: []
 - tokenAuth: []
@@ -158,6 +164,13 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '401':
           $ref: '#/components/responses/Unauthorized'
+    servers:
+    - url: https://{bigip_host}/mgmt/shared/appsvcs
+      description: BIG-IP AS3 Extension Endpoint
+      variables:
+        bigip_host:
+          default: 192.168.1.245
+          description: Hostname or IP address of the BIG-IP device
   /declare/{tenantName}:
     parameters:
     - $ref: '#/components/parameters/TenantNameParam'
@@ -205,6 +218,13 @@ paths:
           $ref: '#/components/responses/Unauthorized'
         '404':
           $ref: '#/components/responses/NotFound'
+    servers:
+    - url: https://{bigip_host}/mgmt/shared/appsvcs
+      description: BIG-IP AS3 Extension Endpoint
+      variables:
+        bigip_host:
+          default: 192.168.1.245
+          description: Hostname or IP address of the BIG-IP device
   /:
     post:
       operationId: submitOnboardingDeclaration
@@ -266,10 +286,23 @@ paths:
           description: No declaration has been submitted
         '401':
           $ref: '#/components/responses/Unauthorized'
+    servers:
+    - url: https://{bigip_host}/mgmt/shared/declarative-onboarding
+      description: BIG-IP Declarative Onboarding Endpoint
+      variables:
+        bigip_host:
+          default: 192.168.1.245
+          description: Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.
 components:
   responses:
-    InternalError_2:
-      description: An internal error occurred during declaration processing.
+    NotFound:
+      description: The requested tenant or task was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: An internal error occurred processing the declaration.
       content:
         application/json:
           schema:
@@ -286,14 +319,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    InternalError:
-      description: An internal error occurred processing the declaration.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested tenant or task was not found.
+    InternalError_2:
+      description: An internal error occurred during declaration processing.
       content:
         application/json:
           schema:
@@ -304,7 +331,170 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    TenantNameParam:
+      name: tenantName
+      in: path
+      required: true
+      description: Name of the AS3 tenant whose declaration to retrieve or manage.
+      schema:
+        type: string
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    AS3Declaration:
+      type: object
+      description: An AS3 declaration describing the desired application services configuration state on the BIG-IP system.
+      required:
+      - class
+      properties:
+        class:
+          type: string
+          const: AS3
+          description: Must be AS3 for the top-level declaration class.
+        action:
+          type: string
+          description: The action to perform with this declaration.
+          enum:
+          - deploy
+          - dry-run
+          - redeploy
+          - retrieve
+          - remove
+          - patch
+          default: deploy
+        persist:
+          type: boolean
+          description: Whether AS3 should save the declaration for retrieval.
+          default: true
+        declaration:
+          type: object
+          description: The ADC class declaration containing tenant and application definitions.
+          properties:
+            class:
+              type: string
+              const: ADC
+            schemaVersion:
+              type: string
+              description: Version of the AS3 schema this declaration conforms to.
+            id:
+              type: string
+              description: Unique identifier for this declaration.
+            label:
+              type: string
+              description: Human-readable label for this declaration.
+            remark:
+              type: string
+              description: Arbitrary remark or note about this declaration.
+            updateMode:
+              type: string
+              description: How AS3 processes the declaration relative to existing config.
+              enum:
+              - selective
+              - complete
+          additionalProperties:
+            type: object
+            description: Tenant objects containing application service definitions.
+    AS3TaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique task identifier.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              tenant:
+                type: string
+    AS3Response:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+                description: HTTP status code for this tenant result.
+              message:
+                type: string
+                description: Status message for this tenant result.
+              lineCount:
+                type: integer
+              host:
+                type: string
+              tenant:
+                type: string
+              runTime:
+                type: integer
+        declaration:
+          type: object
+          description: The processed declaration.
+    JsonPatchOperation:
+      type: object
+      required:
+      - op
+      - path
+      properties:
+        op:
+          type: string
+          description: The JSON Patch operation to perform.
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
+        path:
+          type: string
+          description: JSON Pointer to the target location.
+        value:
+          description: Value for add, replace, or test operations.
+        from:
+          type: string
+          description: Source JSON Pointer for move or copy operations.
+    DOTaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique task identifier.
+        result:
+          type: object
+          properties:
+            class:
+              type: string
+            code:
+              type: integer
+            status:
+              type: string
+              enum:
+              - OK
+              - ERROR
+              - ROLLING_BACK
+              - RUNNING
+              - REBOOTING
+            message:
+              type: string
+            errors:
+              type: array
+              items:
+                type: string
+        declaration:
+          type: object
     DODeclaration:
       type: object
       description: A Declarative Onboarding declaration describing the desired initial BIG-IP device configuration state.
@@ -419,31 +609,6 @@ components:
           additionalProperties:
             type: object
             description: Additional configuration objects such as VLANs, self IPs, routes, and users.
-    AS3Response:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-                description: HTTP status code for this tenant result.
-              message:
-                type: string
-                description: Status message for this tenant result.
-              lineCount:
-                type: integer
-              host:
-                type: string
-              tenant:
-                type: string
-              runTime:
-                type: integer
-        declaration:
-          type: object
-          description: The processed declaration.
     DOResponse:
       type: object
       properties:
@@ -464,144 +629,6 @@ components:
                 type: string
         declaration:
           $ref: '#/components/schemas/DODeclaration'
-    AS3TaskResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique task identifier.
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-              message:
-                type: string
-              tenant:
-                type: string
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
-    DOTaskResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique task identifier.
-        result:
-          type: object
-          properties:
-            class:
-              type: string
-            code:
-              type: integer
-            status:
-              type: string
-              enum:
-              - OK
-              - ERROR
-              - ROLLING_BACK
-              - RUNNING
-              - REBOOTING
-            message:
-              type: string
-            errors:
-              type: array
-              items:
-                type: string
-        declaration:
-          type: object
-    AS3Declaration:
-      type: object
-      description: An AS3 declaration describing the desired application services configuration state on the BIG-IP system.
-      required:
-      - class
-      properties:
-        class:
-          type: string
-          const: AS3
-          description: Must be AS3 for the top-level declaration class.
-        action:
-          type: string
-          description: The action to perform with this declaration.
-          enum:
-          - deploy
-          - dry-run
-          - redeploy
-          - retrieve
-          - remove
-          - patch
-          default: deploy
-        persist:
-          type: boolean
-          description: Whether AS3 should save the declaration for retrieval.
-          default: true
-        declaration:
-          type: object
-          description: The ADC class declaration containing tenant and application definitions.
-          properties:
-            class:
-              type: string
-              const: ADC
-            schemaVersion:
-              type: string
-              description: Version of the AS3 schema this declaration conforms to.
-            id:
-              type: string
-              description: Unique identifier for this declaration.
-            label:
-              type: string
-              description: Human-readable label for this declaration.
-            remark:
-              type: string
-              description: Arbitrary remark or note about this declaration.
-            updateMode:
-              type: string
-              description: How AS3 processes the declaration relative to existing config.
-              enum:
-              - selective
-              - complete
-          additionalProperties:
-            type: object
-            description: Tenant objects containing application service definitions.
-    JsonPatchOperation:
-      type: object
-      required:
-      - op
-      - path
-      properties:
-        op:
-          type: string
-          description: The JSON Patch operation to perform.
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          - test
-        path:
-          type: string
-          description: JSON Pointer to the target location.
-        value:
-          description: Value for add, replace, or test operations.
-        from:
-          type: string
-          description: Source JSON Pointer for move or copy operations.
-  parameters:
-    TenantNameParam:
-      name: tenantName
-      in: path
-      required: true
-      description: Name of the AS3 tenant whose declaration to retrieve or manage.
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http
@@ -612,6 +639,6 @@ components:
       in: header
       name: X-F5-Auth-Token
       description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
-externalDocs:
-  description: F5 BIG-IP AS3 Documentation
-  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+x-refined-from:
+- f5-load-balancer-as3-openapi.yml
+- f5-load-balancer-declarative-onboarding-openapi.yml

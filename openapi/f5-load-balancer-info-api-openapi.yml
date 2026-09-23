@@ -1,8 +1,6 @@
 openapi: 3.2.0
 info:
-  title: F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Info API
-  description: The Application Services 3 Extension (AS3) provides a declarative API for managing application-specific configurations on BIG-IP systems. AS3 uses JSON declarations to describe the desired state of Layer 4-7 application services, enabling infrastructure-as-code workflows for load balancing, SSL offloading, and traffic management. Rather than issuing imperative commands, users submit a complete declaration and AS3 configures the BIG-IP to match the declared state.
-  version: 3.50.0
+  title: F5 Load Balancer Info API
   contact:
     name: F5 Networks Support
     email: support@f5.com
@@ -11,6 +9,8 @@ info:
     name: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
   termsOfService: https://www.f5.com/company/policies/terms-of-use
+  version: '1.0'
+  description: 'Operations tagged Info across 2 of this provider''s published API definitions: f5-load-balancer-as3-openapi.yml, f5-load-balancer-declarative-onboarding-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://{bigip_host}/mgmt/shared/appsvcs
   description: BIG-IP AS3 Extension Endpoint
@@ -18,6 +18,12 @@ servers:
     bigip_host:
       default: 192.168.1.245
       description: Hostname or IP address of the BIG-IP device
+- url: https://{bigip_host}/mgmt/shared/declarative-onboarding
+  description: BIG-IP Declarative Onboarding Endpoint
+  variables:
+    bigip_host:
+      default: 192.168.1.245
+      description: Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.
 security:
 - basicAuth: []
 - tokenAuth: []
@@ -41,15 +47,22 @@ paths:
                 $ref: '#/components/schemas/AS3Info'
         '401':
           $ref: '#/components/responses/Unauthorized'
+    servers:
+    - url: https://{bigip_host}/mgmt/shared/appsvcs
+      description: BIG-IP AS3 Extension Endpoint
+      variables:
+        bigip_host:
+          default: 192.168.1.245
+          description: Hostname or IP address of the BIG-IP device
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
     AS3Info:
       type: object
       properties:
@@ -65,13 +78,28 @@ components:
         schemaMinimum:
           type: string
           description: Minimum supported AS3 schema version.
-    ErrorResponse:
+    DOInfo:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        version:
           type: string
+          description: Declarative Onboarding extension version.
+        release:
+          type: string
+          description: DO release identifier.
+        schemaCurrent:
+          type: string
+          description: Current DO schema version.
+        schemaMinimum:
+          type: string
+          description: Minimum supported DO schema version.
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http
@@ -82,6 +110,6 @@ components:
       in: header
       name: X-F5-Auth-Token
       description: Token-based authentication obtained from the /mgmt/shared/authn/login endpoint.
-externalDocs:
-  description: F5 BIG-IP AS3 Documentation
-  url: https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/
+x-refined-from:
+- f5-load-balancer-as3-openapi.yml
+- f5-load-balancer-declarative-onboarding-openapi.yml
