@@ -132,39 +132,21 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or contained invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    NodeCollection:
+    ErrorResponse:
       type: object
       properties:
-        kind:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
           type: string
-          const: tm:ltm:node:nodecollectionstate
-        selfLink:
-          type: string
-          format: uri
-        items:
+          description: Human-readable error message.
+        errorStack:
           type: array
           items:
-            $ref: '#/components/schemas/Node'
+            type: string
+          description: Stack trace for debugging purposes.
     Node:
       type: object
       required:
@@ -236,20 +218,19 @@ components:
           - up
           - down
           - unchecked
-    ErrorResponse:
+    NodeCollection:
       type: object
       properties:
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
+        kind:
           type: string
-          description: Human-readable error message.
-        errorStack:
+          const: tm:ltm:node:nodecollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
           type: array
           items:
-            type: string
-          description: Stack trace for debugging purposes.
+            $ref: '#/components/schemas/Node'
   parameters:
     NodeNameParam:
       name: nodeName
@@ -258,22 +239,6 @@ components:
       description: Name of the node resource, optionally prefixed with the partition path.
       schema:
         type: string
-    SkipParam:
-      name: $skip
-      in: query
-      required: false
-      description: Number of resources to skip before returning results.
-      schema:
-        type: integer
-        minimum: 0
-    TopParam:
-      name: $top
-      in: query
-      required: false
-      description: Maximum number of resources to return.
-      schema:
-        type: integer
-        minimum: 1
     SelectParam:
       name: $select
       in: query
@@ -288,6 +253,41 @@ components:
       description: OData filter expression to restrict returned resources.
       schema:
         type: string
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

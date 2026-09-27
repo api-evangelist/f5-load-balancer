@@ -82,25 +82,6 @@ paths:
           default: 192.168.1.245
           description: Hostname or IP address of the BIG-IP device
 components:
-  responses:
-    NotFound:
-      description: The requested tenant or task was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound_2:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     AS3TaskList:
       type: object
@@ -109,13 +90,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AS3TaskResponse'
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
     AS3TaskResponse:
       type: object
       properties:
@@ -133,6 +107,13 @@ components:
                 type: string
               tenant:
                 type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
     DOTaskResponse:
       type: object
       properties:
@@ -178,6 +159,25 @@ components:
       description: Unique identifier for the DO processing task.
       schema:
         type: string
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested tenant or task was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound_2:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

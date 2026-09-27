@@ -163,8 +163,8 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:
@@ -175,46 +175,67 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: The request was malformed or contained invalid parameters.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    VirtualNameParam:
+      name: virtualName
+      in: path
+      required: true
+      description: Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual).
+      schema:
+        type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: OData filter expression to restrict returned resources.
+      schema:
+        type: string
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+    ExpandSubcollectionsParam:
+      name: expandSubcollections
+      in: query
+      required: false
+      description: When set to true, inline sub-collections in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
   schemas:
-    VirtualServerCollection:
-      type: object
-      properties:
-        kind:
-          type: string
-          const: tm:ltm:virtual:virtualcollectionstate
-        selfLink:
-          type: string
-          format: uri
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/VirtualServer'
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable error message.
-        errorStack:
-          type: array
-          items:
-            type: string
-          description: Stack trace for debugging purposes.
     VirtualServer:
       type: object
       required:
@@ -345,54 +366,33 @@ components:
         rateLimit:
           type: string
           description: Maximum new connections per second.
-  parameters:
-    ExpandSubcollectionsParam:
-      name: expandSubcollections
-      in: query
-      required: false
-      description: When set to true, inline sub-collections in the response.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-    SkipParam:
-      name: $skip
-      in: query
-      required: false
-      description: Number of resources to skip before returning results.
-      schema:
-        type: integer
-        minimum: 0
-    TopParam:
-      name: $top
-      in: query
-      required: false
-      description: Maximum number of resources to return.
-      schema:
-        type: integer
-        minimum: 1
-    VirtualNameParam:
-      name: virtualName
-      in: path
-      required: true
-      description: Name of the virtual server resource, optionally prefixed with the partition path (e.g., ~Common~my_virtual).
-      schema:
-        type: string
-    SelectParam:
-      name: $select
-      in: query
-      required: false
-      description: Comma-separated list of properties to include in the response.
-      schema:
-        type: string
-    FilterParam:
-      name: $filter
-      in: query
-      required: false
-      description: OData filter expression to restrict returned resources.
-      schema:
-        type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
+    VirtualServerCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:virtual:virtualcollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/VirtualServer'
   securitySchemes:
     basicAuth:
       type: http

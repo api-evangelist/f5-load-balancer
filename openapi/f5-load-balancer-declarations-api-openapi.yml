@@ -295,8 +295,8 @@ paths:
           description: Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.
 components:
   responses:
-    NotFound:
-      description: The requested tenant or task was not found.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:
@@ -307,14 +307,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    BadRequest:
+      description: The request was malformed or the declaration failed validation.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or the declaration failed validation.
+    NotFound:
+      description: The requested tenant or task was not found.
       content:
         application/json:
           schema:
@@ -340,13 +340,31 @@ components:
       schema:
         type: string
   schemas:
-    ErrorResponse:
+    AS3Response:
       type: object
       properties:
-        code:
-          type: integer
-        message:
-          type: string
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+                description: HTTP status code for this tenant result.
+              message:
+                type: string
+                description: Status message for this tenant result.
+              lineCount:
+                type: integer
+              host:
+                type: string
+              tenant:
+                type: string
+              runTime:
+                type: integer
+        declaration:
+          type: object
+          description: The processed declaration.
     AS3Declaration:
       type: object
       description: An AS3 declaration describing the desired application services configuration state on the BIG-IP system.
@@ -400,48 +418,6 @@ components:
           additionalProperties:
             type: object
             description: Tenant objects containing application service definitions.
-    AS3TaskResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique task identifier.
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-              message:
-                type: string
-              tenant:
-                type: string
-    AS3Response:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-                description: HTTP status code for this tenant result.
-              message:
-                type: string
-                description: Status message for this tenant result.
-              lineCount:
-                type: integer
-              host:
-                type: string
-              tenant:
-                type: string
-              runTime:
-                type: integer
-        declaration:
-          type: object
-          description: The processed declaration.
     JsonPatchOperation:
       type: object
       required:
@@ -466,6 +442,30 @@ components:
         from:
           type: string
           description: Source JSON Pointer for move or copy operations.
+    AS3TaskResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique task identifier.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              tenant:
+                type: string
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
     DOTaskResponse:
       type: object
       properties:

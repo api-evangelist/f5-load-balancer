@@ -43,6 +43,18 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    DataGroupCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            type: object
     ErrorResponse:
       type: object
       properties:
@@ -57,18 +69,6 @@ components:
           items:
             type: string
           description: Stack trace for debugging purposes.
-    DataGroupCollection:
-      type: object
-      properties:
-        kind:
-          type: string
-        selfLink:
-          type: string
-          format: uri
-        items:
-          type: array
-          items:
-            type: object
   responses:
     Unauthorized:
       description: Authentication credentials were missing or invalid.
