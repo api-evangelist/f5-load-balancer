@@ -136,19 +136,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    PoolMemberCollection:
-      type: object
-      properties:
-        kind:
-          type: string
-          const: tm:ltm:pool:members:memberscollectionstate
-        selfLink:
-          type: string
-          format: uri
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoolMember'
     PoolMember:
       type: object
       required:
@@ -221,31 +208,32 @@ components:
           items:
             type: string
           description: Stack trace for debugging purposes.
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or contained invalid parameters.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    PoolMemberCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:members:memberscollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoolMember'
   parameters:
     SelectParam:
       name: $select
       in: query
       required: false
       description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    PoolNameParam:
+      name: poolName
+      in: path
+      required: true
+      description: Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool).
       schema:
         type: string
     FilterParam:
@@ -262,13 +250,25 @@ components:
       description: Name of the pool member in address:port format (e.g., ~Common~10.0.0.1:80).
       schema:
         type: string
-    PoolNameParam:
-      name: poolName
-      in: path
-      required: true
-      description: Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool).
-      schema:
-        type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

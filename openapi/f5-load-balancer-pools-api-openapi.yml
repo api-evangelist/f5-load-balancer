@@ -133,20 +133,69 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+    PoolNameParam:
+      name: poolName
+      in: path
+      required: true
+      description: Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool).
+      schema:
+        type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    ExpandSubcollectionsParam:
+      name: expandSubcollections
+      in: query
+      required: false
+      description: When set to true, inline sub-collections in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: OData filter expression to restrict returned resources.
+      schema:
+        type: string
   schemas:
-    PoolCollection:
+    ErrorResponse:
       type: object
       properties:
-        kind:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
           type: string
-          const: tm:ltm:pool:poolcollectionstate
-        selfLink:
-          type: string
-          format: uri
-        items:
+          description: Human-readable error message.
+        errorStack:
           type: array
           items:
-            $ref: '#/components/schemas/Pool'
+            type: string
+          description: Stack trace for debugging purposes.
     Pool:
       type: object
       required:
@@ -232,21 +281,26 @@ components:
           - reset
           - reselect
           - drop
-    ErrorResponse:
+    PoolCollection:
       type: object
       properties:
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
+        kind:
           type: string
-          description: Human-readable error message.
-        errorStack:
+          const: tm:ltm:pool:poolcollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
           type: array
           items:
-            type: string
-          description: Stack trace for debugging purposes.
+            $ref: '#/components/schemas/Pool'
   responses:
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication credentials were missing or invalid.
       content:
@@ -259,60 +313,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    SelectParam:
-      name: $select
-      in: query
-      required: false
-      description: Comma-separated list of properties to include in the response.
-      schema:
-        type: string
-    FilterParam:
-      name: $filter
-      in: query
-      required: false
-      description: OData filter expression to restrict returned resources.
-      schema:
-        type: string
-    TopParam:
-      name: $top
-      in: query
-      required: false
-      description: Maximum number of resources to return.
-      schema:
-        type: integer
-        minimum: 1
-    SkipParam:
-      name: $skip
-      in: query
-      required: false
-      description: Number of resources to skip before returning results.
-      schema:
-        type: integer
-        minimum: 0
-    ExpandSubcollectionsParam:
-      name: expandSubcollections
-      in: query
-      required: false
-      description: When set to true, inline sub-collections in the response.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
-    PoolNameParam:
-      name: poolName
-      in: path
-      required: true
-      description: Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool).
-      schema:
-        type: string
   securitySchemes:
     basicAuth:
       type: http

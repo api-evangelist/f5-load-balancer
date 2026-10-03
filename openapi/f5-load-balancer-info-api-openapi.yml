@@ -55,13 +55,6 @@ paths:
           default: 192.168.1.245
           description: Hostname or IP address of the BIG-IP device
 components:
-  responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     ErrorResponse:
       type: object
@@ -100,6 +93,13 @@ components:
         schemaMinimum:
           type: string
           description: Minimum supported DO schema version.
+  responses:
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http
