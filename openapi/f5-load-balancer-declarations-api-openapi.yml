@@ -295,13 +295,6 @@ paths:
           description: Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-        message:
-          type: string
     AS3TaskResponse:
       type: object
       properties:
@@ -319,6 +312,31 @@ components:
                 type: string
               tenant:
                 type: string
+    AS3Response:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+                description: HTTP status code for this tenant result.
+              message:
+                type: string
+                description: Status message for this tenant result.
+              lineCount:
+                type: integer
+              host:
+                type: string
+              tenant:
+                type: string
+              runTime:
+                type: integer
+        declaration:
+          type: object
+          description: The processed declaration.
     AS3Declaration:
       type: object
       description: An AS3 declaration describing the desired application services configuration state on the BIG-IP system.
@@ -372,31 +390,13 @@ components:
           additionalProperties:
             type: object
             description: Tenant objects containing application service definitions.
-    AS3Response:
+    ErrorResponse:
       type: object
       properties:
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-                description: HTTP status code for this tenant result.
-              message:
-                type: string
-                description: Status message for this tenant result.
-              lineCount:
-                type: integer
-              host:
-                type: string
-              tenant:
-                type: string
-              runTime:
-                type: integer
-        declaration:
-          type: object
-          description: The processed declaration.
+        code:
+          type: integer
+        message:
+          type: string
     JsonPatchOperation:
       type: object
       required:
@@ -585,8 +585,8 @@ components:
         declaration:
           $ref: '#/components/schemas/DODeclaration'
   responses:
-    NotFound:
-      description: The requested tenant or task was not found.
+    InternalError:
+      description: An internal error occurred processing the declaration.
       content:
         application/json:
           schema:
@@ -597,8 +597,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    InternalError:
-      description: An internal error occurred processing the declaration.
+    NotFound:
+      description: The requested tenant or task was not found.
       content:
         application/json:
           schema:

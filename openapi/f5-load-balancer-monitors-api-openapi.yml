@@ -170,6 +170,18 @@ components:
         defaultsFrom:
           type: string
           description: Parent monitor from which this monitor inherits settings.
+    MonitorCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HttpMonitor'
     ErrorResponse:
       type: object
       properties:
@@ -184,18 +196,6 @@ components:
           items:
             type: string
           description: Stack trace for debugging purposes.
-    MonitorCollection:
-      type: object
-      properties:
-        kind:
-          type: string
-        selfLink:
-          type: string
-          format: uri
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/HttpMonitor'
   responses:
     Unauthorized:
       description: Authentication credentials were missing or invalid.

@@ -194,6 +194,19 @@ components:
           - up
           - down
           - unchecked
+    PoolMemberCollection:
+      type: object
+      properties:
+        kind:
+          type: string
+          const: tm:ltm:pool:members:memberscollectionstate
+        selfLink:
+          type: string
+          format: uri
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/PoolMember'
     ErrorResponse:
       type: object
       properties:
@@ -208,27 +221,7 @@ components:
           items:
             type: string
           description: Stack trace for debugging purposes.
-    PoolMemberCollection:
-      type: object
-      properties:
-        kind:
-          type: string
-          const: tm:ltm:pool:members:memberscollectionstate
-        selfLink:
-          type: string
-          format: uri
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/PoolMember'
   parameters:
-    SelectParam:
-      name: $select
-      in: query
-      required: false
-      description: Comma-separated list of properties to include in the response.
-      schema:
-        type: string
     PoolNameParam:
       name: poolName
       in: path
@@ -243,6 +236,13 @@ components:
       description: OData filter expression to restrict returned resources.
       schema:
         type: string
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
     MemberNameParam:
       name: memberName
       in: path
@@ -251,14 +251,14 @@ components:
       schema:
         type: string
   responses:
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
       content:
         application/json:
           schema:

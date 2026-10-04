@@ -82,30 +82,14 @@ paths:
           default: 192.168.1.245
           description: Hostname or IP address of the BIG-IP device
 components:
-  parameters:
-    TaskIdParam:
-      name: taskId
-      in: path
-      required: true
-      description: Unique identifier of the asynchronous task.
-      schema:
-        type: string
-        format: uuid
-    TaskIdParam_2:
-      name: taskId
-      in: path
-      required: true
-      description: Unique identifier for the DO processing task.
-      schema:
-        type: string
   schemas:
-    ErrorResponse:
+    AS3TaskList:
       type: object
       properties:
-        code:
-          type: integer
-        message:
-          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AS3TaskResponse'
     AS3TaskResponse:
       type: object
       properties:
@@ -123,13 +107,13 @@ components:
                 type: string
               tenant:
                 type: string
-    AS3TaskList:
+    ErrorResponse:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/AS3TaskResponse'
+        code:
+          type: integer
+        message:
+          type: string
     DOTaskResponse:
       type: object
       properties:
@@ -159,15 +143,31 @@ components:
                 type: string
         declaration:
           type: object
+  parameters:
+    TaskIdParam:
+      name: taskId
+      in: path
+      required: true
+      description: Unique identifier of the asynchronous task.
+      schema:
+        type: string
+        format: uuid
+    TaskIdParam_2:
+      name: taskId
+      in: path
+      required: true
+      description: Unique identifier for the DO processing task.
+      schema:
+        type: string
   responses:
-    NotFound:
-      description: The requested tenant or task was not found.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    NotFound:
+      description: The requested tenant or task was not found.
       content:
         application/json:
           schema:
