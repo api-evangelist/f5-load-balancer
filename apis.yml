@@ -377,6 +377,12 @@ apis:
   - type: Documentation
     url: https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/
 common:
+  - type: Plans
+    url: plans/f5-load-balancer-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/f5-load-balancer-rate-limits.yml
+  - type: FinOps
+    url: finops/f5-load-balancer-finops.yml
   - type: CapabilityMap
     url: capabilities/f5-load-balancer-capability-edges.yml
     name: F5 Load Balancer Business Capability Map
