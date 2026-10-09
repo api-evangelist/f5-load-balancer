@@ -129,10 +129,8 @@ apis:
 unitEconomics:
   - name: Cost per BIG-IP instance / year
     metric: total_license_cost / bigip_instances
-    target: model-dependent (set per platform)
   - name: FCP true-up variance
     metric: (actual_usage - committed) / committed
-    target: minimize positive variance
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

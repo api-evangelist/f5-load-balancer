@@ -126,3 +126,44 @@ plans:
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - compute
+  - period
+  plans:
+  - name: 30-Day Free Trial
+    access: freemium
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - month
+  - name: Subscription
+    access: other
+    model: subscription
+    model_how: stated
+    units:
+    - compute
+    periods:
+    - year
+  - name: Perpetual (Good-Better-Best / GBB)
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - compute
+    periods:
+    - per-use
+  - name: Flex Consumption Program (FCP)
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods:
+    - year
