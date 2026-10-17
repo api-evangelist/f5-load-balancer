@@ -294,49 +294,75 @@ paths:
           default: 192.168.1.245
           description: Hostname or IP address of the BIG-IP device. Use port 8443 for single-NIC BIG-IP deployments.
 components:
+  responses:
+    NotFound:
+      description: The requested tenant or task was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError:
+      description: An internal error occurred processing the declaration.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: The request was malformed or the declaration failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalError_2:
+      description: An internal error occurred during declaration processing.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest_2:
+      description: The declaration was malformed or contained invalid properties.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    AS3TaskResponse:
+    ErrorResponse:
       type: object
       properties:
-        id:
+        code:
+          type: integer
+        message:
           type: string
-          description: Unique task identifier.
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-              message:
-                type: string
-              tenant:
-                type: string
-    AS3Response:
+    JsonPatchOperation:
       type: object
+      required:
+      - op
+      - path
       properties:
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-                description: HTTP status code for this tenant result.
-              message:
-                type: string
-                description: Status message for this tenant result.
-              lineCount:
-                type: integer
-              host:
-                type: string
-              tenant:
-                type: string
-              runTime:
-                type: integer
-        declaration:
-          type: object
-          description: The processed declaration.
+        op:
+          type: string
+          description: The JSON Patch operation to perform.
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
+        path:
+          type: string
+          description: JSON Pointer to the target location.
+        value:
+          description: Value for add, replace, or test operations.
+        from:
+          type: string
+          description: Source JSON Pointer for move or copy operations.
     AS3Declaration:
       type: object
       description: An AS3 declaration describing the desired application services configuration state on the BIG-IP system.
@@ -390,37 +416,48 @@ components:
           additionalProperties:
             type: object
             description: Tenant objects containing application service definitions.
-    ErrorResponse:
+    AS3TaskResponse:
       type: object
       properties:
-        code:
-          type: integer
-        message:
+        id:
           type: string
-    JsonPatchOperation:
+          description: Unique task identifier.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              tenant:
+                type: string
+    AS3Response:
       type: object
-      required:
-      - op
-      - path
       properties:
-        op:
-          type: string
-          description: The JSON Patch operation to perform.
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          - test
-        path:
-          type: string
-          description: JSON Pointer to the target location.
-        value:
-          description: Value for add, replace, or test operations.
-        from:
-          type: string
-          description: Source JSON Pointer for move or copy operations.
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+                description: HTTP status code for this tenant result.
+              message:
+                type: string
+                description: Status message for this tenant result.
+              lineCount:
+                type: integer
+              host:
+                type: string
+              tenant:
+                type: string
+              runTime:
+                type: integer
+        declaration:
+          type: object
+          description: The processed declaration.
     DOTaskResponse:
       type: object
       properties:
@@ -450,6 +487,26 @@ components:
                 type: string
         declaration:
           type: object
+    DOResponse:
+      type: object
+      properties:
+        result:
+          type: object
+          properties:
+            class:
+              type: string
+            code:
+              type: integer
+            status:
+              type: string
+            message:
+              type: string
+            errors:
+              type: array
+              items:
+                type: string
+        declaration:
+          $ref: '#/components/schemas/DODeclaration'
     DODeclaration:
       type: object
       description: A Declarative Onboarding declaration describing the desired initial BIG-IP device configuration state.
@@ -564,63 +621,6 @@ components:
           additionalProperties:
             type: object
             description: Additional configuration objects such as VLANs, self IPs, routes, and users.
-    DOResponse:
-      type: object
-      properties:
-        result:
-          type: object
-          properties:
-            class:
-              type: string
-            code:
-              type: integer
-            status:
-              type: string
-            message:
-              type: string
-            errors:
-              type: array
-              items:
-                type: string
-        declaration:
-          $ref: '#/components/schemas/DODeclaration'
-  responses:
-    InternalError:
-      description: An internal error occurred processing the declaration.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested tenant or task was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: The request was malformed or the declaration failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    InternalError_2:
-      description: An internal error occurred during declaration processing.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest_2:
-      description: The declaration was malformed or contained invalid properties.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   parameters:
     TenantNameParam:
       name: tenantName

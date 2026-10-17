@@ -232,14 +232,20 @@ components:
           items:
             $ref: '#/components/schemas/Node'
   parameters:
-    TopParam:
-      name: $top
+    NodeNameParam:
+      name: nodeName
+      in: path
+      required: true
+      description: Name of the node resource, optionally prefixed with the partition path.
+      schema:
+        type: string
+    SelectParam:
+      name: $select
       in: query
       required: false
-      description: Maximum number of resources to return.
+      description: Comma-separated list of properties to include in the response.
       schema:
-        type: integer
-        minimum: 1
+        type: string
     SkipParam:
       name: $skip
       in: query
@@ -255,29 +261,23 @@ components:
       description: OData filter expression to restrict returned resources.
       schema:
         type: string
-    SelectParam:
-      name: $select
+    TopParam:
+      name: $top
       in: query
       required: false
-      description: Comma-separated list of properties to include in the response.
+      description: Maximum number of resources to return.
       schema:
-        type: string
-    NodeNameParam:
-      name: nodeName
-      in: path
-      required: true
-      description: Name of the node resource, optionally prefixed with the partition path.
-      schema:
-        type: string
+        type: integer
+        minimum: 1
   responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:

@@ -133,54 +133,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    TopParam:
-      name: $top
-      in: query
-      required: false
-      description: Maximum number of resources to return.
-      schema:
-        type: integer
-        minimum: 1
-    PoolNameParam:
-      name: poolName
-      in: path
-      required: true
-      description: Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool).
-      schema:
-        type: string
-    SkipParam:
-      name: $skip
-      in: query
-      required: false
-      description: Number of resources to skip before returning results.
-      schema:
-        type: integer
-        minimum: 0
-    FilterParam:
-      name: $filter
-      in: query
-      required: false
-      description: OData filter expression to restrict returned resources.
-      schema:
-        type: string
-    SelectParam:
-      name: $select
-      in: query
-      required: false
-      description: Comma-separated list of properties to include in the response.
-      schema:
-        type: string
-    ExpandSubcollectionsParam:
-      name: expandSubcollections
-      in: query
-      required: false
-      description: When set to true, inline sub-collections in the response.
-      schema:
-        type: string
-        enum:
-        - 'true'
-        - 'false'
   schemas:
     PoolCollection:
       type: object
@@ -195,6 +147,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Pool'
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+        message:
+          type: string
+          description: Human-readable error message.
+        errorStack:
+          type: array
+          items:
+            type: string
+          description: Stack trace for debugging purposes.
     Pool:
       type: object
       required:
@@ -280,29 +246,63 @@ components:
           - reset
           - reselect
           - drop
-    ErrorResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: HTTP status code.
-        message:
-          type: string
-          description: Human-readable error message.
-        errorStack:
-          type: array
-          items:
-            type: string
-          description: Stack trace for debugging purposes.
+  parameters:
+    ExpandSubcollectionsParam:
+      name: expandSubcollections
+      in: query
+      required: false
+      description: When set to true, inline sub-collections in the response.
+      schema:
+        type: string
+        enum:
+        - 'true'
+        - 'false'
+    SelectParam:
+      name: $select
+      in: query
+      required: false
+      description: Comma-separated list of properties to include in the response.
+      schema:
+        type: string
+    PoolNameParam:
+      name: poolName
+      in: path
+      required: true
+      description: Name of the pool resource, optionally prefixed with the partition path (e.g., ~Common~my_pool).
+      schema:
+        type: string
+    SkipParam:
+      name: $skip
+      in: query
+      required: false
+      description: Number of resources to skip before returning results.
+      schema:
+        type: integer
+        minimum: 0
+    FilterParam:
+      name: $filter
+      in: query
+      required: false
+      description: OData filter expression to restrict returned resources.
+      schema:
+        type: string
+    TopParam:
+      name: $top
+      in: query
+      required: false
+      description: Maximum number of resources to return.
+      schema:
+        type: integer
+        minimum: 1
   responses:
-    Unauthorized:
-      description: Authentication credentials were missing or invalid.
+    NotFound:
+      description: The requested resource was not found on the BIG-IP system.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found on the BIG-IP system.
+    Unauthorized:
+      description: Authentication credentials were missing or invalid.
       content:
         application/json:
           schema:
