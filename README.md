@@ -1,4 +1,4 @@
-# F5 Load Balancer (f5-load-balancer)
+# F5 Load Balancer
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,102 +66,154 @@
 
 APIs for managing F5 BIG-IP Load Balancer configuration, monitoring, and operations. F5 BIG-IP is an application delivery controller that provides intelligent traffic management, load balancing, and application security.
 
-**APIs.json:** [https://www.f5.com](https://www.f5.com)
+**Areas:** Application Delivery · BIG-IP · Load Balancer · Networking · Traffic Management
 
-## Scope
+## F5 Load Balancer on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for F5 Load Balancer is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/f5-load-balancer/](https://apis.io/providers/f5-load-balancer/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (17)
 
-- Application Delivery
-- BIG-IP
-- Load Balancer
-- Networking
-- Traffic Management
+- [F5 Load Balancer Config API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-config-api/) — Retrieve the original device configuration before Declarative Onboarding modifications were applied.
+- [F5 Load Balancer Data Groups API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-data-groups-api/) — Manage internal and external data groups used for address, string, and integer lookups in traffic processing decisions.
+- [F5 Load Balancer Declarations API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-declarations-api/) — Submit, retrieve, and manage AS3 declarations that describe the desired application services configuration state on the BIG-IP system.
+- [F5 Load Balancer Info API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-info-api/) — Retrieve version and capability information about the installed AS3 extension.
+- [F5 Load Balancer Inspect API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-inspect-api/) — Inspect the current state of BIG-IP configuration classes known to Declarative Onboarding.
+- [F5 Load Balancer iRules API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-irules-api/) — Manage iRules for custom traffic management logic using the F5 Tcl-based scripting language.
+- [F5 Load Balancer Monitors API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-monitors-api/) — Configure health monitors that verify the availability and performance of nodes, pool members, and services.
+- [F5 Load Balancer Nodes API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-nodes-api/) — Manage backend server nodes identified by IP address or FQDN that serve as the foundation for pool member definitions.
+- [F5 Load Balancer Policies API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-policies-api/) — Manage local traffic policies that provide rule-based traffic steering and content manipulation capabilities.
+- [F5 Load Balancer Pool Members API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-pool-members-api/) — Manage individual server members within load balancing pools including their state, ratio, priority group, and connection limits.
+- [F5 Load Balancer Pools API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-pools-api/) — Manage pools of backend servers for load distribution and health monitoring.
+- [F5 Load Balancer Profiles API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-profiles-api/) — Manage traffic profiles that define how the BIG-IP processes different types of network traffic including HTTP, TCP, SSL, and persistence.
+- [F5 Load Balancer SNAT Pools API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-snat-pools-api/) — Manage SNAT (Secure Network Address Translation) pools that define translation addresses for outbound connections.
+- [F5 Load Balancer SSL Certificates API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-ssl-certificates-api/) — Manage SSL certificates and keys used for TLS/SSL termination and re-encryption on virtual servers.
+- [F5 Load Balancer System API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-system-api/) — Access system-level information and configuration including device status, software versions, and global settings.
+- [F5 Load Balancer Tasks API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-tasks-api/) — Monitor the status of asynchronous declaration processing tasks.
+- [F5 Load Balancer Virtual Servers API](https://apis.io/apis/f5-load-balancer/f5-load-balancer-virtual-servers-api/) — Manage virtual servers that direct client traffic to appropriate server pools based on configured rules and profiles.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### F5 BIG-IP iControl REST API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Primary REST API for managing F5 BIG-IP systems including virtual servers, pools, nodes, and policies for application delivery and load balancing.
+- [F5 Load Balancer Agentic Access](https://apis.io/agentic-access/f5-load-balancer/f5-load-balancer-agentic-access/)
 
-- **Human URL:** [https://clouddocs.f5.com/api/icontrol-rest/](https://clouddocs.f5.com/api/icontrol-rest/)
-- **Base URL:** `https://bigip-host/mgmt/tm`
+#### Collections (20)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Configuration
-- Management
-- REST API
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-as3/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-config-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Data Groups API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-data-groups-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Declarations API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-declarations-api/)
+- [F5 Load Balancer F5 BIG-IP Declarative Onboarding (DO) API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-declarative-onboarding/)
+- [F5 Load Balancer F5 BIG-IP iControl REST API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-icontrol-rest/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Info API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-info-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Inspect API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-inspect-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config iRules API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-irules-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Monitors API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-monitors-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Nodes API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-nodes-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Policies API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-policies-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Pool Members API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-pool-members-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Pools API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-pools-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Profiles API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-profiles-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config SNAT Pools API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-snat-pools-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config SSL Certificates API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-ssl-certificates-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config System API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-system-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Tasks API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-tasks-api/)
+- [F5 Load Balancer F5 BIG-IP Application Services 3 Extension (AS3) Config Virtual Servers API](https://apis.io/collections/f5-load-balancer/open-f5-load-balancer-virtual-servers-api/)
 
-#### Properties
+#### Security (3)
 
-- [Documentation](https://clouddocs.f5.com/api/icontrol-rest/)
-- [Authentication](https://clouddocs.f5.com/api/icontrol-rest/Authentication.html)
-- [OpenAPI](openapi/f5-load-balancer-icontrol-rest-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/f5-load-balancer-icontrol-rest.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/f5-load-balancer-icontrol-rest.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### F5 BIG-IP AS3 API
+- [F5 Load Balancer Authentication](https://apis.io/security/f5-load-balancer/f5-load-balancer-authentication/)
+- [F5 Load Balancer Domain Security](https://apis.io/security/f5-load-balancer/f5-load-balancer-domain-security/)
+- [F5 Load Balancer Trust Center](https://apis.io/security/f5-load-balancer/f5-load-balancer-trust-center/)
 
-Application Services 3 Extension for declarative API-based application deployment using JSON declarations.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/)
-- **Base URL:** `https://bigip-host/mgmt/shared/appsvcs`
+Published plans, tiers and prices.
 
-#### Tags
+- [F5 Load Balancer Plans Pricing](https://apis.io/plans/f5-load-balancer/f5-load-balancer-plans-pricing/)
 
-- AS3
-- Automation
-- Declarative
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [Documentation](https://clouddocs.f5.com/products/extensions/f5-appsvcs-extension/latest/)
-- [OpenAPI](openapi/f5-load-balancer-as3-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/f5-load-balancer-as3.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/f5-load-balancer-as3.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [F5 Load Balancer Rate Limits](https://apis.io/rate-limits/f5-load-balancer/f5-load-balancer-rate-limits/)
 
-### F5 BIG-IP Declarative Onboarding API
+#### FinOps (1)
 
-Declarative Onboarding (DO) extension for initial BIG-IP system configuration and provisioning via JSON declarations covering licensing, networking, user management, and module provisioning.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/](https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/)
-- **Base URL:** `https://bigip-host/mgmt/shared/declarative-onboarding`
+- [F5 Load Balancer Finops](https://apis.io/finops/f5-load-balancer/f5-load-balancer-finops/)
 
-#### Tags
+## Where to find this API
 
-- Declarative
-- Onboarding
-- Provisioning
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Properties
-
-- [Documentation](https://clouddocs.f5.com/products/extensions/f5-declarative-onboarding/latest/)
-- [OpenAPI](openapi/f5-load-balancer-declarative-onboarding-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/f5-load-balancer-declarative-onboarding.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/f5-load-balancer-declarative-onboarding.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Portal](https://clouddocs.f5.com/)
+- [Website](https://www.f5.com)
 - [Documentation](https://clouddocs.f5.com/api/)
 - [Support](https://www.f5.com/services/support)
-- [Terms of Service](https://www.f5.com/company/policies/terms-of-use)
-- [Privacy Policy](https://www.f5.com/company/policies/privacy-notice)
 - [Blog](https://www.f5.com/company/blog)
-- [GitHub Organization](https://github.com/F5Networks)
-- [Website](https://www.f5.com)
+- [Terms of service](https://www.f5.com/company/policies/terms-of-use)
+- [Privacy policy](https://www.f5.com/company/policies/privacy-notice)
+- [GitHub](https://github.com/F5Networks)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 35.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 51.9 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 26.2 |
+| Access clarity | 36.8 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/f5-load-balancer/](https://apis.io/providers/f5-load-balancer/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for F5 Load Balancer: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/f5-load-balancer/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
